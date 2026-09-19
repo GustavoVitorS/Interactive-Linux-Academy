@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gustavovitors.github.io/Linux-Drawing/sitemap.xml
