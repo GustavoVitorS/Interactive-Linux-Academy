@@ -120,3 +120,762 @@
 @media (max-width:1020px) and (min-width:821px){.mindmap-scroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#343b45 #11151b}.mindmap-stage{width:980px}}
 .lesson-reference{margin-left:auto;align-self:center;color:var(--blue-2);font-size:.76rem;font-weight:750;white-space:nowrap}.lesson-reference:hover{text-decoration:underline}.lesson-actions{align-items:center;flex-wrap:wrap}@media(max-width:620px){.lesson-reference{width:100%;margin-left:0;padding-top:4px}}
 .command-syntax{display:flex;gap:8px;align-items:baseline;margin-top:10px;color:var(--muted);font-size:.72rem}.command-syntax code{color:#dce7f6;font-size:.75rem;overflow-wrap:anywhere}.command-reference{display:inline-flex;margin-top:12px;color:var(--blue-2);font-size:.74rem;font-weight:750}.command-reference:hover{text-decoration:underline}
+
+/* ==========================================================
+   V4.1 — RESPONSIVE FLEXBOX REFINEMENT
+   Layout pass for 1280x800, 1032x1376, 960x1400,
+   768x1024, 412x968 and fluid sizes between them.
+   ========================================================== */
+
+/* Stable fluid containers */
+.shell{
+  width:min(1180px,calc(100% - clamp(24px,4vw,48px)));
+  min-width:0;
+}
+.section-heading,
+.hero-intro > *,
+.terminal-layout > *,
+.windows-layout > *,
+.concept-grid > *,
+.package-explorer > *,
+.quiz-card > *{
+  min-width:0;
+}
+.section-heading{margin-inline:auto 0}
+
+/* Replace structural grid layouts with wrapping flex layouts */
+.hero-intro{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:clamp(28px,5vw,72px);
+}
+.hero-intro > :first-child{flex:1 1 58%}
+.hero-intro-copy{flex:1 1 34%;max-width:520px}
+
+.split-heading,
+.distro-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:clamp(24px,4vw,54px);
+}
+.split-heading > *,
+.distro-heading > *{flex:1 1 0}
+
+.progress-panel{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.progress-copy{flex:0 1 auto}
+.progress-track{flex:1 1 260px;min-width:160px}
+.progress-panel .text-button{flex:0 0 auto}
+
+.lesson-grid,
+.command-grid,
+.docs-grid{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:stretch;
+  gap:15px;
+}
+.lesson-card,
+.command-card{
+  flex:1 1 320px;
+  max-width:calc(33.333% - 10px);
+}
+.docs-card{
+  display:flex;
+  align-items:center;
+  flex:1 1 480px;
+  max-width:calc(50% - 6px);
+}
+.docs-card > div{flex:1 1 auto;min-width:0}
+.docs-card > i{margin-left:auto;flex:0 0 auto}
+
+.terminal-layout,
+.windows-layout{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(28px,4.5vw,54px);
+}
+.terminal-copy{flex:0 1 38%}
+.terminal-lab{flex:1 1 58%}
+.windows-layout > .section-heading{flex:0 1 38%;margin-bottom:0}
+.windows-layout > .comparison-table{flex:1 1 58%;min-width:0}
+
+.terminal-practice-bar{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.terminal-practice-bar > :first-child{flex:1 1 430px;min-width:0}
+.practice-missions{
+  display:flex;
+  flex:0 1 260px;
+  flex-direction:column;
+  gap:5px;
+  min-width:200px;
+}
+
+.concept-grid{
+  display:flex;
+  align-items:stretch;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.concept-card{flex:1 1 480px}
+.filesystem{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.fs-button{flex:1 1 22%;min-width:76px}
+.permission-display{
+  display:flex;
+  align-items:stretch;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.permission-display > div{flex:1 1 140px}
+.package-explorer{
+  display:flex;
+  align-items:flex-start;
+  gap:30px;
+  flex-wrap:wrap;
+}
+.package-explorer > :first-child{flex:1 1 280px}
+.package-table-wrap{flex:2 1 560px;min-width:0;max-width:100%}
+
+.comparison-table > div{
+  display:flex;
+  align-items:stretch;
+}
+.comparison-table > div > span{flex:1 1 50%;min-width:0}
+
+.quiz-card{
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:30px;
+}
+.quiz-card > :first-child{flex:1 1 420px}
+.quiz-options{
+  display:flex;
+  flex:1 1 420px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.quiz-options button{flex:1 1 calc(50% - 5px)}
+.quiz-feedback{flex:0 0 100%}
+
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:18px 28px;
+}
+.footer-inner > :first-child{flex:1 1 420px}
+.footer-inner > :nth-child(2){flex:0 1 auto}
+.footer-inner > a{flex:0 0 auto}
+
+/* Distribution carousel: Flexbox is more predictable across touch/tablet sizes */
+.distro-carousel{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:16px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:2px;
+  padding:8px 2px 18px;
+  scrollbar-width:none;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.distro-slide{
+  flex:0 0 clamp(260px,31%,360px);
+  width:auto;
+  min-width:0;
+}
+
+/* Perfectly centered carousel chevrons */
+.carousel-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:46px;
+  height:46px;
+  padding:0;
+  line-height:1;
+  font-size:0;
+  text-align:center;
+}
+.carousel-arrow::before{
+  display:block;
+  font-family:Arial,sans-serif;
+  font-size:31px;
+  font-weight:400;
+  line-height:1;
+  transform:translateY(-1px);
+}
+.carousel-arrow.prev::before{content:"‹"}
+.carousel-arrow.next::before{content:"›"}
+.carousel-arrow:disabled{opacity:.38;cursor:default}
+
+/* Main mind map: desktop remains radial; medium/tablet becomes a flex map. */
+.mindmap-window,
+.mindmap-scroll,
+.mindmap-stage{min-width:0;max-width:100%}
+
+/* Compact desktop/laptop tuning: 1181–1360 */
+@media (min-width:1181px) and (max-width:1360px){
+  .mindmap-hero{padding-top:62px;padding-bottom:76px}
+  .hero-intro{gap:34px;margin-bottom:28px}
+  .mindmap-hero h1{font-size:clamp(3rem,5.2vw,4.8rem)}
+  .mindmap-stage{height:690px;min-width:0}
+  .mind-hub{width:300px;min-height:490px}
+  .mind-node{width:158px;padding:11px 12px}
+  .node-start{left:3%;top:10%}
+  .node-terminal{left:3%;top:36%}
+  .node-filesystem{left:4%;top:62%}
+  .node-distros{left:19%;top:5%}
+  .node-windows{left:18%;top:25%}
+  .node-permissions{left:18%;top:82%}
+  .node-packages{right:19%;top:5%}
+  .node-processes{right:4%;top:18%}
+  .node-network{right:3%;top:43%}
+  .node-shell{right:4%;top:69%}
+  .node-admin{right:18%;top:82%}
+  .node-security{left:42%;top:87%}
+}
+
+/* Tablets, portrait screens and narrow laptops: no fixed 980px canvas. */
+@media (max-width:1180px){
+  :root{--shell:min(100% - 32px,1040px)}
+  .section{padding:88px 0}
+  .mindmap-hero{padding-top:58px;padding-bottom:76px}
+  .hero-intro{
+    align-items:flex-start;
+    gap:24px;
+    margin-bottom:28px;
+  }
+  .hero-intro > :first-child{flex:1 1 55%}
+  .hero-intro-copy{flex:1 1 40%;max-width:none}
+  .mindmap-hero h1{font-size:clamp(2.9rem,7vw,4.7rem)}
+
+  .mindmap-scroll{overflow:visible}
+  .mindmap-stage{
+    position:relative;
+    height:auto;
+    min-width:0;
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:stretch;
+    justify-content:center;
+    gap:12px;
+    padding:24px;
+    background-size:30px 30px;
+  }
+  .mindmap-stage:before,
+  .mindmap-stage:after,
+  .mindmap-connectors{display:none}
+
+  .mind-hub{
+    position:relative;
+    left:auto;
+    top:auto;
+    transform:none;
+    order:-1;
+    flex:0 1 390px;
+    width:min(100%,390px);
+    min-height:500px;
+    margin:0 calc(50% - 195px) 10px;
+  }
+  .mind-node,
+  .node-start,.node-terminal,.node-filesystem,.node-permissions,
+  .node-distros,.node-packages,.node-processes,.node-network,
+  .node-shell,.node-admin,.node-security,.node-windows{
+    position:relative;
+    inset:auto!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    width:auto;
+    min-height:92px;
+    flex:1 1 calc(33.333% - 12px);
+    max-width:calc(33.333% - 8px);
+    transform:none;
+  }
+  .mind-node:hover,.mind-node:focus-visible,.mind-node.is-linked{
+    transform:translateY(-2px);
+  }
+  .mind-node:before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:-13px;
+    width:1px;
+    height:13px;
+    background:linear-gradient(to bottom,transparent,rgba(98,160,234,.28));
+  }
+
+  .lesson-card,.command-card{max-width:calc(50% - 8px);flex-basis:360px}
+  .docs-card{max-width:calc(50% - 6px)}
+  .terminal-layout{align-items:flex-start}
+  .terminal-copy{flex:1 1 330px}
+  .terminal-lab{flex:1 1 520px}
+  .distro-slide{flex-basis:clamp(260px,44vw,340px)}
+  .carousel-arrow.prev{left:-8px}
+  .carousel-arrow.next{right:-8px}
+}
+
+/* Portrait tablets: 768–1032 widths */
+@media (max-width:1032px){
+  :root{--shell:min(100% - 30px,900px)}
+  .site-header .nav{gap:12px}
+  .nav-panel{gap:12px}
+  .nav-links{gap:10px}
+  .nav-links a{font-size:.78rem}
+  .github-link{display:none}
+
+  .hero-intro{
+    flex-direction:column;
+    align-items:stretch;
+    gap:20px;
+  }
+  .hero-intro-copy{max-width:760px}
+  .hero-intro-copy>p{max-width:720px}
+  .hero-intro .hero-actions{justify-content:flex-start}
+  .hero-intro .hero-stats{justify-content:flex-start}
+
+  .mindmap-stage{padding:22px 18px;gap:11px}
+  .mind-hub{margin:0 auto 12px;flex-basis:370px;width:min(100%,370px)}
+  .mind-node{flex-basis:calc(50% - 6px);max-width:calc(50% - 6px)}
+
+  .split-heading,.distro-heading{flex-direction:column;align-items:flex-start;gap:10px}
+  .split-heading > *, .distro-heading > *{width:100%}
+
+  .terminal-layout,
+  .windows-layout{
+    flex-direction:column;
+    align-items:stretch;
+    gap:30px;
+  }
+  .terminal-copy,
+  .terminal-lab,
+  .windows-layout > .section-heading,
+  .windows-layout > .comparison-table{
+    flex-basis:auto;
+    width:100%;
+  }
+  .terminal-window{width:100%}
+
+  .concept-card{flex-basis:100%}
+  .package-explorer{gap:22px}
+  .package-explorer > :first-child,
+  .package-table-wrap{flex-basis:100%}
+
+  .docs-card{max-width:100%;flex-basis:100%}
+  .quiz-card{gap:20px}
+  .quiz-card > :first-child,.quiz-options{flex-basis:100%}
+
+  .distro-slide{flex-basis:clamp(260px,56vw,340px)}
+  .carousel-arrow{width:44px;height:44px}
+}
+
+/* Standard tablets and large phones */
+@media (max-width:820px){
+  :root{--shell:min(100% - 28px,720px);--header-h:66px}
+  .section{padding:78px 0}
+  .section-pad{padding-top:72px}
+
+  .mindmap-stage{padding:20px 14px;gap:10px}
+  .mind-hub{flex:0 0 min(100%,360px);width:min(100%,360px);min-height:490px}
+  .mind-node{flex:1 1 calc(50% - 6px);max-width:calc(50% - 6px);min-height:88px}
+  .mindmap-footer{justify-content:flex-start;gap:10px 16px}
+  .mindmap-footer p{flex:0 0 100%;margin:0}
+
+  .lesson-card,.command-card{max-width:100%;flex-basis:calc(50% - 8px)}
+  .distro-slide{flex-basis:min(72vw,320px)}
+  .carousel-arrow{display:flex}
+  .carousel-arrow.prev{left:-6px}
+  .carousel-arrow.next{right:-6px}
+
+  .footer-inner{align-items:flex-start}
+  .footer-inner > :first-child{flex-basis:100%}
+}
+
+/* Phones, including 412x968 */
+@media (max-width:620px){
+  :root{--shell:calc(100% - 22px)}
+  .section{padding:68px 0}
+  .mindmap-hero{padding-top:42px;padding-bottom:64px}
+  .hero-intro{gap:18px;margin-bottom:24px}
+  .mindmap-hero h1{font-size:clamp(2.55rem,12vw,4rem)}
+  .hero-intro-copy>p{font-size:.95rem;margin-bottom:18px}
+  .hero-intro .hero-actions{display:flex;flex-direction:column;align-items:stretch}
+  .hero-intro .hero-actions .button{width:100%}
+  .hero-stats{display:flex;gap:8px;margin-top:18px}
+  .hero-stats > div{flex:1 1 0;text-align:center;min-width:0}
+
+  .mindmap-window{border-radius:18px}
+  .mindmap-window-bar{height:50px;padding-inline:12px}
+  .mindmap-app-title{max-width:calc(100% - 92px)}
+  .window-controls{flex:0 0 auto}
+  .mindmap-stage{
+    flex-direction:column;
+    align-items:stretch;
+    padding:16px 10px 20px;
+  }
+  .mind-hub{
+    order:-1;
+    flex:none;
+    width:100%;
+    max-width:360px;
+    min-height:465px;
+    margin:0 auto 8px;
+    padding-inline:14px;
+  }
+  .mind-hub .tux-wrap{height:300px}
+  .mind-node{
+    flex:none;
+    width:100%;
+    max-width:none;
+    min-height:78px;
+  }
+  .mind-node:before{display:none}
+  .mindmap-footer{padding:11px 12px;gap:8px 12px}
+  .mindmap-footer > div{font-size:.62rem}
+
+  .progress-panel{align-items:flex-start;gap:10px}
+  .progress-copy{flex:1 1 180px;white-space:normal}
+  .progress-track{order:3;flex:0 0 100%;width:100%}
+  .progress-panel .text-button{margin-left:auto}
+  .level-tabs{display:flex;width:100%;overflow-x:auto;gap:5px}
+  .tab{flex:1 0 auto;text-align:center}
+
+  .lesson-card,.command-card{max-width:100%;flex-basis:100%}
+  .terminal-practice-bar{flex-direction:column}
+  .terminal-practice-bar > :first-child,.practice-missions{width:100%;flex-basis:auto;min-width:0}
+  .practice-missions{flex-direction:column}
+  .terminal-output{height:min(330px,44vh);min-height:280px}
+
+  .filesystem{gap:7px}
+  .fs-button{flex-basis:calc(33.333% - 7px);min-width:74px}
+  .permission-display{flex-direction:column}
+  .permission-display > div{flex-basis:auto;width:100%}
+
+  .quiz-options{flex-direction:column}
+  .quiz-options button{flex-basis:auto;width:100%}
+
+  .distro-carousel-wrap{padding-inline:8px}
+  .distro-carousel{gap:12px;padding-inline:0}
+  .distro-slide{flex:0 0 min(84vw,330px)}
+  .carousel-arrow{
+    width:42px;
+    height:42px;
+    top:50%;
+  }
+  .carousel-arrow.prev{left:-6px}
+  .carousel-arrow.next{right:-6px}
+  .carousel-arrow::before{font-size:29px}
+
+  .comparison-table>div{align-items:stretch}
+  .comparison-table>div span{font-size:.78rem;padding:11px 10px;overflow-wrap:anywhere}
+
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:12px}
+  .footer-inner > *{width:100%}
+  .footer-inner > :nth-child(2){display:flex}
+}
+
+@media (max-width:430px){
+  :root{--shell:calc(100% - 18px)}
+  .mindmap-hero h1{font-size:clamp(2.35rem,11.8vw,3.35rem)}
+  .mindmap-stage{padding-inline:8px}
+  .mind-hub{min-height:445px;padding:14px 11px}
+  .mind-hub .tux-wrap{height:285px}
+  .mind-hub .speech{left:12px;top:56px;max-width:190px}
+  .mindmap-footer{justify-content:center;text-align:center}
+  .mindmap-footer p{text-align:left}
+  .distro-slide{flex-basis:calc(100vw - 54px);padding:19px}
+  .distro-logo-box{width:64px;height:64px}
+  .carousel-arrow{width:40px;height:40px}
+  .carousel-arrow.prev{left:-3px}
+  .carousel-arrow.next{right:-3px}
+  .fs-button{flex-basis:calc(50% - 5px)}
+}
+
+@media (max-width:390px){
+  .mind-hub{min-height:430px}
+  .mind-hub .tux-wrap{height:275px}
+  .distro-slide{flex-basis:calc(100vw - 46px)}
+}
+
+/* V4.1 navigation/footer Flexbox consistency */
+@media (max-width:820px){
+  .nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .nav-links a{flex:1 1 calc(50% - 3px)}
+  .nav-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+  .nav-actions > *{flex:1 1 calc(33.333% - 6px)}
+  .footer-inner > :nth-child(2){display:flex}
+}
+@media (max-width:620px){
+  .nav-actions > *{flex:1 1 calc(50% - 4px)}
+  .nav-actions .github-link{flex-basis:100%}
+}
+
+/* ==========================================================
+   V4.2 — PROFESSIONAL RESPONSIVE SPACING PASS
+   Fixes section alignment, 1280px mind-map collisions,
+   portrait/tablet spacing, and keeps all existing content.
+   ========================================================== */
+
+/* Keep section content visually anchored to the same left edge.
+   The previous auto left margin pushed headings toward the center/right
+   on wide screens and created the large empty area seen in screenshots. */
+.section-heading{
+  width:min(100%,760px);
+  max-width:760px;
+  margin:0 0 clamp(28px,3vw,38px) 0;
+}
+.section-heading.split-heading,
+.section-heading.distro-heading{
+  width:100%;
+  max-width:none;
+}
+
+/* Tighter, fluid vertical rhythm so sections stay connected instead of
+   looking vertically detached on 800px-tall and portrait screens. */
+.section{
+  padding-top:clamp(64px,6vw,88px);
+  padding-bottom:clamp(64px,6vw,88px);
+}
+.section-pad{
+  padding-top:clamp(58px,5vw,78px);
+  padding-bottom:clamp(60px,5vw,82px);
+}
+#learn .section-heading,
+#concepts .section-heading,
+.roadmap-section .section-heading{
+  margin-left:0;
+  margin-right:0;
+}
+
+/* Better spacing between a heading and the first interactive block. */
+.progress-panel,
+.filter-row,
+.concept-grid,
+.docs-grid,
+.roadmap{
+  margin-top:0;
+}
+.level-tabs{margin-top:22px}
+.lesson-grid{margin-top:24px}
+.command-grid{margin-top:24px}
+
+/* 1280-class laptops: keep the radial map, but move the inner-side nodes
+   away from their neighbors and from the center hub. */
+@media (min-width:1181px) and (max-width:1360px){
+  .mindmap-stage{
+    height:700px;
+    padding-inline:18px;
+  }
+  .mind-node{
+    width:150px;
+    min-height:90px;
+    padding:11px 12px;
+  }
+  .mind-hub{
+    width:292px;
+    min-height:486px;
+  }
+
+  .node-start{left:3%;top:10%}
+  .node-distros{left:21%;top:4%}
+  .node-windows{left:21%;top:25%}
+  .node-terminal{left:3%;top:39%}
+  .node-filesystem{left:3%;top:65%}
+  .node-permissions{left:21%;top:82%}
+
+  .node-packages{right:21%;top:4%}
+  .node-processes{right:3%;top:17%}
+  .node-network{right:3%;top:43%}
+  .node-shell{right:3%;top:69%}
+  .node-admin{right:21%;top:82%}
+  .node-security{left:50%;top:88%;transform:translateX(-50%)}
+  .node-security:hover,
+  .node-security:focus-visible,
+  .node-security.is-linked{transform:translateX(-50%) translateY(-2px)}
+}
+
+/* Portrait tablets and narrow laptops use the flex map. Ensure the hub
+   has its own row and every topic gets a real gap, never edge-to-edge. */
+@media (max-width:1180px){
+  .mindmap-stage{
+    row-gap:16px;
+    column-gap:16px;
+    padding:24px 20px 28px;
+  }
+  .mind-hub{
+    flex:0 0 calc(100% - 2px);
+    width:100%;
+    max-width:430px;
+    margin:0 auto 4px;
+  }
+  .mind-node{
+    flex:1 1 calc(33.333% - 16px);
+    max-width:calc(33.333% - 11px);
+    margin:0;
+  }
+  .mind-node:before{display:none}
+}
+
+@media (max-width:1032px){
+  .section{
+    padding-top:72px;
+    padding-bottom:72px;
+  }
+  .section-heading{margin-bottom:30px}
+  .hero-intro{margin-bottom:24px}
+
+  .mindmap-stage{
+    gap:14px;
+    padding:22px 16px 26px;
+  }
+  .mind-hub{
+    flex-basis:100%;
+    max-width:390px;
+    margin-bottom:2px;
+  }
+  .mind-node{
+    flex:1 1 calc(50% - 7px);
+    max-width:calc(50% - 7px);
+    min-height:92px;
+  }
+
+  .split-heading,
+  .distro-heading{
+    gap:12px;
+  }
+}
+
+@media (max-width:820px){
+  .section{
+    padding-top:66px;
+    padding-bottom:66px;
+  }
+  .section-pad{
+    padding-top:56px;
+    padding-bottom:64px;
+  }
+  .section-heading{margin-bottom:26px}
+  .mindmap-stage{gap:12px;padding:18px 12px 22px}
+  .mind-node{
+    flex-basis:calc(50% - 6px);
+    max-width:calc(50% - 6px);
+  }
+}
+
+@media (max-width:620px){
+  .section{
+    padding-top:58px;
+    padding-bottom:58px;
+  }
+  .section-pad{
+    padding-top:46px;
+    padding-bottom:58px;
+  }
+  .section-heading{
+    width:100%;
+    max-width:100%;
+    margin-bottom:24px;
+  }
+  .section-heading h2{font-size:clamp(2rem,10vw,3rem)}
+  .section-heading p:not(.eyebrow){max-width:100%}
+
+  .mindmap-stage{
+    gap:11px;
+    padding:14px 9px 18px;
+  }
+  .mind-hub{
+    width:100%;
+    max-width:360px;
+    flex-basis:auto;
+    margin:0 auto 2px;
+  }
+  .mind-node{
+    flex:0 0 100%;
+    width:100%;
+    max-width:100%;
+    min-height:76px;
+  }
+}
+
+@media (max-width:430px){
+  .section{padding-top:52px;padding-bottom:52px}
+  .section-pad{padding-top:42px;padding-bottom:54px}
+  .mindmap-stage{padding-inline:7px}
+}
+
+/* Keep carousel controls optically centered inside the circular buttons. */
+.carousel-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  line-height:1;
+}
+.carousel-arrow::before{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  line-height:1;
+  transform:translateY(-1px);
+}
+
+/* Guarantee the center hub occupies its own visual row in the Flexbox map. */
+@media (min-width:621px) and (max-width:1180px){
+  .mind-hub{
+    margin-left:max(0px,calc((100% - 430px)/2));
+    margin-right:max(0px,calc((100% - 430px)/2));
+  }
+}
+@media (min-width:621px) and (max-width:1032px){
+  .mind-hub{
+    margin-left:max(0px,calc((100% - 390px)/2));
+    margin-right:max(0px,calc((100% - 390px)/2));
+  }
+}
+@media (min-width:621px) and (max-width:820px){
+  .mind-hub{
+    max-width:360px;
+    margin-left:max(0px,calc((100% - 360px)/2));
+    margin-right:max(0px,calc((100% - 360px)/2));
+  }
+}
+
+/* Keep the first learning section visually connected to the interactive map. */
+.mindmap-hero{padding-bottom:42px}
+#learn{padding-top:52px}
+@media (max-width:620px){
+  .mindmap-hero{padding-bottom:32px}
+  #learn{padding-top:44px}
+}

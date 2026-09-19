@@ -178,3 +178,15 @@ MIT — see [LICENSE](LICENSE).
 ## Author
 
 Created by [Gustavo Vitor](https://github.com/GustavoVitorS).
+
+### V4.1 responsive refinement
+
+The V4 interface received an additional responsive layout pass focused on portrait tablets, narrow laptops and mobile devices. Core page layouts and the distribution carousel now use Flexbox-based wrapping, the interactive learning map switches from the radial desktop composition to a collision-free flexible layout on smaller screens, and carousel navigation controls are geometrically centered. Targeted sizes include 1280×800, 1032×1376, 960×1400, 768×1024 and 412×968.
+
+### V4.2 responsive polish
+- Keeps every V4 feature and content block intact.
+- Restores the project favicon with a dedicated `assets/favicon.svg`.
+- Anchors section headings to the same content edge instead of drifting toward the middle on wide screens.
+- Adds safer spacing for the radial mind map on 1181–1360px screens.
+- Uses the flex mind-map layout for portrait/tablet widths with explicit gaps between cards.
+- Tightens vertical rhythm on 1280×800, 1032×1376, 960×1400, 768×1024 and 412×968 class viewports.
