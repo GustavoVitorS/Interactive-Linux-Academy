@@ -154,10 +154,6 @@ Then open:
 http://localhost:8000
 ```
 
-## GitHub Pages
-
-The project has no backend and no build step is required for deployment after `bundle.js` has been generated. Relative paths are used so it can be published from the `Linux-Drawing` repository through GitHub Pages.
-
 ## Performance
 
 The interface uses HTML, CSS and Vanilla JavaScript. Tux eye tracking is throttled through `requestAnimationFrame`; decorative motion uses transforms/opacity; the mind-map connectors are redrawn only when needed; and `prefers-reduced-motion` is respected.
