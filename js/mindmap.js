@@ -1,13 +1,11 @@
-import { t } from './i18n.js';
-
-export function initMindMap({ tuxSpeak } = {}) {
+function initMindMap({ tuxSpeak } = {}) {
   const stage = document.querySelector('#linuxMindmap');
   const svg = document.querySelector('#mindmapConnectors');
   const hub = document.querySelector('#mindHub');
   const nodes = [...document.querySelectorAll('.mind-node')];
   const start = document.querySelector('#mapStart');
   const visitedKey = 'linuxAcademy.mapVisited';
-  let visited = new Set(JSON.parse(localStorage.getItem(visitedKey) || '[]'));
+  let visited = new Set(JSON.parse(storage.getItem(visitedKey) || '[]'));
   let raf = null;
 
   function centerInStage(el) {
@@ -59,14 +57,21 @@ export function initMindMap({ tuxSpeak } = {}) {
 
   function setActive(node, active) {
     node.classList.toggle('is-linked', active);
+    stage?.classList.toggle('is-focusing', active);
     svg?.querySelector(`[data-for-node="${node.dataset.mapId}"]`)?.classList.toggle('active', active);
+    if (active) {
+      const rect=node.getBoundingClientRect();
+      window.dispatchEvent(new CustomEvent('academy:map-focus',{detail:{id:node.dataset.mapId,x:rect.left+rect.width/2,y:rect.top+rect.height/2}}));
+    } else {
+      window.dispatchEvent(new CustomEvent('academy:map-blur'));
+    }
   }
 
   function activateNode(node) {
     const id = node.dataset.mapId;
     if (id) {
       visited.add(id);
-      localStorage.setItem(visitedKey, JSON.stringify([...visited]));
+      storage.setItem(visitedKey, JSON.stringify([...visited]));
       node.classList.add('visited');
       svg?.querySelector(`[data-for-node="${id}"]`)?.classList.add('visited');
     }

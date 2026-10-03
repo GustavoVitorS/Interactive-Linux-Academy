@@ -1,6 +1,3 @@
-import { t, getLanguage } from './i18n.js';
-import { commands } from './data/commands.js';
-
 const clone = obj => JSON.parse(JSON.stringify(obj));
 const baseFs = {
   type: 'dir', children: {
@@ -22,7 +19,7 @@ const baseFs = {
   }
 };
 
-export function initTerminal({ onCommand, tuxSpeak } = {}) {
+function initTerminal({ onCommand, tuxSpeak } = {}) {
   const output = document.querySelector('#terminalOutput');
   const form = document.querySelector('#terminalForm');
   const input = document.querySelector('#terminalInput');
@@ -116,11 +113,11 @@ export function initTerminal({ onCommand, tuxSpeak } = {}) {
   function setMission(key, done = true) {
     if (!missions[key]) return;
     missions[key].classList.toggle('done', done);
-    if (done) localStorage.setItem(`linuxAcademy.mission.${key}`, 'done');
+    if (done) storage.setItem(`linuxAcademy.mission.${key}`, 'done');
   }
 
   function syncMissions() {
-    Object.keys(missions).forEach(key => setMission(key, localStorage.getItem(`linuxAcademy.mission.${key}`) === 'done'));
+    Object.keys(missions).forEach(key => setMission(key, storage.getItem(`linuxAcademy.mission.${key}`) === 'done'));
   }
 
   function checkState(commandName) {
@@ -386,7 +383,7 @@ export function initTerminal({ onCommand, tuxSpeak } = {}) {
       historyIndex = 0;
       exploredPwd = false;
       exploredLs = false;
-      Object.keys(missions).forEach(key => localStorage.removeItem(`linuxAcademy.mission.${key}`));
+      Object.keys(missions).forEach(key => storage.removeItem(`linuxAcademy.mission.${key}`));
       syncMissions();
       updatePrompt();
       print('Virtual filesystem reset.', 'success');

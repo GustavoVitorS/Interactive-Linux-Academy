@@ -1,81 +1,114 @@
-# Linux Drawing — V4 Interactive Linux Academy
+# Interactive Linux Academy V5
 
-Linux Drawing started as a small HTML/CSS experiment: a Tux-inspired penguin drawn with simple shapes. V4 keeps that origin visible, but turns the project into a responsive Linux learning environment for GitHub Pages.
+> Learn Linux by understanding the system, practicing real command syntax, and completing safe browser-based labs.
 
-![Linux Drawing V4 desktop preview](preview-v4-desktop.png)
+Interactive Linux Academy started as **Linux Drawing**, a small HTML/CSS Tux experiment. V5 turns that idea into an editorial, bilingual Linux learning product built with HTML, CSS and Vanilla JavaScript and designed to run directly on GitHub Pages.
 
-## What changed from V1
+![Interactive Linux Academy V5 — desktop](preview-v5-desktop.png)
 
-![Original Linux Drawing V1](preview-v1.png)
+## V1 → V4 → V5
 
-The original project focused on a static CSS drawing. V4 keeps the recognizable black oval body, white belly, yellow beak and feet, then adds a more dimensional CSS illustration, cursor-following eyes, natural blinking, idle motion, click reactions and a one-eye wink after the visitor stays over Tux for a moment.
+- **V1 — Linux Drawing:** static CSS illustration of Tux.
+- **V4 / V4.2:** interactive Tux, learning map, simulated terminal, lessons, command explorer, distro explorer, PT-BR/EN and responsive refinements.
+- **V5 — Interactive Linux Academy:** new editorial product system, personalized routes, richer Terminal Lab, Command Inspector, terminal missions, split learning, distro comparison/finder, documentation explorer, quick reference, progress dashboard and local achievements.
 
-The page itself became an interactive academy rather than a static illustration.
+The mascot remains implemented with HTML/CSS/JS instead of being replaced by a static hero image, preserving the project's original technical identity.
 
-## Main features
+## Highlights
 
-- Interactive mind-map hero connecting Linux topics from beginner to advanced.
-- Clickable learning nodes for fundamentals, terminal, filesystem, permissions, packages, processes, networking, Bash, administration, security, distributions and Windows migration.
-- Safe browser terminal with an in-memory virtual filesystem.
-- Terminal practice for navigation, files, search, pipes, redirection, package-manager examples, process inspection, networking, systemd-style commands and more.
-- `man <command>` learning summaries inside the simulator.
-- 24 bilingual lessons: Beginner, Intermediate and Advanced.
-- EN / PT-BR interface switch with persistent preference when browser storage is available.
-- Linux commands and their syntax remain unchanged when the explanatory UI is translated.
-- Command Explorer with syntax, examples, risk warnings and official documentation links.
-- Distribution carousel for Debian, Ubuntu, Fedora, Pop!_OS, Arch Linux, Linux Mint, openSUSE, Kali Linux, EndeavourOS and NixOS.
-- GNOME-style distribution modal with profile, use cases and official website.
-- Interactive filesystem, permissions and package-manager references.
-- Search palette with `Ctrl/Cmd + K`.
-- Local progress, quiz and terminal missions.
-- Responsive burger navigation and touch-friendly distro carousel.
-- Reduced-motion support and keyboard-accessible controls.
+### Interactive learning map
 
-## Documentation basis
+The visual Linux map connects core concepts such as Fundamentals, Terminal, Filesystem, Distributions, Package Management, Processes, Networking, and Shell & Bash. Nodes react to focus/hover, can highlight a personalized route, and link into the learning experience.
 
-The learning content was rewritten around primary or official references instead of generic Linux copy. The site links directly to these sources where relevant:
+### Terminal Lab
 
-- [GNU Coreutils Manual](https://www.gnu.org/software/coreutils/manual/coreutils.html)
-- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
-- [Linux man-pages](https://man7.org/linux/man-pages/)
-- [Filesystem Hierarchy Standard 3.0](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)
-- [Debian Reference](https://www.debian.org/doc/manuals/debian-reference/)
-- [Arch Linux pacman manual](https://man.archlinux.org/man/pacman.8)
-- [Fedora Documentation](https://docs.fedoraproject.org/)
-- [Kali Linux Documentation](https://www.kali.org/docs/)
+The terminal is a **JavaScript educational simulator**, not a real shell. It includes a virtual filesystem, command history, simulated outputs, progressive missions and lesson-to-terminal workflows.
 
-The academy is an educational overview, not a replacement for the documentation shipped by a user's own distribution.
+It never executes host commands, accesses the user's filesystem, installs packages, or uses `eval()`.
 
-## Safe terminal design
+### Command Inspector
 
-The terminal is a JavaScript simulation. It does **not**:
+Commands such as `ls -lah` can be broken down into their command and flags so learners understand what they type instead of memorizing opaque strings.
 
-- open a real shell;
-- execute host commands;
-- use `eval()`;
-- access the visitor's real filesystem;
-- make package changes;
-- connect to SSH hosts;
-- run arbitrary scripts.
+### Split Learn Mode
 
-Commands such as `rm`, `sudo apt update`, `systemctl`, `ssh` and `kill` are simulated inside the browser. The virtual filesystem can be reset at any time with `reset`.
+Open a lesson and the live browser terminal side by side on desktop. On smaller screens the experience remains usable without resetting terminal state.
 
-Try:
+### Linux curriculum
 
-```bash
-help
-pwd
-ls -la
-cd Documents
-touch notes.txt
-cat welcome.txt
-find . -name "*.txt"
-man rm
-ps aux
-lsblk
-ip addr
-systemctl status ssh
-```
+The project includes **24 bilingual lessons** across Beginner, Intermediate and Advanced levels, with real command syntax, examples, expected output, warnings, exercises and official references.
+
+### Command Explorer + Quick Reference
+
+Browse and search **34 Linux commands** by category, inspect examples, read safety warnings and send supported commands directly to the Terminal Lab.
+
+### Distribution Explorer
+
+Explore **10 distributions** including Debian, Ubuntu, Fedora, Pop!_OS, Arch Linux, Linux Mint, openSUSE, Kali Linux, EndeavourOS and NixOS.
+
+V5 also adds:
+
+- comparison of up to three distributions;
+- a local distro finder based on experience and goals;
+- detailed distro modal/drawer information;
+- official website links.
+
+### Personalized learning route
+
+First-time onboarding can highlight a route for:
+
+- Linux beginners;
+- Windows users;
+- development;
+- servers / DevOps;
+- cybersecurity;
+- advanced Linux users.
+
+The preference is stored locally and requires no account.
+
+### Progress and achievements
+
+Lesson progress, missions, route preferences and achievements use `localStorage`. There is no backend, fake account system or leaderboard.
+
+## Design system
+
+V5 introduces a deliberate editorial/product design language influenced by modern open-source desktop interfaces and contemporary digital-product curation:
+
+- dark Linux-oriented surfaces;
+- restrained GNOME-inspired blue;
+- terminal green only for technical states;
+- Tux yellow/orange as mascot identity;
+- Instrument Sans-style UI typography with IBM Plex Mono-style technical typography and robust fallbacks;
+- consistent spacing, border, radius, motion and surface tokens;
+- reduced reliance on repetitive cards and generic SaaS patterns.
+
+The implementation remains original to Interactive Linux Academy rather than copying a specific reference site.
+
+## Responsive design
+
+The layout is designed as separate responsive compositions rather than a compressed desktop page. It was checked at representative widths including:
+
+`320`, `360`, `375`, `390`, `412`, `430`, `768`, `960`, `1032`, `1280`, `1366`, `1440`, `1920`, and ultrawide layouts.
+
+The learning map changes from a radial network to an adaptive two-column/vertical structure before the center hub can collide with learning nodes.
+
+![Interactive Linux Academy V5 — tablet](preview-v5-tablet.png)
+
+![Interactive Linux Academy V5 — mobile](preview-v5-mobile.png)
+
+## Accessibility
+
+The interface includes:
+
+- semantic HTML;
+- keyboard-accessible navigation;
+- `focus-visible` states;
+- dialog semantics and Escape behavior;
+- accessible touch targets;
+- reduced-motion support;
+- bilingual labels and controls;
+- responsive terminal controls;
+- contrast-conscious dark surfaces.
 
 ## Languages
 
@@ -84,33 +117,49 @@ The interface supports:
 - English
 - Português Brasileiro
 
-Only explanatory content is translated. Real Linux command names, flags, syntax and code examples remain in their original form, for example:
+Linux commands and flags are intentionally **not translated**. Examples remain authentic, such as:
 
 ```bash
+ls -la
 sudo apt update
-sudo dnf install curl
-sudo pacman -S curl
-chmod u+x script.sh
+dnf install package
+pacman -S package
+chmod 755 script.sh
+grep "error" logfile.txt
+systemctl status ssh
 ```
+
+## Security model
+
+Interactive Linux Academy is a static educational web application.
+
+It does **not**:
+
+- execute a real shell;
+- access the host filesystem;
+- use `eval()`;
+- expose API keys;
+- include advertising scripts;
+- include tracking or analytics;
+- require a backend.
 
 ## Project structure
 
 ```text
-Linux-Drawing-V4/
+Interactive-Linux-Academy/
 ├── index.html
 ├── README.md
+├── CHANGELOG.md
 ├── LICENSE
 ├── robots.txt
 ├── sitemap.xml
-├── preview-v4-desktop.png
-├── preview-v4-mobile.png
 ├── assets/
 │   └── favicon.svg
 ├── css/
-│   └── style.css
+│   ├── style.css          # V4 compatibility/base layer
+│   └── v5.css             # V5 product/editorial design system
 ├── js/
-│   ├── bundle.js
-│   ├── app.js
+│   ├── runtime.js
 │   ├── i18n.js
 │   ├── tux.js
 │   ├── mindmap.js
@@ -120,6 +169,9 @@ Linux-Drawing-V4/
 │   ├── distros.js
 │   ├── search.js
 │   ├── quiz.js
+│   ├── app.js
+│   ├── v5.js
+│   ├── bundle.js          # generated classic bundle for GitHub Pages/local use
 │   └── data/
 │       ├── lessons.js
 │       ├── commands.js
@@ -128,21 +180,9 @@ Linux-Drawing-V4/
     └── build_bundle.py
 ```
 
-## Why there is a bundle
+## Running locally
 
-`index.html` loads `js/bundle.js` as a classic deferred script. This avoids the common `file://` restriction that can prevent ES-module imports from loading when someone double-clicks `index.html` locally.
-
-The maintainable source remains split across the files inside `js/`. After editing them, rebuild the browser bundle with:
-
-```bash
-python3 tools/build_bundle.py
-```
-
-No third-party Python package is required.
-
-## Run locally
-
-You can open `index.html` directly. For a development workflow closer to GitHub Pages, a tiny static server is still convenient:
+A simple static server is recommended:
 
 ```bash
 python3 -m http.server 8000
@@ -154,35 +194,44 @@ Then open:
 http://localhost:8000
 ```
 
-## Performance
+The site is also designed for GitHub Pages.
 
-The interface uses HTML, CSS and Vanilla JavaScript. Tux eye tracking is throttled through `requestAnimationFrame`; decorative motion uses transforms/opacity; the mind-map connectors are redrawn only when needed; and `prefers-reduced-motion` is respected.
+## Building `bundle.js`
 
-## Security
+The maintainable source files inside `js/` are the source of truth. Do not edit only the generated bundle.
 
-- No secrets or API keys.
-- No analytics or trackers.
-- No real command execution.
-- No backend.
-- User-entered terminal text is written with text nodes rather than injected as executable HTML.
-- External distribution links open with `noopener noreferrer`.
+After changing JavaScript source files, rebuild with:
+
+```bash
+python3 tools/build_bundle.py
+```
+
+Then optionally validate syntax:
+
+```bash
+node --check js/bundle.js
+```
+
+## GitHub Pages
+
+Repository:
+
+```text
+https://github.com/GustavoVitorS/Interactive-Linux-Academy
+```
+
+Expected Pages path:
+
+```text
+https://gustavovitors.github.io/Interactive-Linux-Academy/
+```
+
+All production asset paths are relative so the project can live below the repository subpath.
+
+## Contributing
+
+Contributions that improve Linux accuracy, accessibility, exercises, translations, responsive behavior or documentation are welcome. Keep examples technically grounded and distinguish simulated terminal behavior from behavior on a real Linux system.
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-## Author
-
-Created by [Gustavo Vitor](https://github.com/GustavoVitorS).
-
-### V4.1 responsive refinement
-
-The V4 interface received an additional responsive layout pass focused on portrait tablets, narrow laptops and mobile devices. Core page layouts and the distribution carousel now use Flexbox-based wrapping, the interactive learning map switches from the radial desktop composition to a collision-free flexible layout on smaller screens, and carousel navigation controls are geometrically centered. Targeted sizes include 1280×800, 1032×1376, 960×1400, 768×1024 and 412×968.
-
-### V4.2 responsive polish
-- Keeps every V4 feature and content block intact.
-- Restores the project favicon with a dedicated `assets/favicon.svg`.
-- Anchors section headings to the same content edge instead of drifting toward the middle on wide screens.
-- Adds safer spacing for the radial mind map on 1181–1360px screens.
-- Uses the flex mind-map layout for portrait/tablet widths with explicit gaps between cards.
-- Tightens vertical rhythm on 1280×800, 1032×1376, 960×1400, 768×1024 and 412×968 class viewports.

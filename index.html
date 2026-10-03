@@ -3,28 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Learn Linux interactively with a safe browser terminal, distro explorer, lessons, quizzes and an animated Tux guide.">
-  <meta name="theme-color" content="#111318">
-  <meta property="og:title" content="Linux Interactive Academy">
-  <meta property="og:description" content="A GNOME-inspired, free and open-source Linux learning lab for the browser.">
+  <meta name="description" content="Interactive Linux Academy — learn Linux from zero to advanced with a safe browser terminal, visual learning map, distro explorer, documentation and hands-on missions.">
+  <meta name="theme-color" content="#070a0f">
+  <meta property="og:title" content="Interactive Linux Academy">
+  <meta property="og:description" content="Learn Linux by understanding the system and practicing safely in your browser.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://gustavovitors.github.io/Linux-Drawing/">
-  <link rel="canonical" href="https://gustavovitors.github.io/Linux-Drawing/">
+  <meta property="og:url" content="https://gustavovitors.github.io/Interactive-Linux-Academy/">
+  <meta property="og:image" content="https://gustavovitors.github.io/Interactive-Linux-Academy/preview-v5-desktop.png">
+  <link rel="canonical" href="https://gustavovitors.github.io/Interactive-Linux-Academy/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
-  <title>Linux Interactive Academy</title>
+  <link rel="stylesheet" href="css/v5.css">
+  <title>Interactive Linux Academy — Learn Linux</title>
 </head>
-<body>
+<body class="v5">
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
-  <div class="wallpaper" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="v5-background" aria-hidden="true">
+    <div class="v5-grid"></div>
+    <div class="v5-orbit v5-orbit-a"></div>
+    <div class="v5-orbit v5-orbit-b"></div>
+  </div>
   <div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
 
-  <header class="site-header" id="home">
+  <header class="site-header v5-header" id="home">
     <nav class="nav shell" aria-label="Primary navigation">
-      <a class="brand" href="#home" aria-label="Linux Interactive Academy home">
-        <span class="brand-orbit" aria-hidden="true"><span>⌘</span></span>
-        <span class="brand-copy"><strong>Linux</strong><small>Interactive Academy</small></span>
+      <a class="brand v5-brand" href="#home" aria-label="Interactive Linux Academy home">
+        <span class="brand-tux" aria-hidden="true">🐧</span>
+        <span class="brand-copy"><strong>Interactive Linux Academy</strong><small>open-source learning lab</small></span>
+        <span class="brand-arrow" aria-hidden="true">→</span>
       </a>
 
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Open navigation">
@@ -33,221 +40,249 @@
 
       <div class="nav-panel" id="navPanel">
         <div class="nav-links">
-          <a href="#learn" data-i18n="navLearn">Learn</a>
+          <a class="active" href="#learn" data-i18n="navLearn">Learn</a>
           <a href="#terminal" data-i18n="navTerminal">Terminal</a>
-          <a href="#commands" data-i18n="navCommands">Commands</a>
           <a href="#distros" data-i18n="navDistros">Distros</a>
-          <a href="#roadmap" data-i18n="navRoadmap">Roadmap</a>
           <a href="#resources" data-i18n="navResources">Docs</a>
+          <a href="#about" data-v5-i18n="about">About</a>
         </div>
         <div class="nav-actions">
-          <button class="topbar-button search-trigger" id="searchTrigger" type="button" aria-label="Open search"><span>⌕</span><b>Ctrl K</b></button>
-          <button class="topbar-button language-toggle" id="languageToggle" type="button" aria-label="Switch language"><span>◎</span><b id="languageLabel">EN</b></button>
-          <a class="github-link" href="https://github.com/GustavoVitorS/Linux-Drawing" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <button class="topbar-button search-trigger" id="searchTrigger" type="button" aria-label="Open search">
+            <span aria-hidden="true">⌕</span><b data-v5-i18n="searchLabel">Search</b><kbd>Ctrl K</kbd>
+          </button>
+          <button class="topbar-button language-toggle" id="languageToggle" type="button" aria-label="Switch language">
+            <b id="languageLabel">EN</b>
+          </button>
+          <button class="topbar-button theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">☼</button>
         </div>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero mindmap-hero shell section-pad" aria-labelledby="heroTitle">
-      <div class="hero-intro reveal">
-        <div>
-          <div class="gnome-pill"><span class="status-dot"></span><span data-i18n="heroPill">Free • Open source • Browser based</span></div>
-          <p class="eyebrow hero-eyebrow" data-i18n="mapEyebrow">Interactive Linux map</p>
-          <h1 id="heroTitle" data-i18n-html="mapTitle">Linux is not a list of commands.<br><em>It is a connected system.</em></h1>
+    <section class="hero-v5 shell" aria-labelledby="heroTitle">
+      <div class="hero-copy-v5 reveal">
+        <p class="hero-overline" data-v5-i18n="heroOverline">LEARN • PRACTICE • EVOLVE</p>
+        <h1 id="heroTitle">
+          <span data-v5-i18n="heroLinux">LINUX</span>
+          <strong data-v5-i18n="heroInteractive">INTERACTIVE</strong>
+          <span data-v5-i18n="heroAcademy">ACADEMY</span>
+        </h1>
+        <p class="hero-lede" data-v5-i18n="heroLede">From zero to advanced through an interactive, practical path. Explore the system, run commands and understand how Linux fits together.</p>
+        <div class="hero-actions">
+          <button class="button primary" id="mapStart" type="button"><span aria-hidden="true">▶</span><span data-i18n="startLearning">Start learning</span><i>→</i></button>
+          <a class="button secondary" href="#learning-map"><span aria-hidden="true">⌘</span><span data-v5-i18n="exploreMap">Explore the map</span><i>→</i></a>
         </div>
-        <div class="hero-intro-copy">
-          <p data-i18n="mapText">Explore the map, choose a path and learn how the pieces connect from your first terminal command to administration and security.</p>
-          <div class="hero-actions">
-            <button class="button primary" id="mapStart" type="button" data-i18n="startLearning">Start learning</button>
-            <a class="button secondary" href="#terminal"><span class="terminal-glyph">$</span><span data-i18n="openTerminal">Open terminal</span></a>
-          </div>
-          <div class="hero-stats" aria-label="Platform highlights">
-            <div><strong id="lessonCount">0</strong><span data-i18n="lessonsLabel">Lessons</span></div>
-            <div><strong id="commandCount">0</strong><span data-i18n="commandsLabel">Commands</span></div>
-            <div><strong id="distroCount">0</strong><span data-i18n="distrosLabel">Distros</span></div>
-          </div>
+        <div class="hero-meta" aria-label="Academy statistics">
+          <span><b id="lessonCount">0</b><small data-i18n="lessonsLabel">Lessons</small></span>
+          <span><b id="commandCount">0</b><small data-i18n="commandsLabel">Commands</small></span>
+          <span><b id="distroCount">0</b><small data-i18n="distrosLabel">Distros</small></span>
+          <span><b>2</b><small>Languages</small></span>
         </div>
       </div>
 
-      <div class="mindmap-window reveal" aria-label="Interactive Linux learning map">
-        <div class="mindmap-window-bar">
-          <div class="mindmap-app-title"><span class="app-dot"></span><strong data-i18n="mapWindowTitle">Linux Learning Map</strong><small>visitor — academy.desktop</small></div>
-          <div class="window-controls" aria-hidden="true"><span>−</span><span>□</span><span>×</span></div>
-        </div>
-        <div class="mindmap-scroll" id="mindmapScroll">
-          <div class="mindmap-stage" id="linuxMindmap">
-            <svg class="mindmap-connectors" id="mindmapConnectors" aria-hidden="true"></svg>
-
-            <button class="mind-node node-start" type="button" data-target="#learn" data-level="beginner" data-map-id="fundamentals">
-              <span class="node-kicker" data-i18n="beginner">Beginner</span><strong data-i18n="fundamentals">Fundamentals</strong><small data-i18n="mapStartNode">Start here</small>
-            </button>
-            <button class="mind-node node-terminal" type="button" data-target="#terminal" data-map-id="terminal">
-              <span class="node-icon">$</span><strong>Terminal</strong><small>pwd • ls • cd</small>
-            </button>
-            <button class="mind-node node-filesystem" type="button" data-target="#concepts" data-map-id="filesystem">
-              <span class="node-icon">/</span><strong data-i18n="filesystem">Filesystem</strong><small>/home • /etc • /var</small>
-            </button>
-            <button class="mind-node node-permissions" type="button" data-target="#concepts" data-map-id="permissions">
-              <span class="node-icon">rwx</span><strong data-i18n="permissions">Permissions</strong><small>chmod • chown</small>
-            </button>
-            <button class="mind-node node-distros" type="button" data-target="#distros" data-map-id="distros">
-              <span class="node-icon">◉</span><strong data-i18n="navDistros">Distros</strong><small>Debian • Fedora • Arch</small>
-            </button>
-            <button class="mind-node node-packages" type="button" data-target="#concepts" data-map-id="packages">
-              <span class="node-kicker" data-i18n="intermediate">Intermediate</span><strong data-i18n="packages">Packages</strong><small>apt • dnf • pacman</small>
-            </button>
-            <button class="mind-node node-processes" type="button" data-target="#learn" data-level="intermediate" data-map-id="processes">
-              <span class="node-icon">PID</span><strong data-i18n="processes">Processes</strong><small>ps • top • kill</small>
-            </button>
-            <button class="mind-node node-network" type="button" data-target="#learn" data-level="intermediate" data-map-id="networking">
-              <span class="node-icon">↔</span><strong data-i18n="networking">Networking</strong><small>ip • ping • ssh</small>
-            </button>
-            <button class="mind-node node-shell" type="button" data-target="#learn" data-level="advanced" data-map-id="shell">
-              <span class="node-kicker" data-i18n="advanced">Advanced</span><strong>Shell &amp; Bash</strong><small>| • &gt; • scripts</small>
-            </button>
-            <button class="mind-node node-admin" type="button" data-target="#roadmap" data-map-id="administration">
-              <span class="node-icon">⚙</span><strong data-i18n="administration">Administration</strong><small>systemd • logs</small>
-            </button>
-            <button class="mind-node node-security" type="button" data-target="#learn" data-level="advanced" data-map-id="security">
-              <span class="node-icon">◇</span><strong data-i18n="mapSecurity">Security</strong><small>users • SSH • least privilege</small>
-            </button>
-            <button class="mind-node node-windows" type="button" data-target="#windows-linux" data-map-id="windows">
-              <span class="node-icon">↪</span><strong data-i18n="mapWindows">From Windows</strong><small>C:\Users → /home</small>
-            </button>
-
-            <div class="mind-hub" id="mindHub">
-              <div class="hub-title"><small data-i18n="mapCenterKicker">Your guide</small><strong>Linux</strong><span class="evolution-badge" data-i18n="tuxEvolution">CSS Tux • evolved from V1</span></div>
-              <div class="speech" id="tuxSpeech" role="status">Welcome! Ready to learn Linux?</div>
-              <div class="tux-wrap" id="tuxWrap" role="button" tabindex="0" aria-label="Interactive Tux mascot">
-                <div class="tux" id="tux" aria-hidden="true">
-                  <div class="tux-back-wing left"></div>
-                  <div class="tux-back-wing right"></div>
-                  <div class="tux-body">
-                    <div class="tux-belly"></div>
-                    <div class="tux-head" id="tuxHead">
-                      <div class="tux-face"></div>
-                      <div class="tux-brow left"></div><div class="tux-brow right"></div>
-                      <div class="eye eye-left" id="tuxEyeLeft"><span class="pupil"><i></i></span></div>
-                      <div class="eye eye-right" id="tuxEyeRight"><span class="pupil"><i></i></span></div>
-                      <div class="tux-beak"><span></span></div>
-                      <div class="tux-cheek left"></div><div class="tux-cheek right"></div>
-                    </div>
-                  </div>
-                  <div class="tux-foot left"></div><div class="tux-foot right"></div>
-                </div>
+      <div class="hero-mascot-v5 reveal">
+        <div class="hero-tech-lines" aria-hidden="true"></div>
+        <div class="speech hero-speech" id="tuxSpeech" role="status">Welcome! Ready to learn Linux?</div>
+        <div class="tux-wrap" id="tuxWrap" role="button" tabindex="0" aria-label="Interactive Tux mascot">
+          <div class="tux" id="tux" aria-hidden="true">
+            <div class="tux-back-wing left"></div>
+            <div class="tux-back-wing right"></div>
+            <div class="tux-body">
+              <div class="tux-belly"></div>
+              <div class="tux-head" id="tuxHead">
+                <div class="tux-face"></div>
+                <div class="tux-brow left"></div><div class="tux-brow right"></div>
+                <div class="eye eye-left" id="tuxEyeLeft"><span class="pupil"><i></i></span></div>
+                <div class="eye eye-right" id="tuxEyeRight"><span class="pupil"><i></i></span></div>
+                <div class="tux-beak"><span></span></div>
+                <div class="tux-cheek left"></div><div class="tux-cheek right"></div>
               </div>
-              <div class="tux-interaction-hint"><span>↖</span><b data-i18n="tuxHint">Move, hover or click Tux</b></div>
-              <div class="mascot-console"><span>visitor@linux:~$</span><strong id="mascotCommand">whoami</strong><i></i></div>
             </div>
+            <div class="tux-foot left"></div><div class="tux-foot right"></div>
           </div>
         </div>
-        <div class="mindmap-footer">
-          <div><span class="map-dot beginner"></span><span data-i18n="beginner">Beginner</span></div>
-          <div><span class="map-dot intermediate"></span><span data-i18n="intermediate">Intermediate</span></div>
-          <div><span class="map-dot advanced"></span><span data-i18n="advanced">Advanced</span></div>
-          <p data-i18n="mapHint">Click any connected topic to jump directly to that part of the course.</p>
-        </div>
+        <div class="hero-tux-console"><span>visitor@linux:~$</span><strong id="mascotCommand">whoami</strong><i></i></div>
       </div>
+
+      <aside class="hero-principles reveal" aria-label="Learning principles">
+        <small>// OPEN-SOURCE LEARNING SYSTEM</small>
+        <h2 data-v5-i18n-html="principlesTitle">More knowledge.<br><em>More freedom.</em></h2>
+        <ul>
+          <li><span>▣</span><b data-v5-i18n="principle1">Clear documentation</b></li>
+          <li><span>&gt;_</span><b data-v5-i18n="principle2">Authentic commands</b></li>
+          <li><span>◫</span><b data-v5-i18n="principle3">Interactive environment</b></li>
+          <li><span>◎</span><b data-v5-i18n="principle4">Hands-on exercises</b></li>
+          <li><span>↗</span><b data-v5-i18n="principle5">Beginner to advanced</b></li>
+        </ul>
+        <div class="corner-mark" aria-hidden="true"></div>
+      </aside>
     </section>
 
-    <section class="section shell" id="learn">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="learnEyebrow">01 / Learning path</p>
-        <h2 data-i18n="learnTitle">Build Linux knowledge one practical layer at a time.</h2>
+    <section class="learning-map-v5 shell section" id="learning-map">
+      <div class="map-editorial reveal">
+        <p class="eyebrow" data-v5-i18n="learningPathLabel">LEARNING PATH</p>
+        <h2 data-v5-i18n-html="mapHeadline">Your Linux map,<br>connected.</h2>
+        <p data-v5-i18n="mapIntro">Explore core concepts visually. Focus a node to reveal its commands and relationship to the rest of the system.</p>
+        <button class="text-link" type="button" id="openOnboarding"><span>▣</span><span data-v5-i18n="personalizeRoute">Personalize my route</span><i>→</i></button>
+      </div>
+
+      <div class="map-network-wrap reveal">
+        <div class="mindmap-stage v5-map" id="linuxMindmap">
+          <svg class="mindmap-connectors" id="mindmapConnectors" aria-hidden="true"></svg>
+
+          <button class="mind-node node-start" type="button" data-target="#learn" data-level="beginner" data-map-id="fundamentals">
+            <span class="node-icon">▣</span><span class="node-index">01</span><strong data-i18n="fundamentals">Fundamentals</strong><small data-v5-i18n="fundamentalsSub">What Linux is</small>
+          </button>
+          <button class="mind-node node-terminal" type="button" data-target="#terminal" data-map-id="terminal">
+            <span class="node-icon">&gt;_</span><span class="node-index">02</span><strong>Terminal</strong><small>pwd • ls • cd</small>
+          </button>
+          <button class="mind-node node-filesystem" type="button" data-target="#concepts" data-map-id="filesystem">
+            <span class="node-icon">□</span><span class="node-index">03</span><strong data-i18n="filesystem">Filesystem</strong><small>/home • /etc • /var</small>
+          </button>
+          <button class="mind-node node-distros" type="button" data-target="#distros" data-map-id="distros">
+            <span class="node-icon">◇</span><span class="node-index">04</span><strong data-i18n="navDistros">Distros</strong><small>Debian • Fedora • Arch</small>
+          </button>
+          <button class="mind-node node-packages" type="button" data-target="#concepts" data-map-id="packages">
+            <span class="node-icon">◫</span><span class="node-index">05</span><strong data-i18n="packages">Packages</strong><small>apt • dnf • pacman</small>
+          </button>
+          <button class="mind-node node-processes" type="button" data-target="#learn" data-level="intermediate" data-map-id="processes">
+            <span class="node-icon">PID</span><span class="node-index">06</span><strong data-i18n="processes">Processes</strong><small>ps • top • kill</small>
+          </button>
+          <button class="mind-node node-network" type="button" data-target="#learn" data-level="intermediate" data-map-id="networking">
+            <span class="node-icon">⌘</span><span class="node-index">07</span><strong data-i18n="networking">Networking</strong><small>ip • ping • ssh</small>
+          </button>
+          <button class="mind-node node-shell" type="button" data-target="#learn" data-level="advanced" data-map-id="shell">
+            <span class="node-icon">$</span><span class="node-index">08</span><strong>Shell &amp; Bash</strong><small>| • &gt; • scripts</small>
+          </button>
+
+          <div class="mind-hub v5-hub" id="mindHub">
+            <span class="hub-penguin">🐧</span>
+            <strong>Linux<br>Interactive Academy</strong>
+          </div>
+        </div>
+      </div>
+
+      <aside class="progress-dashboard-v5 reveal" id="progressDashboard">
+        <p class="eyebrow" data-v5-i18n="yourProgress">YOUR PROGRESS</p>
+        <div class="progress-ring" id="progressRing"><span id="progressRingLabel">0%</span></div>
+        <div class="progress-levels">
+          <span><i class="level-dot beginner"></i><b data-i18n="beginner">Beginner</b><small id="beginnerProgress">0/0</small></span>
+          <span><i class="level-dot intermediate"></i><b data-i18n="intermediate">Intermediate</b><small id="intermediateProgress">0/0</small></span>
+          <span><i class="level-dot advanced"></i><b data-i18n="advanced">Advanced</b><small id="advancedProgress">0/0</small></span>
+        </div>
+        <button class="dashboard-link" type="button" id="continueLearning"><span>⌁</span><b data-v5-i18n="continueLearning">Continue learning</b><i>→</i></button>
+      </aside>
+    </section>
+
+    <section class="section shell learning-section-v5" id="learn">
+      <div class="section-heading reveal editorial-heading">
+        <div>
+          <p class="eyebrow" data-i18n="learnEyebrow">01 / Learning path</p>
+          <h2 data-v5-i18n-html="learnHeadline">Understand Linux<br>from the inside out.</h2>
+        </div>
         <p data-i18n="learnText">Short explanations, authentic commands and safe browser exercises. Progress is stored only on this device.</p>
       </div>
-      <div class="progress-panel reveal">
-        <div class="progress-copy"><span data-i18n="localProgress">Local progress</span><strong id="progressLabel">0% complete</strong></div>
-        <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
-        <button class="text-button" id="resetProgress" type="button" data-i18n="resetProgress">Reset progress</button>
+
+      <div class="learning-toolbar reveal">
+        <div class="level-tabs" role="tablist" aria-label="Learning level">
+          <button class="tab active" type="button" data-level="beginner" role="tab" aria-selected="true" data-i18n="beginner">Beginner</button>
+          <button class="tab" type="button" data-level="intermediate" role="tab" aria-selected="false" data-i18n="intermediate">Intermediate</button>
+          <button class="tab" type="button" data-level="advanced" role="tab" aria-selected="false" data-i18n="advanced">Advanced</button>
+        </div>
+        <div class="progress-panel">
+          <div class="progress-copy"><span data-i18n="localProgress">Local progress</span><strong id="progressLabel">0% complete</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          <button class="text-button" id="resetProgress" type="button" data-i18n="resetProgress">Reset progress</button>
+        </div>
       </div>
-      <div class="level-tabs reveal" role="tablist" aria-label="Learning level">
-        <button class="tab active" type="button" data-level="beginner" role="tab" aria-selected="true" data-i18n="beginner">Beginner</button>
-        <button class="tab" type="button" data-level="intermediate" role="tab" aria-selected="false" data-i18n="intermediate">Intermediate</button>
-        <button class="tab" type="button" data-level="advanced" role="tab" aria-selected="false" data-i18n="advanced">Advanced</button>
-      </div>
-      <div class="lesson-grid" id="lessonGrid"></div>
+      <div class="lesson-grid editorial-lessons" id="lessonGrid"></div>
     </section>
 
-    <section class="section terminal-section" id="terminal">
-      <div class="shell terminal-layout">
-        <div class="terminal-copy reveal">
-          <p class="eyebrow" data-i18n="terminalEyebrow">02 / Safe practice</p>
-          <h2 data-i18n="terminalTitle">Practice the command line without touching your real system.</h2>
-          <p data-i18n="terminalText">The terminal below is a JavaScript simulation with a virtual filesystem. Commands keep their real Linux names and syntax in every language.</p>
-          <div class="safety-list">
-            <span><i>✓</i><b data-i18n="safeOne">No real shell access</b></span>
-            <span><i>✓</i><b data-i18n="safeTwo">No filesystem access</b></span>
-            <span><i>✓</i><b data-i18n="safeThree">No eval() or remote execution</b></span>
+    <section class="section terminal-section v5-terminal-section" id="terminal">
+      <div class="shell">
+        <div class="terminal-heading-v5 reveal">
+          <div>
+            <p class="eyebrow" data-v5-i18n="labLabel">LABORATORY</p>
+            <h2 data-v5-i18n-html="terminalHeadline">Terminal in<br>your browser.</h2>
+            <p data-i18n="terminalText">The terminal below is a JavaScript simulation with a virtual filesystem. Commands keep their real Linux names and syntax in every language.</p>
           </div>
-          <div class="challenge-card" id="challengeCard">
-            <span class="challenge-label" data-i18n="miniChallenge">Mini challenge</span>
-            <strong data-i18n-html="challengeText">Create <code>notes.txt</code> inside <code>Documents</code>.</strong>
-            <p data-i18n-html="challengeHint">Hint: use <code>cd</code> and then <code>touch</code>.</p>
-            <span class="challenge-status" id="challengeStatus" data-i18n="notCompleted">Not completed</span>
+          <div class="terminal-actions-v5">
+            <button class="button terminal-green" type="button" id="focusTerminal"><span>&gt;_</span><span data-v5-i18n="openTerminalBtn">Open terminal</span><i>→</i></button>
+            <a class="button secondary" href="#commands"><span>▤</span><span data-v5-i18n="viewCommands">View commands</span></a>
           </div>
         </div>
-        <div class="terminal-lab reveal">
-          <div class="terminal-practice-bar">
-            <div>
-              <span class="practice-label" data-i18n="practiceShortcuts">Practice shortcuts</span>
-              <div class="terminal-chips" id="terminalChips">
-                <button type="button" data-command="pwd"><code>pwd</code></button>
-                <button type="button" data-command="ls -la"><code>ls -la</code></button>
-                <button type="button" data-command="cd Documents"><code>cd Documents</code></button>
-                <button type="button" data-command="mkdir linux-lab"><code>mkdir linux-lab</code></button>
-                <button type="button" data-command="tree"><code>tree</code></button>
-                <button type="button" data-command="help"><code>help</code></button>
+
+        <div class="terminal-product reveal">
+          <div class="terminal-main-column">
+            <div class="terminal-window" aria-label="Linux terminal simulator">
+              <div class="terminal-bar">
+                <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span>linux-academy — bash</span>
+                <div class="terminal-bar-actions"><span class="terminal-safe" data-i18n="sandboxed">Sandboxed</span><button type="button" id="terminalClear" aria-label="Clear terminal" data-i18n="clear">Clear</button></div>
+              </div>
+              <div class="terminal-output" id="terminalOutput" tabindex="0" aria-live="polite">
+                <div class="terminal-line info">Interactive Linux Academy — Practice Lab</div>
+                <div class="terminal-line">Loading the interactive terminal…</div>
+              </div>
+              <form class="terminal-input-row" id="terminalForm" autocomplete="off">
+                <span class="prompt" id="terminalPrompt">visitor@linux-academy:~$</span>
+                <label class="sr-only" for="terminalInput">Terminal command</label>
+                <input id="terminalInput" name="command" spellcheck="false" autocapitalize="off" autocomplete="off" inputmode="text" aria-describedby="terminalHelp" placeholder="type a command…" data-i18n-placeholder="terminalInputPlaceholder">
+              </form>
+              <div class="terminal-hint-line"><span data-i18n="terminalHintLine">Use ↑ ↓ for history and Tab for command completion.</span><kbd>Ctrl</kbd><span>+</span><kbd>L</kbd><span data-i18n="terminalClearHint">clears the terminal</span></div>
+              <p class="sr-only" id="terminalHelp">Type help to see available simulated commands.</p>
+            </div>
+
+            <div class="command-inspector" id="commandInspector">
+              <div class="inspector-heading"><span>&gt;_</span><div><small data-v5-i18n="commandInspector">COMMAND INSPECTOR</small><strong id="inspectorCommand">ls -lah</strong></div></div>
+              <div class="inspector-parts" id="inspectorParts">
+                <span><code>ls</code><b>List directory contents</b></span>
+                <span><code>-l</code><b>Long format</b></span>
+                <span><code>-a</code><b>Hidden files</b></span>
+                <span><code>-h</code><b>Human-readable sizes</b></span>
               </div>
             </div>
-            <div class="practice-missions" aria-label="Terminal practice missions">
-              <span class="mission" id="missionExplore"><i></i><b data-i18n="missionExplore">Explore your home directory</b></span>
-              <span class="mission" id="missionCreate"><i></i><b data-i18n="missionCreate">Create a linux-lab directory</b></span>
-              <span class="mission" id="missionNote"><i></i><b data-i18n="missionNote">Create notes.txt inside Documents</b></span>
+          </div>
+
+          <aside class="challenge-panel-v5" id="challengeCard">
+            <div class="challenge-top"><span>◎</span><small data-v5-i18n="currentChallenge">CURRENT CHALLENGE</small><b id="missionCounter">01/07</b></div>
+            <h3 data-v5-i18n="challengeTitle">Explore your filesystem</h3>
+            <p data-v5-i18n="challengeDescription">Navigate to Documents and create a notes.txt file.</p>
+            <ol class="mission-steps" id="missionSteps">
+              <li class="mission" id="missionExplore"><i></i><b data-i18n="missionExplore">Explore your home directory</b></li>
+              <li class="mission" id="missionCreate"><i></i><b data-i18n="missionCreate">Create a linux-lab directory</b></li>
+              <li class="mission" id="missionNote"><i></i><b data-i18n="missionNote">Create notes.txt inside Documents</b></li>
+            </ol>
+            <strong class="challenge-hidden-text" data-i18n-html="challengeText">Create <code>notes.txt</code> inside <code>Documents</code>.</strong>
+            <p class="challenge-hidden-text" data-i18n-html="challengeHint">Hint: use <code>cd</code> and then <code>touch</code>.</p>
+            <span class="challenge-status" id="challengeStatus" data-i18n="notCompleted">Not completed</span>
+            <button class="hint-button" type="button" id="missionHint"><span>⌁</span><span data-v5-i18n="viewHint">View hint</span><i>→</i></button>
+          </aside>
+        </div>
+
+        <div class="terminal-practice-bar">
+          <div>
+            <span class="practice-label" data-i18n="practiceShortcuts">Practice shortcuts</span>
+            <div class="terminal-chips" id="terminalChips">
+              <button type="button" data-command="pwd"><code>pwd</code></button>
+              <button type="button" data-command="ls -la"><code>ls -la</code></button>
+              <button type="button" data-command="cd Documents"><code>cd Documents</code></button>
+              <button type="button" data-command="mkdir linux-lab"><code>mkdir linux-lab</code></button>
+              <button type="button" data-command="tree"><code>tree</code></button>
+              <button type="button" data-command="help"><code>help</code></button>
             </div>
           </div>
-          <div class="terminal-window" aria-label="Linux terminal simulator">
-            <div class="terminal-bar">
-              <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-              <span>visitor — virtual-shell</span>
-              <div class="terminal-bar-actions"><span class="terminal-safe" data-i18n="sandboxed">Sandboxed</span><button type="button" id="terminalClear" aria-label="Clear terminal" data-i18n="clear">Clear</button></div>
-            </div>
-            <div class="terminal-output" id="terminalOutput" tabindex="0" aria-live="polite">
-              <div class="terminal-line info">Linux Interactive Academy — Practice Lab</div>
-              <div class="terminal-line">Loading the interactive terminal…</div>
-              <div class="terminal-line muted">If this message remains, JavaScript did not initialize. Reload the page and check the browser console.</div>
-            </div>
-            <form class="terminal-input-row" id="terminalForm" autocomplete="off">
-              <span class="prompt" id="terminalPrompt">visitor@linux-academy:~$</span>
-              <label class="sr-only" for="terminalInput">Terminal command</label>
-              <input id="terminalInput" name="command" spellcheck="false" autocapitalize="off" autocomplete="off" inputmode="text" aria-describedby="terminalHelp" placeholder="type a command…" data-i18n-placeholder="terminalInputPlaceholder">
-            </form>
-            <div class="terminal-hint-line"><span data-i18n="terminalHintLine">Use ↑ ↓ for history and Tab for command completion.</span><kbd>Ctrl</kbd><span>+</span><kbd>L</kbd><span data-i18n="terminalClearHint">clears the terminal</span></div>
-            <p class="sr-only" id="terminalHelp">Type help to see available simulated commands.</p>
-          </div>
+          <div class="practice-missions extended-missions" id="extendedMissions"></div>
         </div>
       </div>
     </section>
 
-    <section class="section shell" id="commands">
-      <div class="section-heading reveal split-heading">
-        <div><p class="eyebrow" data-i18n="commandsEyebrow">03 / Command explorer</p><h2 data-i18n="commandsTitle">Understand what a command does before you run it.</h2></div>
-        <p data-i18n="commandsText">Search by purpose or category. Command names and syntax remain unchanged; explanations follow your selected language.</p>
-      </div>
-      <div class="filter-row reveal">
-        <label class="search-field"><span aria-hidden="true">⌕</span><input id="commandSearch" type="search" placeholder="Search commands…" data-i18n-placeholder="searchCommands" aria-label="Search Linux commands"></label>
-        <select id="commandCategory" aria-label="Filter commands by category"><option value="all">All categories</option></select>
-      </div>
-      <div class="command-grid" id="commandGrid"></div>
-    </section>
-
-    <section class="section distros-section" id="distros">
+    <section class="section distros-section v5-distros" id="distros">
       <div class="shell">
-        <div class="section-heading reveal distro-heading">
-          <div><p class="eyebrow" data-i18n="distrosEyebrow">04 / Distribution explorer</p><h2 data-i18n="distrosTitle">Meet the Linux ecosystem.</h2></div>
-          <p data-i18n="distrosText">Swipe or use the arrows. Select a distribution to open a GNOME-style detail window with its profile and official website.</p>
+        <div class="section-heading reveal editorial-heading">
+          <div><p class="eyebrow" data-v5-i18n="distrosLabelTop">LINUX DISTRIBUTIONS</p><h2 data-v5-i18n="distrosHeadline">Meet the main distributions.</h2></div>
+          <p data-i18n="distroNotice">There is no universal “best” Linux distribution. Hardware, workflow, update model and experience level all matter.</p>
         </div>
 
         <div class="distro-carousel-wrap reveal">
@@ -257,14 +292,79 @@
         </div>
         <div class="carousel-progress"><span id="distroProgress"></span></div>
 
-        <div class="distro-notice reveal"><span>ⓘ</span><p data-i18n="distroNotice">There is no universal “best” Linux distribution. Hardware, workflow, update model and experience level all matter.</p></div>
+        <div class="distro-tools-v5 reveal">
+          <article class="distro-tool-card">
+            <p class="eyebrow" data-v5-i18n="compareLabel">COMPARE</p>
+            <h3 data-v5-i18n="compareTitle">Compare up to three distributions.</h3>
+            <div class="compare-selects" id="compareSelects">
+              <select aria-label="Distribution 1" data-compare-slot="0"></select>
+              <select aria-label="Distribution 2" data-compare-slot="1"></select>
+              <select aria-label="Distribution 3" data-compare-slot="2"></select>
+            </div>
+            <div class="distro-compare-output" id="distroCompareOutput"></div>
+          </article>
+          <article class="distro-tool-card distro-finder">
+            <p class="eyebrow" data-v5-i18n="finderLabel">FIND YOUR LINUX</p>
+            <h3 data-v5-i18n="finderTitle">What kind of Linux experience do you want?</h3>
+            <div class="finder-options" id="finderOptions">
+              <button type="button" data-finder="beginner" data-v5-i18n="finderBeginner">Simple desktop</button>
+              <button type="button" data-finder="developer" data-v5-i18n="finderDeveloper">Development</button>
+              <button type="button" data-finder="stable" data-v5-i18n="finderStable">Stability</button>
+              <button type="button" data-finder="advanced" data-v5-i18n="finderAdvanced">Deep control</button>
+            </div>
+            <div class="finder-result" id="finderResult" aria-live="polite"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="commands">
+      <div class="section-heading reveal editorial-heading">
+        <div><p class="eyebrow" data-i18n="commandsEyebrow">03 / Command explorer</p><h2 data-v5-i18n-html="commandsHeadline">A Linux quick reference<br>you can actually practice.</h2></div>
+        <p data-i18n="commandsText">Search by purpose or category. Command names and syntax remain unchanged; explanations follow your selected language.</p>
+      </div>
+      <div class="filter-row reveal">
+        <label class="search-field"><span aria-hidden="true">⌕</span><input id="commandSearch" type="search" placeholder="Search commands…" data-i18n-placeholder="searchCommands" aria-label="Search Linux commands"></label>
+        <select id="commandCategory" aria-label="Filter commands by category"><option value="all">All categories</option></select>
+      </div>
+      <div class="command-grid" id="commandGrid"></div>
+      <div class="cheat-sheet reveal">
+        <div class="cheat-copy">
+          <p class="eyebrow" data-v5-i18n="cheatLabel">QUICK REFERENCE</p>
+          <h3 data-v5-i18n="cheatTitle">Search by intent, not only by command name.</h3>
+        </div>
+        <label class="search-field large"><span>⌕</span><input id="cheatSearch" type="search" placeholder="find a file, check disk, inspect process…" data-v5-i18n-placeholder="cheatPlaceholder"></label>
+        <div class="cheat-results" id="cheatResults"></div>
+      </div>
+    </section>
+
+    <section class="section shell docs-section v5-docs" id="resources">
+      <div class="section-heading reveal editorial-heading">
+        <div><p class="eyebrow" data-v5-i18n="docsLabel">DOCUMENTATION</p><h2 data-v5-i18n-html="docsHeadline">Read the concept.<br>Verify the source.</h2></div>
+        <p data-i18n="docsText">The course summarizes concepts for learning, while these links take you to primary documentation for deeper study and verification.</p>
+      </div>
+      <div class="docs-explorer reveal">
+        <nav class="docs-sidebar" id="docsSidebar" aria-label="Documentation topics"></nav>
+        <article class="docs-article" id="docsArticle">
+          <div class="docs-breadcrumb"><span>Docs</span><i>/</i><strong id="docsBreadcrumb">Filesystem</strong></div>
+          <div id="docsArticleBody"></div>
+          <div class="docs-navigation">
+            <button type="button" id="docsPrev">← <span data-v5-i18n="previous">Previous</span></button>
+            <button type="button" id="docsNext"><span data-v5-i18n="next">Next</span> →</button>
+          </div>
+        </article>
+      </div>
+      <div class="docs-grid reveal">
+        <a class="docs-card" href="https://www.gnu.org/software/coreutils/manual/coreutils.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">GNU</span><div><strong>GNU Coreutils Manual</strong><p data-i18n="docsCoreutils"></p></div><i>↗</i></a>
+        <a class="docs-card" href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">$</span><div><strong>GNU Bash Reference Manual</strong><p data-i18n="docsBash"></p></div><i>↗</i></a>
+        <a class="docs-card" href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener noreferrer"><span class="docs-icon">man</span><div><strong>Linux man-pages</strong><p data-i18n="docsManPages"></p></div><i>↗</i></a>
+        <a class="docs-card" href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">/</span><div><strong>Filesystem Hierarchy Standard</strong><p data-i18n="docsFhs"></p></div><i>↗</i></a>
       </div>
     </section>
 
     <section class="section shell" id="concepts">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="conceptsEyebrow">05 / Core concepts</p>
-        <h2 data-i18n="conceptsTitle">See how Linux is organized.</h2>
+      <div class="section-heading reveal editorial-heading">
+        <div><p class="eyebrow" data-i18n="conceptsEyebrow">05 / Core concepts</p><h2 data-i18n="conceptsTitle">See how Linux is organized.</h2></div>
         <p data-i18n="conceptsText">Interactive references for the filesystem, permissions and package managers.</p>
       </div>
       <div class="concept-grid">
@@ -285,7 +385,7 @@
         </article>
       </div>
       <article class="package-explorer reveal">
-        <div><p class="eyebrow" data-i18n="packageManagers">Package managers</p><h3 data-i18n="sameGoal">Same goal, different tools.</h3><p data-i18n="packageText">The command changes with the distribution family. The examples remain authentic Linux syntax.</p></div>
+        <div><p class="eyebrow" data-i18n="packageManagers">Package managers</p><h3 data-i18n="sameGoal">Same goal, different tools.</h3><p data-i18n="packageText"></p></div>
         <div class="package-table-wrap">
           <table>
             <thead><tr><th data-i18n="family">Family</th><th data-i18n="tool">Tool</th><th data-i18n="installExample">Install example</th></tr></thead>
@@ -294,33 +394,15 @@
               <tr><td>Fedora / RHEL</td><td><code>dnf</code></td><td><code>sudo dnf install package</code></td></tr>
               <tr><td>Arch</td><td><code>pacman</code></td><td><code>sudo pacman -S package</code></td></tr>
               <tr><td>openSUSE</td><td><code>zypper</code></td><td><code>sudo zypper install package</code></td></tr>
-              <tr><td>Alpine</td><td><code>apk</code></td><td><code>sudo apk add package</code></td></tr>
             </tbody>
           </table>
         </div>
       </article>
     </section>
 
-    <section class="section shell docs-section" id="resources">
-      <div class="section-heading reveal split-heading">
-        <div><p class="eyebrow" data-i18n="docsEyebrow">06 / Official references</p><h2 data-i18n="docsTitle">Learn with the manuals that Linux users actually rely on.</h2></div>
-        <p data-i18n="docsText">The course summarizes concepts for learning, while these links take you to primary documentation for deeper study and verification.</p>
-      </div>
-      <div class="docs-grid reveal">
-        <a class="docs-card" href="https://www.gnu.org/software/coreutils/manual/coreutils.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">GNU</span><div><strong>GNU Coreutils Manual</strong><p data-i18n="docsCoreutils">Primary manual for foundational file and system utilities such as ls, cp, mv, rm, pwd and chmod.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">$</span><div><strong>GNU Bash Reference Manual</strong><p data-i18n="docsBash">Shell syntax, built-ins, redirection, scripting and interactive behavior.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener noreferrer"><span class="docs-icon">man</span><div><strong>Linux man-pages</strong><p data-i18n="docsManPages">Linux interfaces and a curated collection of manual pages, organized by traditional man sections.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html" target="_blank" rel="noopener noreferrer"><span class="docs-icon">/</span><div><strong>Filesystem Hierarchy Standard 3.0</strong><p data-i18n="docsFhs">Reference for conventional purposes and placement of directories such as /etc, /home, /usr and /var.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://www.debian.org/doc/manuals/debian-reference/" target="_blank" rel="noopener noreferrer"><span class="docs-icon">D</span><div><strong>Debian Reference</strong><p data-i18n="docsDebian">Practical GNU/Linux tutorials, console basics, packages and system administration.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://man.archlinux.org/man/pacman.8" target="_blank" rel="noopener noreferrer"><span class="docs-icon">A</span><div><strong>Arch pacman(8)</strong><p data-i18n="docsArchPacman">Official pacman manual covering package queries, synchronization, removal and command syntax.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://docs.fedoraproject.org/" target="_blank" rel="noopener noreferrer"><span class="docs-icon">F</span><div><strong>Fedora Documentation</strong><p data-i18n="docsFedora">Official Fedora documentation for installation, package workflows and system usage.</p></div><i>↗</i></a>
-        <a class="docs-card" href="https://www.kali.org/docs/" target="_blank" rel="noopener noreferrer"><span class="docs-icon">K</span><div><strong>Kali Linux Documentation</strong><p data-i18n="docsKali">Official documentation for Kali's specialized penetration-testing and security-auditing platform.</p></div><i>↗</i></a>
-      </div>
-    </section>
-
     <section class="section windows-section" id="windows-linux">
       <div class="shell windows-layout">
-        <div class="section-heading reveal"><p class="eyebrow" data-i18n="windowsEyebrow">06 / Coming from Windows?</p><h2 data-i18n="windowsTitle">Translate familiar ideas into Linux concepts.</h2><p data-i18n="windowsText">These are learning bridges, not exact one-to-one equivalents.</p></div>
+        <div class="section-heading reveal"><p class="eyebrow" data-i18n="windowsEyebrow">Coming from Windows?</p><h2 data-i18n="windowsTitle">Translate familiar ideas into Linux concepts.</h2><p data-i18n="windowsText">These are learning bridges, not exact one-to-one equivalents.</p></div>
         <div class="comparison-table reveal">
           <div class="compare-head"><span>Windows</span><span>Linux</span></div>
           <div><span>C:\Users</span><span><code>/home</code></span></div>
@@ -333,35 +415,50 @@
       </div>
     </section>
 
-    <section class="section shell" id="quiz">
-      <div class="quiz-card reveal">
+    <section class="section shell compact-grid-v5">
+      <article class="quiz-card reveal" id="quiz">
         <div><p class="eyebrow" data-i18n="knowledgeCheck">Knowledge check</p><h2 data-i18n="quizQuestion">Which command prints the current directory?</h2><p data-i18n="quizText">Choose one answer. Feedback appears immediately.</p></div>
         <div class="quiz-options" id="quizOptions">
           <button type="button" data-answer="pwd"><code>pwd</code></button><button type="button" data-answer="mkdir"><code>mkdir</code></button><button type="button" data-answer="touch"><code>touch</code></button><button type="button" data-answer="grep"><code>grep</code></button>
         </div>
         <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
-      </div>
+      </article>
+
+      <article class="achievement-panel reveal" id="achievements">
+        <p class="eyebrow" data-v5-i18n="achievementsLabel">LOCAL ACHIEVEMENTS</p>
+        <h2 data-v5-i18n="achievementsTitle">Small milestones, stored only here.</h2>
+        <div class="achievement-list" id="achievementList"></div>
+      </article>
     </section>
 
     <section class="section roadmap-section" id="roadmap">
       <div class="shell">
-        <div class="section-heading reveal"><p class="eyebrow" data-i18n="roadmapEyebrow">07 / Roadmap</p><h2 data-i18n="roadmapTitle">One system, many directions.</h2><p data-i18n="roadmapText">Build a strong foundation and then specialize in development, servers, DevOps or security.</p></div>
+        <div class="section-heading reveal editorial-heading"><div><p class="eyebrow" data-i18n="roadmapEyebrow">Roadmap</p><h2 data-i18n="roadmapTitle">One system, many directions.</h2></div><p data-i18n="roadmapText"></p></div>
         <div class="roadmap reveal" aria-label="Linux learning roadmap">
-          <span data-i18n="fundamentals">Fundamentals</span><i>→</i><span>Terminal</span><i>→</i><span data-i18n="filesystem">Filesystem</span><i>→</i><span data-i18n="permissions">Permissions</span><i>→</i><span data-i18n="packages">Packages</span><i>→</i><span data-i18n="processes">Processes</span><i>→</i><span data-i18n="networking">Networking</span><i>→</i><span>Shell & Bash</span><i>→</i><span data-i18n="administration">Administration</span><i>→</i><span>DevOps / Servers / Security</span>
+          <span data-i18n="fundamentals">Fundamentals</span><i>→</i><span>Terminal</span><i>→</i><span data-i18n="filesystem">Filesystem</span><i>→</i><span data-i18n="permissions">Permissions</span><i>→</i><span data-i18n="packages">Packages</span><i>→</i><span data-i18n="processes">Processes</span><i>→</i><span data-i18n="networking">Networking</span><i>→</i><span>Shell & Bash</span><i>→</i><span data-i18n="administration">Administration</span>
         </div>
       </div>
     </section>
+
+    <section class="about-v5 shell section" id="about">
+      <div>
+        <p class="eyebrow">V1 → V4 → V5</p>
+        <h2 data-v5-i18n-html="aboutHeadline">From a CSS drawing<br>to an interactive Linux product.</h2>
+      </div>
+      <p data-v5-i18n="aboutText">The project preserves its original Tux experiment while evolving into an open-source learning environment built with HTML, CSS and Vanilla JavaScript.</p>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="shell footer-inner"><div><strong>Linux Interactive Academy</strong><p data-i18n="footerText">From a CSS Tux experiment to an interactive Linux learning environment.</p></div><div><span data-i18n="builtWith">Built with</span><strong>HTML • CSS • Vanilla JS</strong></div><a href="https://github.com/GustavoVitorS/Linux-Drawing" target="_blank" rel="noreferrer" data-i18n="viewSource">View source ↗</a></div>
+  <footer class="footer v5-footer">
+    <div class="shell footer-inner">
+      <div><strong>Interactive Linux Academy</strong><p data-i18n="footerText">From a CSS Tux experiment to an interactive Linux learning environment.</p></div>
+      <div><span data-i18n="builtWith">Built with</span><strong>HTML • CSS • Vanilla JS</strong></div>
+      <a href="https://github.com/GustavoVitorS/Interactive-Linux-Academy" target="_blank" rel="noopener noreferrer" data-i18n="viewSource">View source ↗</a>
+    </div>
   </footer>
 
   <dialog class="distro-dialog" id="distroDialog" aria-labelledby="distroModalTitle">
-    <div class="dialog-window-bar">
-      <span data-i18n="distroProfile">Distribution profile</span>
-      <button type="button" id="distroClose" aria-label="Close distribution details">×</button>
-    </div>
+    <div class="dialog-window-bar"><span data-i18n="distroProfile">Distribution profile</span><button type="button" id="distroClose" aria-label="Close distribution details">×</button></div>
     <div class="distro-modal-body" id="distroModalBody"></div>
   </dialog>
 
@@ -370,7 +467,38 @@
     <div class="search-body">
       <h2 id="searchTitle" data-i18n="findAnything">Find anything</h2>
       <label class="search-field large"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Commands, lessons, distros…" data-i18n-placeholder="globalSearchPlaceholder" autocomplete="off"></label>
+      <p class="search-key-help">↑ ↓ <span data-v5-i18n="navigate">navigate</span> • Enter <span data-v5-i18n="open">open</span> • Esc <span data-v5-i18n="close">close</span></p>
       <div class="search-results" id="searchResults"></div>
+    </div>
+  </dialog>
+
+  <dialog class="onboarding-dialog" id="onboardingDialog" aria-labelledby="onboardingTitle">
+    <form method="dialog" class="onboarding-shell">
+      <div class="dialog-window-bar"><span data-v5-i18n="personalize">Personalize your learning route</span><button value="cancel" aria-label="Close onboarding">×</button></div>
+      <div class="onboarding-body">
+        <p class="eyebrow">START HERE</p>
+        <h2 id="onboardingTitle" data-v5-i18n="onboardingQuestion">What do you want to learn?</h2>
+        <p data-v5-i18n="onboardingText">This only changes the route we highlight. Your choice stays on this device.</p>
+        <div class="onboarding-options" id="onboardingOptions">
+          <button type="button" data-route="new" data-v5-i18n="routeNew">I am new to Linux</button>
+          <button type="button" data-route="windows" data-v5-i18n="routeWindows">I am coming from Windows</button>
+          <button type="button" data-route="development" data-v5-i18n="routeDev">I want Linux for development</button>
+          <button type="button" data-route="devops" data-v5-i18n="routeDevops">I want servers / DevOps</button>
+          <button type="button" data-route="security" data-v5-i18n="routeSecurity">I want cybersecurity</button>
+          <button type="button" data-route="advanced" data-v5-i18n="routeAdvanced">I already use Linux</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="split-learn-dialog" id="splitLearnDialog" aria-labelledby="splitLessonTitle">
+    <div class="dialog-window-bar"><span data-v5-i18n="splitLearn">Split Learn Mode</span><button type="button" id="splitLearnClose" aria-label="Close split learn mode">×</button></div>
+    <div class="split-learn-body">
+      <article class="split-lesson-pane" id="splitLessonPane"></article>
+      <section class="split-terminal-pane">
+        <div class="split-terminal-head"><span>&gt;_</span><strong data-v5-i18n="practiceWithoutLeaving">Practice without leaving the lesson</strong></div>
+        <div id="splitTerminalSlot"></div>
+      </section>
     </div>
   </dialog>
 

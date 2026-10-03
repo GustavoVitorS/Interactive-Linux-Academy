@@ -1,4 +1,4 @@
-export const commands=[
+const commands=[
 {name:'pwd',category:'Navigation',level:'Beginner',description:{en:'Print the current working directory.',pt:'Mostra o diretório de trabalho atual.'},syntax:'pwd',example:'pwd'},
 {name:'ls',category:'Navigation',level:'Beginner',description:{en:'List directory contents. Common options include -l and -a.',pt:'Lista o conteúdo de diretórios. Opções comuns incluem -l e -a.'},syntax:'ls [options] [path]',example:'ls -la'},
 {name:'cd',category:'Navigation',level:'Beginner',description:{en:'Change the current working directory.',pt:'Altera o diretório de trabalho atual.'},syntax:'cd [directory]',example:'cd Documents'},

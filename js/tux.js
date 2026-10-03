@@ -1,6 +1,4 @@
-import { t } from './i18n.js';
-
-export function initTux() {
+function initTux() {
   const wrap = document.querySelector('#tuxWrap');
   const tux = document.querySelector('#tux');
   const head = document.querySelector('#tuxHead');
@@ -140,5 +138,5 @@ export function initTux() {
 
   speak(t('tuxWelcome'));
   window.addEventListener('academy:language', () => speak(t('tuxWelcome')));
-  return { speak, blink, wink, react };
+  return { speak, blink, wink, react, lookAt: move };
 }

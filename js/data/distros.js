@@ -1,4 +1,4 @@
-export const distros=[
+const distros=[
   {
     id:'debian',name:'Debian',family:'Debian',packageManager:'APT',release:{en:'Stable / Testing / Unstable',pt:'Estável / Testing / Unstable'},difficulty:{en:'Intermediate',pt:'Intermediário'},desktop:'GNOME, KDE Plasma, Xfce +',color:'#A81D33',logo:'https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/debian.svg',website:'https://www.debian.org/',
     summary:{en:'A community-driven universal operating system known for stability, breadth of architectures and a huge package ecosystem.',pt:'Um sistema operacional universal mantido pela comunidade, conhecido pela estabilidade, ampla variedade de arquiteturas e enorme ecossistema de pacotes.'},
