@@ -1,0 +1,185 @@
+/* V6.3 RC — page structure, shells, sections and major layout composition. */
+
+/* source: style.css */
+.shell{width:var(--shell);margin-inline:auto}
+
+/* source: style.css */
+.section{padding:110px 0;position:relative}
+
+/* source: style.css */
+.section-pad{padding-top:112px;padding-bottom:84px}
+
+/* source: style.css */
+.site-header{position:sticky;top:0;z-index:100;height:var(--header-h);background:rgba(12,14,18,.78);backdrop-filter:blur(22px) saturate(130%);border-bottom:1px solid var(--line)}
+
+/* source: style.css */
+.hero h1{font-size:clamp(3.25rem,6.3vw,6.5rem);line-height:.97;letter-spacing:-.055em;margin:25px 0 0;max-width:830px}
+
+/* source: style.css */
+.hero h1 em{font-style:normal;color:var(--blue-2);text-shadow:0 10px 36px rgba(53,132,228,.17)}
+
+/* source: style.css */
+.section-heading{max-width:760px;margin-bottom:38px}
+
+/* source: style.css */
+.section-heading h2{font-size:clamp(2.15rem,4vw,4.15rem);line-height:1.03;letter-spacing:-.04em;margin:0 0 15px}
+
+/* source: style.css */
+.section-heading p:not(.eyebrow){color:var(--muted);font-size:1rem;max-width:680px}
+
+/* source: style.css */
+.terminal-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:54px;align-items:center}
+
+/* source: style.css */
+.footer{padding:34px 0 42px;border-top:1px solid var(--line);background:#0b0d11}
+
+/* source: style.css */
+.footer-inner{display:grid;grid-template-columns:1fr auto auto;gap:30px;align-items:center}
+
+/* source: style.css */
+.footer p{margin:4px 0 0;color:var(--muted);font-size:.8rem}
+
+/* source: style.css */
+.footer div:nth-child(2){display:flex;flex-direction:column;color:var(--muted);font-size:.75rem}
+
+/* source: style.css */
+.footer div:nth-child(2) strong{color:#eef0f2}
+
+/* source: style.css */
+.footer a{color:var(--blue-2);font-size:.85rem}
+
+/* source: style.css */
+/* ==========================================================
+   V4.1 — RESPONSIVE FLEXBOX REFINEMENT
+   Layout pass for 1280x800, 1032x1376, 960x1400,
+   768x1024, 412x968 and fluid sizes between them.
+   ========================================================== */
+
+/* Stable fluid containers */
+.shell{
+  width:min(1180px,calc(100% - clamp(24px,4vw,48px)));
+  min-width:0;
+}
+
+/* source: style.css */
+.section-heading,
+.hero-intro > *,
+.terminal-layout > *,
+.windows-layout > *,
+.concept-grid > *,
+.package-explorer > *,
+.quiz-card > *{
+  min-width:0;
+}
+
+/* source: style.css */
+.section-heading{margin-inline:auto 0}
+
+/* source: style.css */
+.terminal-layout,
+.windows-layout{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(28px,4.5vw,54px);
+}
+
+/* source: style.css */
+.windows-layout > .section-heading{flex:0 1 38%;margin-bottom:0}
+
+/* source: style.css */
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:18px 28px;
+}
+
+/* source: style.css */
+.footer-inner > :first-child{flex:1 1 420px}
+
+/* source: style.css */
+.footer-inner > :nth-child(2){flex:0 1 auto}
+
+/* source: style.css */
+.footer-inner > a{flex:0 0 auto}
+
+/* source: style.css */
+/* ==========================================================
+   V4.2 — PROFESSIONAL RESPONSIVE SPACING PASS
+   Fixes section alignment, 1280px mind-map collisions,
+   portrait/tablet spacing, and keeps all existing content.
+   ========================================================== */
+
+/* Keep section content visually anchored to the same left edge.
+   The previous auto left margin pushed headings toward the center/right
+   on wide screens and created the large empty area seen in screenshots. */
+.section-heading{
+  width:min(100%,760px);
+  max-width:760px;
+  margin:0 0 clamp(28px,3vw,38px) 0;
+}
+
+/* source: style.css */
+.section-heading.split-heading,
+.section-heading.distro-heading{
+  width:100%;
+  max-width:none;
+}
+
+/* source: style.css */
+/* Tighter, fluid vertical rhythm so sections stay connected instead of
+   looking vertically detached on 800px-tall and portrait screens. */
+.section{
+  padding-top:clamp(64px,6vw,88px);
+  padding-bottom:clamp(64px,6vw,88px);
+}
+
+/* source: style.css */
+.section-pad{
+  padding-top:clamp(58px,5vw,78px);
+  padding-bottom:clamp(60px,5vw,82px);
+}
+
+/* source: style.css */
+#learn .section-heading,
+#concepts .section-heading,
+.roadmap-section .section-heading{
+  margin-left:0;
+  margin-right:0;
+}
+
+/* source: v5.css */
+/* HEADER */
+.site-header.v5-header{
+  height:var(--v5-header);
+  background:rgba(7,10,15,.82);
+  border-bottom:1px solid rgba(143,172,210,.12);
+  backdrop-filter:blur(18px) saturate(125%);
+}
+
+/* source: v5.css */
+.v5-footer .footer-inner{gap:30px}
+
+/* source: v5.css */
+.split-learn-body{display:grid;grid-template-columns:minmax(300px,.82fr) minmax(440px,1.18fr);height:calc(100% - 44px)}
+
+/* source: v6.2.css */
+/* V6.2.5 — Footer author identity */
+body.v6 .v5-footer .footer-author{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  width:max-content;
+  color:var(--v5-text,#f4f7fb);
+  text-decoration:none;
+  font-weight:750;
+  font-size:.76rem;
+  line-height:1;
+  padding:8px 10px;
+  margin:-8px -10px;
+  border:1px solid transparent;
+  border-radius:10px;
+  transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s ease;
+}

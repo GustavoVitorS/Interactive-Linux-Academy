@@ -1,0 +1,15 @@
+/* Academic-edition translations and release metadata. */
+const v6Messages={
+  en:{dashboardLabel:'ACADEMIC PROGRESS',dashboardTitle:'Your Linux learning record',overallProgress:'Overall progress',lessonsCompleted:'Lessons',challengesCompleted:'Challenges',quizAccuracy:'Quiz accuracy',autoAdvance:'Auto advance',quizHelper:'Answer, read the explanation, then continue automatically.',resultsLabel:'YOUR RESULTS',resultsTitle:'Knowledge statistics',accuracy:'Accuracy',testsCompleted:'Tests',correctAnswers:'Correct',incorrectAnswers:'Incorrect',curriculumLabel:'CURRICULUM',curriculumTitle:'One system, many learning paths.',curriculumText:'Build a foundation, then move toward administration, networking, automation, security and containers.',aboutHeadline:'From a CSS drawing to an open-source Linux academy.',aboutText:'V6 turns the project into an academic learning environment: structured curriculum, labs, quizzes, local progress, documentation and a safe terminal simulator.',resumeLearning:'Continue where you stopped'},
+  pt:{dashboardLabel:'PROGRESSO ACADÊMICO',dashboardTitle:'Seu registro de aprendizado Linux',overallProgress:'Progresso geral',lessonsCompleted:'Aulas',challengesCompleted:'Desafios',quizAccuracy:'Precisão nos testes',autoAdvance:'Avanço automático',quizHelper:'Responda, leia a explicação e continue automaticamente.',resultsLabel:'SEUS RESULTADOS',resultsTitle:'Estatísticas de conhecimento',accuracy:'Precisão',testsCompleted:'Testes',correctAnswers:'Acertos',incorrectAnswers:'Erros',curriculumLabel:'TRILHA',curriculumTitle:'Um sistema, muitos caminhos.',curriculumText:'Construa uma base sólida e depois avance para administração, redes, automação, segurança e containers.',aboutHeadline:'De um desenho em CSS para uma academia Linux open source.',aboutText:'A V6 transforma o projeto em um ambiente acadêmico: currículo estruturado, laboratórios, testes, progresso local, documentação e terminal seguro.',resumeLearning:'Continuar de onde parei'}
+};
+const v6t=k=>v6Messages[getLanguage()]?.[k]??v6Messages.en[k]??k;
+function applyV6Translations(){document.querySelectorAll('[data-v6-i18n]').forEach(el=>{const v=v6t(el.dataset.v6I18n);if(v!=null)el.textContent=v;});}
+function syncV6Title(){document.title=getLanguage()==='pt'?'Interactive Linux Academy V6 — Edição Acadêmica':'Interactive Linux Academy V6 — Academic Edition';}
+applyV6Translations();syncV6Title();window.addEventListener('academy:language',()=>{applyV6Translations();syncV6Title();});
+
+/* theme button keeps static icon markup and updates accessible name only */
+function syncV6Theme(){if(!themeToggle)return;const light=document.documentElement.dataset.theme==='light';const label=light?v5t('themeDark'):v5t('themeLight');replaceThemeIcon(themeToggle,light);themeToggle.setAttribute('aria-label',label);themeToggle.setAttribute('title',label);document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f5f7fb':'#070a0f');}
+themeToggle?.addEventListener('click',()=>setTimeout(syncV6Theme,0));window.addEventListener('academy:language',syncV6Theme);syncV6Theme();
+
+/* Academic dashboard + resume */

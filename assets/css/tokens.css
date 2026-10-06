@@ -1,0 +1,64 @@
+/* Interactive Linux Academy V6.3 RC — design tokens and shared custom properties. */
+
+/* source: style.css */
+:root{
+  --bg:#0d0f13;--bg-soft:#11141a;--panel:#181b22;--panel-2:#20242d;--panel-3:#272c36;
+  --line:rgba(255,255,255,.075);--line-strong:rgba(255,255,255,.13);--text:#f3f4f6;--muted:#a6abb5;
+  --blue:#3584e4;--blue-2:#62a0ea;--green:#33d17a;--yellow:#f6d32d;--orange:#ff7800;--red:#ed333b;
+  --shadow:0 30px 90px rgba(0,0,0,.38);--shadow-soft:0 14px 40px rgba(0,0,0,.22);
+  --radius:24px;--shell:min(1180px,calc(100% - 40px));--header-h:70px;
+  --font-ui:"Cantarell","Noto Sans","Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono","Fira Code","Liberation Mono",Consolas,monospace;
+}
+
+/* source: v5.css */
+:root{
+  --v5-bg:#070a0f;
+  --v5-bg-2:#0a1018;
+  --v5-surface:#0e151f;
+  --v5-surface-2:#121b27;
+  --v5-surface-3:#172230;
+  --v5-line:rgba(174,198,230,.13);
+  --v5-line-strong:rgba(174,198,230,.24);
+  --v5-text:#f5f7fa;
+  --v5-muted:#9099a8;
+  --v5-muted-2:#667181;
+  --v5-blue:#3f93ff;
+  --v5-blue-2:#6eb0ff;
+  --v5-green:#57e389;
+  --v5-yellow:#ffb01f;
+  --v5-red:#ff6b71;
+  --v5-warning:#ffc857;
+  --v5-shadow:0 26px 80px rgba(0,0,0,.36);
+  --v5-font:"Instrument Sans","Inter","SF Pro Display","Segoe UI",system-ui,sans-serif;
+  --v5-mono:"IBM Plex Mono","JetBrains Mono","SFMono-Regular",Consolas,monospace;
+  --v5-space-1:.375rem;
+  --v5-space-2:.625rem;
+  --v5-space-3:.875rem;
+  --v5-space-4:1.125rem;
+  --v5-space-5:1.5rem;
+  --v5-space-6:2rem;
+  --v5-space-7:3rem;
+  --v5-space-8:4.5rem;
+  --v5-radius-xs:6px;
+  --v5-radius-sm:10px;
+  --v5-radius-md:16px;
+  --v5-radius-lg:24px;
+  --v5-radius-window:18px;
+  --v5-header:58px;
+  --v5-shell:min(1440px,calc(100% - clamp(28px,6vw,96px)));
+  --font-ui:var(--v5-font);
+  --font-mono:var(--v5-mono);
+  --bg:var(--v5-bg);
+  --panel:var(--v5-surface);
+  --panel-2:var(--v5-surface-2);
+  --text:var(--v5-text);
+  --muted:var(--v5-muted);
+  --blue:var(--v5-blue);
+  --blue-2:var(--v5-blue-2);
+  --green:var(--v5-green);
+  --yellow:var(--v5-yellow);
+  --line:var(--v5-line);
+  --line-strong:var(--v5-line-strong);
+  --header-h:var(--v5-header);
+}
