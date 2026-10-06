@@ -12,7 +12,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
   const localize=obj=>typeof obj==='string'?obj:(obj?.[getLanguage()]??obj?.en??'');
   const labIds=new Set(['files-directories','pipes','redirection','search-text','find-files','packages','networking','bash-scripting']);
   const challengeIds=new Set(['permissions','processes','services','storage','security']);
-  const typeFor=lesson=>labIds.has(lesson.id)?'LAB':challengeIds.has(lesson.id)?'CHALLENGE':'READ';
+  const typeFor=lesson=>lesson.type|| (labIds.has(lesson.id)?'LAB':challengeIds.has(lesson.id)?'CHALLENGE':'READ');
   const minutesFor=(lesson,index)=>lesson.minutes||[6,8,10,12][(index+lesson.level.length)%4];
 
   function render(){
@@ -26,7 +26,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
 
       const num=document.createElement('span');
       num.className='lesson-num';
-      num.textContent=`${String(index+1).padStart(2,'0')} / ${t(activeLevel)}`;
+      num.textContent=`${String(index+1).padStart(2,'0')} / ${lesson.module ? lesson.module.toUpperCase() : t(activeLevel)}`;
 
       const heading=document.createElement('div');
       heading.className='lesson-title-wrap';
@@ -64,6 +64,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       tryBtn.type='button';
       tryBtn.textContent=t('tryIt');
       tryBtn.addEventListener('click',()=>{
+        storage.setItem('linuxAcademy.lastLesson',lesson.id);
         terminalRunner?.(lesson.command);
         document.querySelector('#terminal')?.scrollIntoView({behavior:'smooth'});
       });
@@ -72,7 +73,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       splitBtn.className='small-button split-learn-button';
       splitBtn.type='button';
       splitBtn.textContent=getLanguage()==='pt'?'Abrir modo dividido':'Open split mode';
-      splitBtn.addEventListener('click',()=>window.dispatchEvent(new CustomEvent('academy:split-lesson',{detail:{lesson}})));
+      splitBtn.addEventListener('click',()=>{storage.setItem('linuxAcademy.lastLesson',lesson.id);window.dispatchEvent(new CustomEvent('academy:split-lesson',{detail:{lesson}}));});
 
       const doneBtn=document.createElement('button');
       doneBtn.className='small-button complete';
@@ -82,6 +83,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
         const set=read();
         if(set.has(lesson.id)) set.delete(lesson.id);
         else {
+          storage.setItem('linuxAcademy.lastLesson',lesson.id);
           set.add(lesson.id);
           tuxSpeak?.(getLanguage()==='pt'?'Boa! Mais um conceito Linux concluído. 🐧':'Nice! Another Linux concept unlocked. 🐧');
         }
@@ -94,7 +96,10 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       ref.href=lesson.reference;
       ref.target='_blank';
       ref.rel='noopener noreferrer';
-      ref.textContent=`${lesson.source || t('official')} ↗`;
+      const refType=lesson.referenceType||inferReferenceType(lesson.reference);
+      const refProvider=lesson.source||getReferenceLabel(refType);
+      ref.textContent=`${getReferenceLabel(refType)} · ${refProvider} ↗`;
+      ref.setAttribute('aria-label',`${getReferenceLabel(refType)} — ${refProvider}`);
 
       actions.append(tryBtn,splitBtn,doneBtn,ref);
       card.append(num,heading,desc,cmd,detail,actions);

@@ -47,9 +47,51 @@ const lessons=[
   {id:'storage',level:'advanced',title:{en:'Inspect block devices before changing disks',pt:'Inspecione dispositivos de bloco antes de alterar discos'},description:{en:'lsblk is useful for understanding disks, partitions and mount relationships. Destructive tools such as mkfs, fdisk and dd should only follow verified device identification and backups.',pt:'lsblk é útil para entender discos, partições e relações de montagem. Ferramentas destrutivas como mkfs, fdisk e dd só devem ser usadas após confirmar o dispositivo e possuir backup.'},command:'lsblk',output:{en:'Lists block devices without modifying them.',pt:'Lista dispositivos de bloco sem modificá-los.'},reference:'https://man7.org/linux/man-pages/man8/lsblk.8.html',source:'lsblk(8) manual'},
   {id:'mounts',level:'advanced',title:{en:'Filesystems and mounts',pt:'Filesystems e montagens'},description:{en:'Linux exposes filesystems through mount points in one directory tree. Learn to inspect mounts and filesystem types before attempting administrative changes.',pt:'Linux expõe filesystems por pontos de montagem em uma única árvore de diretórios. Aprenda a inspecionar montagens e tipos de filesystem antes de realizar alterações administrativas.'},command:'findmnt',output:{en:'On a real system, shows mounted filesystems in a structured view.',pt:'Em um sistema real, mostra filesystems montados em uma visão estruturada.'},reference:'https://man7.org/linux/man-pages/man8/findmnt.8.html',source:'findmnt(8) manual'},
   {id:'logs',level:'advanced',title:{en:'Investigate logs before guessing',pt:'Investigue logs antes de adivinhar'},description:{en:'Logs provide evidence about boot, services and failures. On systemd systems, journalctl can query the journal by boot, unit, priority and time.',pt:'Logs fornecem evidências sobre boot, serviços e falhas. Em sistemas systemd, journalctl pode consultar o journal por boot, unit, prioridade e período.'},command:'journalctl -b',output:{en:'Queries messages from the current boot on a systemd-based system.',pt:'Consulta mensagens do boot atual em um sistema baseado em systemd.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html',source:'systemd journalctl manual'},
-  {id:'ssh',level:'advanced',title:{en:'Remote administration with SSH',pt:'Administração remota com SSH'},description:{en:'SSH provides encrypted remote login and command execution. Learn host verification, keys and least-privilege access before administering remote systems.',pt:'SSH fornece login remoto criptografado e execução de comandos. Aprenda verificação de host, chaves e menor privilégio antes de administrar sistemas remotos.'},command:'ssh user@server.example',output:{en:'Example syntax only; this browser lab makes no network connection.',pt:'Apenas exemplo de sintaxe; este laboratório no navegador não realiza conexão de rede.'},reference:'https://man.openbsd.org/ssh',source:'OpenSSH manual'},
+  {id:'ssh',level:'advanced',title:{en:'Remote administration with SSH',pt:'Administração remota com SSH'},description:{en:'SSH provides encrypted remote login and command execution. Learn host verification, keys and least-privilege access before administering remote systems.',pt:'SSH fornece login remoto criptografado e execução de comandos. Aprenda verificação de host, chaves e menor privilégio antes de administrar sistemas remotos.'},command:'ssh user@server.example',output:{en:'Example syntax only; this browser lab makes no network connection.',pt:'Apenas exemplo de sintaxe; este laboratório no navegador não realiza conexão de rede.'},reference:'https://man.openbsd.org/ssh.1',source:'OpenSSH manual'},
   {id:'automation',level:'advanced',title:{en:'Schedule repeatable work',pt:'Agende tarefas repetíveis'},description:{en:'Linux environments commonly schedule recurring work with systemd timers or cron. Keep jobs observable, idempotent where possible and explicit about paths and environment.',pt:'Ambientes Linux normalmente agendam tarefas recorrentes com timers do systemd ou cron. Mantenha tarefas observáveis, idempotentes quando possível e explícitas sobre caminhos e ambiente.'},command:'systemctl list-timers',output:{en:'Lists active systemd timers on a systemd-based system.',pt:'Lista timers ativos em um sistema baseado em systemd.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html',source:'systemd.timer manual'},
   {id:'security',level:'advanced',title:{en:'Security starts with least privilege and updates',pt:'Segurança começa com menor privilégio e atualizações'},description:{en:'Use administrative privileges only when required, keep software supported and updated, review permissions and authenticate remote access carefully. Security is a process, not one command.',pt:'Use privilégios administrativos apenas quando necessário, mantenha software suportado e atualizado, revise permissões e autentique acessos remotos com cuidado. Segurança é um processo, não um único comando.'},command:'id',output:{en:'Shows the current user and group identities.',pt:'Mostra as identidades de usuário e grupos atuais.'},reference:'https://man7.org/linux/man-pages/man1/id.1.html',source:'id(1) manual'}
+,
+  {id:'open-source',level:'beginner',module:'foundations',type:'READ',minutes:7,title:{en:'Open source and Linux communities',pt:'Código aberto e comunidades Linux'},description:{en:'Linux is developed in public across many projects. Licenses, maintainers, distributions and upstream communities shape how software reaches users.',pt:'Linux é desenvolvido publicamente em muitos projetos. Licenças, mantenedores, distribuições e comunidades upstream moldam como o software chega aos usuários.'},command:'uname -a',output:{en:'Inspect the system identity before learning how its software is assembled.',pt:'Inspecione a identidade do sistema antes de aprender como seu software é montado.'},reference:'https://www.kernel.org/',source:'kernel.org'},
+  {id:'distribution-model',level:'beginner',module:'foundations',type:'READ',minutes:8,title:{en:'What a distribution actually adds',pt:'O que uma distribuição realmente adiciona'},description:{en:'A distribution combines the Linux kernel with user-space software, package repositories, defaults, installers and support policies.',pt:'Uma distribuição combina o kernel Linux com software de user space, repositórios, padrões, instaladores e políticas de suporte.'},command:'cat /etc/os-release',output:{en:'A real system exposes distribution identity in /etc/os-release.',pt:'Um sistema real expõe a identidade da distribuição em /etc/os-release.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/os-release.html',source:'os-release specification'},
+  {id:'paths',level:'beginner',module:'terminal',type:'LAB',minutes:8,title:{en:'Absolute and relative paths',pt:'Caminhos absolutos e relativos'},description:{en:'Absolute paths begin at /. Relative paths are resolved from the current working directory. Understanding the difference prevents many navigation mistakes.',pt:'Caminhos absolutos começam em /. Caminhos relativos são resolvidos a partir do diretório atual. Entender a diferença evita muitos erros de navegação.'},command:'cd /home/visitor/Documents',output:{en:'Move using an absolute path inside the simulated filesystem.',pt:'Mova-se usando um caminho absoluto no filesystem simulado.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html',source:'GNU Bash Manual'},
+  {id:'copy-move',level:'beginner',module:'files',type:'LAB',minutes:9,title:{en:'Copy and move files safely',pt:'Copie e mova arquivos com segurança'},description:{en:'cp duplicates files and mv renames or relocates them. Inspect the destination before overwriting important data.',pt:'cp duplica arquivos e mv renomeia ou desloca arquivos. Confira o destino antes de sobrescrever dados importantes.'},command:'cp README.txt Documents/README-copy.txt',output:{en:'Create a copy in a practice directory.',pt:'Crie uma cópia em um diretório de prática.'},reference:'https://www.gnu.org/software/coreutils/manual/coreutils.html',source:'GNU Coreutils'},
+  {id:'links',level:'intermediate',module:'files',type:'READ',minutes:10,title:{en:'Hard links and symbolic links',pt:'Hard links e links simbólicos'},description:{en:'Links let multiple pathnames refer to data. Symbolic links store another pathname; hard links reference the same inode on the same filesystem.',pt:'Links permitem que vários caminhos se refiram a dados. Links simbólicos armazenam outro caminho; hard links referenciam o mesmo inode no mesmo filesystem.'},command:'ln -s target shortcut',output:{en:'Symbolic links are useful for aliases and versioned paths.',pt:'Links simbólicos são úteis para aliases e caminhos versionados.'},reference:'https://www.gnu.org/software/coreutils/manual/html_node/ln-invocation.html',source:'GNU Coreutils'},
+  {id:'text-less',level:'beginner',module:'text',type:'LAB',minutes:7,title:{en:'Read long text with less',pt:'Leia textos longos com less'},description:{en:'less is designed for interactive reading without loading an entire file into a visual editor. It supports search and navigation.',pt:'less é voltado à leitura interativa sem carregar todo o arquivo em um editor visual. Ele suporta busca e navegação.'},command:'less README.txt',output:{en:'Use q to leave less on a real system.',pt:'Use q para sair do less em um sistema real.'},reference:'https://man7.org/linux/man-pages/man1/less.1.html',source:'Linux manual pages'},
+  {id:'sort-uniq',level:'intermediate',module:'text',type:'LAB',minutes:10,title:{en:'Sort and deduplicate text streams',pt:'Ordene e remova duplicatas em fluxos de texto'},description:{en:'sort orders lines; uniq collapses adjacent duplicates. They become much more useful when composed in pipelines.',pt:'sort ordena linhas; uniq agrupa duplicatas adjacentes. Eles ficam muito mais úteis quando combinados em pipelines.'},command:'sort names.txt | uniq',output:{en:'uniq expects matching lines to be adjacent, so sort is commonly used first.',pt:'uniq espera linhas iguais adjacentes, por isso sort costuma vir antes.'},reference:'https://www.gnu.org/software/coreutils/manual/coreutils.html',source:'GNU Coreutils'},
+  {id:'cut-tr-wc',level:'intermediate',module:'text',type:'LAB',minutes:11,title:{en:'Extract, transform and count text',pt:'Extraia, transforme e conte texto'},description:{en:'cut selects fields, tr translates characters and wc counts lines, words or bytes. These small tools are foundations of shell text processing.',pt:'cut seleciona campos, tr traduz caracteres e wc conta linhas, palavras ou bytes. Essas ferramentas são bases do processamento de texto no shell.'},command:'wc -l README.txt',output:{en:'Count lines before building more complex pipelines.',pt:'Conte linhas antes de montar pipelines mais complexos.'},reference:'https://www.gnu.org/software/coreutils/manual/coreutils.html',source:'GNU Coreutils'},
+  {id:'sed-basics',level:'intermediate',module:'text',type:'LAB',minutes:12,title:{en:'Stream editing with sed',pt:'Edição de fluxo com sed'},description:{en:'sed applies editing expressions to streams. Start with substitutions and previews before using in-place modifications.',pt:'sed aplica expressões de edição a fluxos. Comece com substituições e visualizações antes de usar modificações in-place.'},command:'sed "s/Linux/GNU\\/Linux/" README.txt',output:{en:'Without -i, sed prints transformed output rather than modifying the file.',pt:'Sem -i, sed imprime a saída transformada em vez de modificar o arquivo.'},reference:'https://www.gnu.org/software/sed/manual/sed.html',source:'GNU sed Manual'},
+  {id:'awk-basics',level:'advanced',module:'text',type:'LAB',minutes:14,title:{en:'Field-oriented processing with awk',pt:'Processamento por campos com awk'},description:{en:'awk processes records and fields and can express filtering, calculations and formatted output in a compact language.',pt:'awk processa registros e campos e pode expressar filtros, cálculos e saída formatada em uma linguagem compacta.'},command:'awk "{print $1}" data.txt',output:{en:'Use simple field extraction before moving to larger awk programs.',pt:'Use extração simples de campos antes de avançar para programas awk maiores.'},reference:'https://www.gnu.org/software/gawk/manual/gawk.html',source:'GNU Awk Manual'},
+  {id:'groups',level:'beginner',module:'permissions',type:'READ',minutes:8,title:{en:'Users, groups and identity',pt:'Usuários, grupos e identidade'},description:{en:'Linux access decisions often involve numeric user and group IDs. id shows the identities and supplementary groups associated with a user.',pt:'Decisões de acesso no Linux frequentemente envolvem IDs numéricos de usuário e grupo. id mostra identidades e grupos suplementares associados a um usuário.'},command:'id',output:{en:'Inspect identity before changing ownership or permissions.',pt:'Inspecione a identidade antes de alterar dono ou permissões.'},reference:'https://man7.org/linux/man-pages/man1/id.1.html',source:'Linux man-pages'},
+  {id:'umask',level:'intermediate',module:'permissions',type:'READ',minutes:10,title:{en:'Default permissions and umask',pt:'Permissões padrão e umask'},description:{en:'umask removes permission bits from defaults used when applications create files and directories. It does not retroactively change existing files.',pt:'umask remove bits de permissão dos padrões usados quando aplicativos criam arquivos e diretórios. Ele não altera retroativamente arquivos existentes.'},command:'umask',output:{en:'Read the current mask before changing it.',pt:'Leia a máscara atual antes de alterá-la.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html',source:'GNU Bash Manual'},
+  {id:'sudo-model',level:'intermediate',module:'permissions',type:'READ',minutes:10,title:{en:'Administrative work with sudo',pt:'Trabalho administrativo com sudo'},description:{en:'sudo can execute a command under another user according to policy. Treat privilege elevation as a deliberate boundary, not a prefix to add automatically.',pt:'sudo pode executar um comando como outro usuário de acordo com políticas. Trate elevação de privilégio como um limite deliberado, não como um prefixo automático.'},command:'sudo -l',output:{en:'Review permitted commands before administrative work.',pt:'Revise comandos permitidos antes de tarefas administrativas.'},reference:'https://www.sudo.ws/docs/man/sudo.man/',source:'sudo manual'},
+  {id:'repositories',level:'intermediate',module:'packages',type:'READ',minutes:10,title:{en:'Repositories, metadata and dependencies',pt:'Repositórios, metadados e dependências'},description:{en:'Package managers use configured repositories and metadata to resolve software versions and dependencies. Repository trust matters because packages execute on your system.',pt:'Gerenciadores usam repositórios e metadados configurados para resolver versões e dependências. A confiança no repositório importa porque pacotes executam no seu sistema.'},command:'apt list --upgradable',output:{en:'Inspect available updates before applying them on a real Debian-family system.',pt:'Inspecione atualizações disponíveis antes de aplicá-las em um sistema real da família Debian.'},reference:'https://www.debian.org/doc/manuals/debian-reference/ch02.en.html',source:'Debian Reference'},
+  {id:'rpm-dpkg',level:'intermediate',module:'packages',type:'REFERENCE',minutes:11,title:{en:'Low-level package databases',pt:'Bancos de pacotes de baixo nível'},description:{en:'Debian-family systems commonly expose dpkg while RPM-based systems expose rpm. Higher-level tools usually handle dependency resolution and repositories.',pt:'Sistemas da família Debian costumam expor dpkg e sistemas baseados em RPM expõem rpm. Ferramentas de nível mais alto normalmente lidam com dependências e repositórios.'},command:'dpkg -l',output:{en:'Inspect package database entries without changing the system.',pt:'Inspecione entradas do banco de pacotes sem alterar o sistema.'},reference:'https://www.debian.org/doc/manuals/debian-reference/ch02.en.html',source:'Debian Reference'},
+  {id:'jobs',level:'intermediate',module:'processes',type:'LAB',minutes:10,title:{en:'Shell jobs: foreground and background',pt:'Jobs do shell: foreground e background'},description:{en:'Interactive shells track jobs launched from the current session. jobs, bg and fg help manage them without confusing shell jobs with the entire process table.',pt:'Shells interativos acompanham jobs iniciados na sessão atual. jobs, bg e fg ajudam a gerenciá-los sem confundir jobs do shell com toda a tabela de processos.'},command:'jobs',output:{en:'A real interactive shell lists jobs associated with that shell.',pt:'Um shell interativo real lista jobs associados àquele shell.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Job-Control-Basics.html',source:'GNU Bash Manual'},
+  {id:'nice',level:'advanced',module:'processes',type:'READ',minutes:11,title:{en:'Scheduling priority with nice and renice',pt:'Prioridade de escalonamento com nice e renice'},description:{en:'nice values influence CPU scheduling priority for normal processes. They are hints within the scheduler, not guarantees of performance.',pt:'Valores nice influenciam a prioridade de CPU de processos normais. São indicações ao escalonador, não garantias de desempenho.'},command:'nice -n 10 command',output:{en:'Start lower-priority work deliberately on a real system.',pt:'Inicie tarefas de menor prioridade de forma deliberada em um sistema real.'},reference:'https://man7.org/linux/man-pages/man1/nice.1.html',source:'Linux man-pages'},
+  {id:'systemd-units',level:'intermediate',module:'systemd',type:'READ',minutes:11,title:{en:'Understand systemd units',pt:'Entenda units do systemd'},description:{en:'systemd represents services, sockets, timers, mounts and other resources as units. Learn unit states before changing them.',pt:'systemd representa serviços, sockets, timers, montagens e outros recursos como units. Aprenda os estados antes de alterá-los.'},command:'systemctl list-units --type=service',output:{en:'Inspect loaded service units on a real systemd machine.',pt:'Inspecione units de serviço carregadas em uma máquina systemd real.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html',source:'systemd.unit'},
+  {id:'systemd-enable',level:'advanced',module:'systemd',type:'CHALLENGE',minutes:12,title:{en:'Start now vs enable at boot',pt:'Iniciar agora vs habilitar no boot'},description:{en:'start affects the current runtime. enable configures activation relationships for future boots. They are related but not the same action.',pt:'start afeta o runtime atual. enable configura relações de ativação para boots futuros. São ações relacionadas, mas diferentes.'},command:'systemctl is-enabled ssh',output:{en:'Inspect enablement state before making persistent changes.',pt:'Inspecione o estado de habilitação antes de mudanças persistentes.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html',source:'systemctl manual'},
+  {id:'journal-filters',level:'advanced',module:'logs',type:'LAB',minutes:12,title:{en:'Filter the systemd journal',pt:'Filtre o journal do systemd'},description:{en:'journalctl can filter by unit, boot, priority and time range. Narrow evidence before reading thousands of lines.',pt:'journalctl pode filtrar por unit, boot, prioridade e período. Restrinja as evidências antes de ler milhares de linhas.'},command:'journalctl -u ssh -b',output:{en:'Query one unit in the current boot on a real system.',pt:'Consulte uma unit no boot atual em um sistema real.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html',source:'journalctl manual'},
+  {id:'ip-routes',level:'intermediate',module:'networking',type:'LAB',minutes:11,title:{en:'Addresses, links and routes with ip',pt:'Endereços, links e rotas com ip'},description:{en:'ip organizes networking into objects such as link, address and route. Inspect those views before changing network state.',pt:'ip organiza rede em objetos como link, address e route. Inspecione essas visões antes de alterar o estado da rede.'},command:'ip route',output:{en:'Display the routing table on a real Linux system.',pt:'Mostre a tabela de rotas em um sistema Linux real.'},reference:'https://man7.org/linux/man-pages/man8/ip.8.html',source:'ip(8)'},
+  {id:'ss-sockets',level:'intermediate',module:'networking',type:'LAB',minutes:10,title:{en:'Inspect sockets with ss',pt:'Inspecione sockets com ss'},description:{en:'ss reports socket information and is commonly used to inspect listening TCP/UDP endpoints and established connections.',pt:'ss mostra informações de sockets e é usado para inspecionar endpoints TCP/UDP em escuta e conexões estabelecidas.'},command:'ss -tulpn',output:{en:'Inspect listening sockets; some process details may require privileges.',pt:'Inspecione sockets em escuta; alguns detalhes de processos podem exigir privilégios.'},reference:'https://man7.org/linux/man-pages/man8/ss.8.html',source:'ss(8)'},
+  {id:'curl-wget',level:'intermediate',module:'networking',type:'LAB',minutes:10,title:{en:'HTTP transfers with curl and wget',pt:'Transferências HTTP com curl e wget'},description:{en:'curl is oriented around transferring data across protocols; wget is commonly used for non-interactive downloads. Learn to verify destinations and TLS errors.',pt:'curl é voltado a transferir dados por protocolos; wget é usado com frequência para downloads não interativos. Aprenda a verificar destinos e erros TLS.'},command:'curl -I https://example.com',output:{en:'Request response headers on a real connected system.',pt:'Solicite cabeçalhos de resposta em um sistema real conectado.'},reference:'https://curl.se/docs/manpage.html',source:'curl documentation'},
+  {id:'scp',level:'advanced',module:'networking',type:'READ',minutes:10,title:{en:'Copy files through SSH',pt:'Copie arquivos via SSH'},description:{en:'scp copies files over SSH. Host verification and destination paths deserve the same care as an interactive SSH session.',pt:'scp copia arquivos sobre SSH. Verificação do host e caminhos de destino exigem o mesmo cuidado de uma sessão SSH interativa.'},command:'scp notes.txt user@host:/tmp/',output:{en:'Example syntax only; the browser lab does not connect to networks.',pt:'Apenas sintaxe de exemplo; o laboratório no navegador não conecta à rede.'},reference:'https://man.openbsd.org/scp.1',source:'OpenSSH manual'},
+  {id:'mount-inspect',level:'advanced',module:'storage',type:'LAB',minutes:12,title:{en:'Inspect mounts and free space',pt:'Inspecione montagens e espaço livre'},description:{en:'df reports filesystem capacity, du estimates directory usage and findmnt presents mount relationships. Use all three to answer different storage questions.',pt:'df mostra capacidade do filesystem, du estima uso de diretórios e findmnt apresenta relações de montagem. Use os três para responder perguntas diferentes.'},command:'df -h',output:{en:'Review capacity without modifying any storage.',pt:'Revise capacidade sem modificar armazenamento.'},reference:'https://man7.org/linux/man-pages/man1/df.1.html',source:'GNU/Linux manual pages'},
+  {id:'fstab',level:'advanced',module:'storage',type:'REFERENCE',minutes:13,title:{en:'Persistent mounts and /etc/fstab',pt:'Montagens persistentes e /etc/fstab'},description:{en:'/etc/fstab describes filesystems that may be mounted automatically or by explicit requests. A bad entry can affect boot, so validate carefully.',pt:'/etc/fstab descreve filesystems que podem ser montados automaticamente ou por solicitações explícitas. Uma entrada incorreta pode afetar o boot, então valide com cuidado.'},command:'cat /etc/fstab',output:{en:'Read configuration before attempting changes on a real system.',pt:'Leia a configuração antes de tentar alterações em um sistema real.'},reference:'https://man7.org/linux/man-pages/man5/fstab.5.html',source:'fstab(5)'},
+  {id:'bash-variables',level:'intermediate',module:'bash',type:'LAB',minutes:10,title:{en:'Variables, expansion and quoting',pt:'Variáveis, expansão e quoting'},description:{en:'Shell expansion happens before command execution. Quoting controls how spaces, wildcards and special characters are interpreted.',pt:'Expansão do shell acontece antes da execução do comando. Quoting controla como espaços, curingas e caracteres especiais são interpretados.'},command:'echo "$HOME"',output:{en:'Double quotes preserve spaces while still allowing parameter expansion.',pt:'Aspas duplas preservam espaços enquanto permitem expansão de parâmetros.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html',source:'GNU Bash Manual'},
+  {id:'bash-conditionals',level:'advanced',module:'bash',type:'LAB',minutes:13,title:{en:'Conditionals and exit status',pt:'Condicionais e status de saída'},description:{en:'if, test and command exit statuses let scripts make decisions. Reliable scripts check the outcome of commands rather than assuming success.',pt:'if, test e status de saída permitem que scripts tomem decisões. Scripts confiáveis verificam resultados em vez de presumir sucesso.'},command:'test -f README.txt && echo found',output:{en:'Use exit status to make simple conditional decisions.',pt:'Use status de saída para decisões condicionais simples.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Conditional-Constructs.html',source:'GNU Bash Manual'},
+  {id:'bash-loops',level:'advanced',module:'bash',type:'LAB',minutes:14,title:{en:'Loops and functions in Bash',pt:'Loops e funções em Bash'},description:{en:'for and while repeat work; functions package reusable command sequences. Favor readable scripts with clear inputs and failure handling.',pt:'for e while repetem tarefas; funções agrupam sequências reutilizáveis. Prefira scripts legíveis com entradas e tratamento de falhas claros.'},command:'for f in *.txt; do echo "$f"; done',output:{en:'Iterate over matching names while preserving quoting.',pt:'Itere sobre nomes correspondentes preservando quoting.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html',source:'GNU Bash Manual'},
+  {id:'dmesg',level:'advanced',module:'troubleshooting',type:'READ',minutes:10,title:{en:'Kernel messages with dmesg',pt:'Mensagens do kernel com dmesg'},description:{en:'dmesg reads the kernel ring buffer, which can reveal device detection, driver and boot information. Access may be restricted by policy.',pt:'dmesg lê o ring buffer do kernel, que pode revelar detecção de dispositivos, drivers e boot. O acesso pode ser restringido por política.'},command:'dmesg | tail',output:{en:'Review recent kernel messages on systems where access is permitted.',pt:'Revise mensagens recentes do kernel em sistemas onde o acesso é permitido.'},reference:'https://man7.org/linux/man-pages/man1/dmesg.1.html',source:'dmesg(1)'},
+  {id:'troubleshoot-method',level:'advanced',module:'troubleshooting',type:'CHALLENGE',minutes:14,title:{en:'Troubleshoot from evidence, not guesses',pt:'Solucione problemas com evidências, não palpites'},description:{en:'Start by defining the symptom, scope and recent changes. Inspect logs, state and resources before changing configuration.',pt:'Comece definindo sintoma, escopo e mudanças recentes. Inspecione logs, estado e recursos antes de alterar configuração.'},command:'journalctl -b -p warning',output:{en:'Filter relevant evidence before deciding what to change.',pt:'Filtre evidências relevantes antes de decidir o que alterar.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html',source:'journalctl manual'},
+  {id:'least-privilege',level:'advanced',module:'security',type:'READ',minutes:11,title:{en:'Least privilege as a daily habit',pt:'Menor privilégio como hábito diário'},description:{en:'Run ordinary work as an unprivileged user and elevate only for operations that actually require it. Review ownership and service privileges regularly.',pt:'Execute tarefas comuns como usuário sem privilégios e eleve apenas quando realmente necessário. Revise dono de arquivos e privilégios de serviços regularmente.'},command:'id',output:{en:'Know your current identity before administrative commands.',pt:'Saiba sua identidade atual antes de comandos administrativos.'},reference:'https://www.sudo.ws/docs/man/sudo.man/',source:'sudo manual'},
+  {id:'ssh-hardening',level:'advanced',module:'security',type:'REFERENCE',minutes:13,title:{en:'SSH keys and host verification',pt:'Chaves SSH e verificação de host'},description:{en:'Public-key authentication avoids sending reusable passwords to remote hosts, while host key verification helps detect unexpected server identity changes.',pt:'Autenticação por chave pública evita enviar senhas reutilizáveis a hosts remotos, enquanto verificação da chave do host ajuda a detectar mudanças inesperadas de identidade.'},command:'ssh -v user@host',output:{en:'Verbose mode can explain authentication and host-key decisions on a real connection.',pt:'Modo verbose pode explicar decisões de autenticação e chave do host em uma conexão real.'},reference:'https://man.openbsd.org/ssh.1',source:'OpenSSH manual'},
+  {id:'firewall-concepts',level:'advanced',module:'security',type:'READ',minutes:12,title:{en:'Firewall concepts before commands',pt:'Conceitos de firewall antes dos comandos'},description:{en:'A firewall evaluates traffic against policy. Learn addresses, protocols, ports, direction and default policy before choosing a frontend such as nftables or firewalld.',pt:'Um firewall avalia tráfego contra políticas. Aprenda endereços, protocolos, portas, direção e política padrão antes de escolher um frontend como nftables ou firewalld.'},command:'ss -tulpn',output:{en:'Inventory listening services before defining filtering policy.',pt:'Inventarie serviços em escuta antes de definir políticas de filtragem.'},reference:'https://wiki.nftables.org/wiki-nftables/index.php/Main_Page',source:'nftables documentation'},
+  {id:'server-service-model',level:'advanced',module:'servers',type:'READ',minutes:11,title:{en:'How Linux services fit together',pt:'Como serviços Linux se conectam'},description:{en:'A typical server combines a daemon, configuration, permissions, network sockets, logs and a service manager. Troubleshooting requires connecting those layers.',pt:'Um servidor típico combina daemon, configuração, permissões, sockets de rede, logs e gerenciador de serviços. Solucionar problemas exige conectar essas camadas.'},command:'systemctl status ssh',output:{en:'Inspect service state before editing configuration.',pt:'Inspecione o estado do serviço antes de editar configuração.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html',source:'systemctl manual'},
+  {id:'containers-concepts',level:'advanced',module:'containers',type:'READ',minutes:12,title:{en:'Containers, namespaces and cgroups',pt:'Containers, namespaces e cgroups'},description:{en:'Linux containers isolate process views with namespaces and constrain resources with cgroups. Container engines add image, network and lifecycle tooling around those kernel features.',pt:'Containers Linux isolam visões de processos com namespaces e limitam recursos com cgroups. Engines adicionam imagens, rede e ciclo de vida ao redor desses recursos do kernel.'},command:'ps aux',output:{en:'Container concepts start from ordinary Linux processes.',pt:'Conceitos de containers começam em processos Linux comuns.'},reference:'https://docs.kernel.org/admin-guide/cgroup-v2.html',source:'Linux Kernel Documentation'},
+  {id:'podman-docker',level:'advanced',module:'containers',type:'REFERENCE',minutes:10,title:{en:'Container engines: Podman and Docker',pt:'Engines de container: Podman e Docker'},description:{en:'Podman and Docker provide workflows around OCI images and containers. Their command surfaces overlap, but architecture and defaults can differ.',pt:'Podman e Docker fornecem fluxos ao redor de imagens e containers OCI. As interfaces de comando se sobrepõem, mas arquitetura e padrões podem diferir.'},command:'podman --help',output:{en:'Use official engine documentation for host-specific setup.',pt:'Use a documentação oficial da engine para configuração específica do host.'},reference:'https://docs.podman.io/',source:'Podman Documentation'},
+  {id:'git-dev',level:'intermediate',module:'development',type:'LAB',minutes:10,title:{en:'Git as part of a Linux development environment',pt:'Git como parte do ambiente de desenvolvimento Linux'},description:{en:'Git, SSH keys, editors and language tooling are common parts of a Linux workstation. Keep project and system package responsibilities separate.',pt:'Git, chaves SSH, editores e ferramentas de linguagem são partes comuns de uma workstation Linux. Separe responsabilidades do projeto e dos pacotes do sistema.'},command:'git status',output:{en:'Inspect repository state before staging or committing changes.',pt:'Inspecione o estado do repositório antes de adicionar ou commitar mudanças.'},reference:'https://git-scm.com/docs/git',source:'Git Documentation'},
+  {id:'env-vars',level:'intermediate',module:'development',type:'READ',minutes:9,title:{en:'Environment variables and PATH',pt:'Variáveis de ambiente e PATH'},description:{en:'Environment variables pass configuration into processes. PATH is a colon-separated list the shell searches for executable commands.',pt:'Variáveis de ambiente passam configuração aos processos. PATH é uma lista separada por dois-pontos que o shell pesquisa por executáveis.'},command:'echo $PATH',output:{en:'Inspect PATH before changing shell startup files.',pt:'Inspecione PATH antes de alterar arquivos de inicialização do shell.'},reference:'https://www.gnu.org/software/bash/manual/html_node/Shell-Variables.html',source:'GNU Bash Manual'},
+  {id:'cron-timers',level:'advanced',module:'administration',type:'REFERENCE',minutes:12,title:{en:'cron and systemd timers',pt:'cron e timers do systemd'},description:{en:'cron schedules commands by calendar expressions. systemd timers integrate scheduling with units and journal logging. Choose based on the environment and observability needs.',pt:'cron agenda comandos por expressões de calendário. Timers do systemd integram agendamento com units e journal. Escolha conforme ambiente e necessidade de observabilidade.'},command:'systemctl list-timers',output:{en:'Inspect existing schedules before creating new ones.',pt:'Inspecione agendamentos existentes antes de criar novos.'},reference:'https://www.freedesktop.org/software/systemd/man/latest/systemd.timer.html',source:'systemd.timer'},
+  {id:'performance',level:'advanced',module:'administration',type:'READ',minutes:13,title:{en:'Observe CPU, memory, disk and load',pt:'Observe CPU, memória, disco e carga'},description:{en:'Performance troubleshooting starts with measurement. Process activity, memory pressure, filesystem capacity and I/O provide different parts of the picture.',pt:'Diagnóstico de performance começa com medição. Atividade de processos, pressão de memória, capacidade do filesystem e I/O mostram partes diferentes do quadro.'},command:'top',output:{en:'Start with observation before tuning kernel or service settings.',pt:'Comece observando antes de ajustar kernel ou serviços.'},reference:'https://man7.org/linux/man-pages/man1/top.1.html',source:'top(1)'}
 ];
 
 /* --- js/data/commands.js --- */
@@ -89,6 +131,31 @@ const commands=[
 {name:'dd',category:'Storage',level:'Advanced',description:{en:'Copy and convert raw data between files or block devices.',pt:'Copia e converte dados brutos entre arquivos ou dispositivos de bloco.'},syntax:'dd if=input of=output [options]',example:'dd if=image.iso of=/dev/sdX',risk:{en:'A wrong output device can overwrite an entire disk.',pt:'Escolher o dispositivo de saída errado pode sobrescrever um disco inteiro.'}},
 {name:'mkfs',category:'Storage',level:'Advanced',description:{en:'Create a filesystem on a device or partition.',pt:'Cria um sistema de arquivos em um dispositivo ou partição.'},syntax:'mkfs.type device',example:'sudo mkfs.ext4 /dev/sdX1',risk:{en:'Formatting destroys the existing filesystem data on the selected target.',pt:'A formatação destrói os dados do sistema de arquivos existente no alvo selecionado.'}},
 {name:'fdisk',category:'Storage',level:'Advanced',description:{en:'Inspect or modify disk partition tables.',pt:'Inspeciona ou modifica tabelas de partição de disco.'},syntax:'fdisk device',example:'sudo fdisk /dev/sdX',risk:{en:'Writing an incorrect partition table can make data inaccessible.',pt:'Gravar uma tabela de partições incorreta pode tornar dados inacessíveis.'}}
+,
+{name:'cp',category:'Files',level:'Beginner',description:{en:'Copy files or directories.',pt:'Copia arquivos ou diretórios.'},syntax:'cp [options] source destination',example:'cp README.txt Documents/README-copy.txt'},
+{name:'mv',category:'Files',level:'Beginner',description:{en:'Move or rename files and directories.',pt:'Move ou renomeia arquivos e diretórios.'},syntax:'mv source destination',example:'mv old.txt new.txt'},
+{name:'ln',category:'Files',level:'Intermediate',description:{en:'Create hard or symbolic links.',pt:'Cria hard links ou links simbólicos.'},syntax:'ln [options] target link',example:'ln -s target shortcut'},
+{name:'less',category:'Text',level:'Beginner',description:{en:'Read text interactively one screen at a time.',pt:'Lê texto interativamente uma tela por vez.'},syntax:'less file',example:'less README.txt'},
+{name:'sort',category:'Text',level:'Intermediate',description:{en:'Sort lines of text.',pt:'Ordena linhas de texto.'},syntax:'sort [options] file',example:'sort names.txt'},
+{name:'uniq',category:'Text',level:'Intermediate',description:{en:'Report or omit adjacent duplicate lines.',pt:'Mostra ou remove linhas duplicadas adjacentes.'},syntax:'uniq [options] file',example:'sort names.txt | uniq'},
+{name:'cut',category:'Text',level:'Intermediate',description:{en:'Select fields or character ranges from lines.',pt:'Seleciona campos ou intervalos de caracteres das linhas.'},syntax:'cut [options] file',example:'cut -d: -f1 /etc/passwd'},
+{name:'tr',category:'Text',level:'Intermediate',description:{en:'Translate or delete characters.',pt:'Traduz ou remove caracteres.'},syntax:'tr SET1 SET2',example:'tr a-z A-Z'},
+{name:'wc',category:'Text',level:'Beginner',description:{en:'Count lines, words or bytes.',pt:'Conta linhas, palavras ou bytes.'},syntax:'wc [options] file',example:'wc -l README.txt'},
+{name:'sed',category:'Text',level:'Intermediate',description:{en:'Transform text streams with editing expressions.',pt:'Transforma fluxos de texto com expressões de edição.'},syntax:'sed [options] script file',example:'sed "s/foo/bar/" file.txt'},
+{name:'awk',category:'Text',level:'Advanced',description:{en:'Process records and fields with the awk language.',pt:'Processa registros e campos com a linguagem awk.'},syntax:'awk program [file]',example:'awk "{print $1}" data.txt'},
+{name:'jobs',category:'Processes',level:'Intermediate',description:{en:'List jobs associated with the current shell.',pt:'Lista jobs associados ao shell atual.'},syntax:'jobs',example:'jobs'},
+{name:'nice',category:'Processes',level:'Advanced',description:{en:'Start a program with an adjusted scheduling priority.',pt:'Inicia um programa com prioridade de escalonamento ajustada.'},syntax:'nice -n adjustment command',example:'nice -n 10 command'},
+{name:'ss',category:'Network',level:'Intermediate',description:{en:'Inspect network sockets.',pt:'Inspeciona sockets de rede.'},syntax:'ss [options]',example:'ss -tulpn'},
+{name:'curl',category:'Network',level:'Intermediate',description:{en:'Transfer data to or from URLs.',pt:'Transfere dados de ou para URLs.'},syntax:'curl [options] URL',example:'curl -I https://example.com'},
+{name:'wget',category:'Network',level:'Intermediate',description:{en:'Retrieve files over network protocols.',pt:'Obtém arquivos por protocolos de rede.'},syntax:'wget [options] URL',example:'wget https://example.com/file'},
+{name:'scp',category:'Network',level:'Intermediate',description:{en:'Copy files through SSH.',pt:'Copia arquivos por SSH.'},syntax:'scp source user@host:path',example:'scp notes.txt user@host:/tmp/'},
+{name:'findmnt',category:'Storage',level:'Intermediate',description:{en:'Display mounted filesystems in a structured view.',pt:'Exibe filesystems montados de forma estruturada.'},syntax:'findmnt [options]',example:'findmnt'},
+{name:'mount',category:'Storage',level:'Advanced',description:{en:'Attach a filesystem to the directory tree.',pt:'Anexa um filesystem à árvore de diretórios.'},syntax:'mount [options] device directory',example:'mount | head'},
+{name:'umount',category:'Storage',level:'Advanced',description:{en:'Detach a mounted filesystem.',pt:'Desanexa um filesystem montado.'},syntax:'umount target',example:'sudo umount /mnt/example'},
+{name:'dmesg',category:'Administration',level:'Advanced',description:{en:'Read messages from the kernel ring buffer.',pt:'Lê mensagens do ring buffer do kernel.'},syntax:'dmesg [options]',example:'dmesg | tail'},
+{name:'git',category:'Development',level:'Intermediate',description:{en:'Distributed version control tool.',pt:'Ferramenta distribuída de controle de versão.'},syntax:'git command [options]',example:'git status'},
+{name:'podman',category:'Containers',level:'Advanced',description:{en:'Manage OCI containers and images with Podman.',pt:'Gerencia containers e imagens OCI com Podman.'},syntax:'podman command [options]',example:'podman ps'},
+{name:'docker',category:'Containers',level:'Advanced',description:{en:'Manage containers and images with Docker.',pt:'Gerencia containers e imagens com Docker.'},syntax:'docker command [options]',example:'docker ps'}
 ];
 
 /* --- js/data/distros.js --- */
@@ -155,6 +222,102 @@ const distros=[
     goodFor:{en:['Reproducible environments','Declarative system configuration','Advanced experimentation'],pt:['Ambientes reproduzíveis','Configuração declarativa do sistema','Experimentação avançada']}
   }
 ];
+
+/* --- js/data/references.js --- */
+
+/* Interactive Linux Academy V6.2 — authoritative documentation registry.
+ * Keep external references centralized so Command Explorer, lessons and docs
+ * can identify the upstream provider and avoid misleading generic fallbacks.
+ */
+const documentationReferences={
+  pwd:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/pwd-invocation.html'},
+  ls:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/ls-invocation.html'},
+  cd:{provider:'GNU Bash',type:'official',url:'https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html#index-cd'},
+  mkdir:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/mkdir-invocation.html'},
+  touch:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/touch-invocation.html'},
+  cat:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html'},
+  grep:{provider:'GNU grep',type:'official',url:'https://www.gnu.org/software/grep/manual/grep.html'},
+  find:{provider:'GNU Findutils',type:'official',url:'https://www.gnu.org/software/findutils/manual/html_mono/find.html'},
+  head:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/head-invocation.html'},
+  tail:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/tail-invocation.html'},
+  ps:{provider:'procps-ng manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/ps.1.html'},
+  top:{provider:'procps-ng manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/top.1.html'},
+  kill:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/kill.1.html'},
+  chmod:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/chmod-invocation.html'},
+  chown:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/chown-invocation.html'},
+  whoami:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/whoami-invocation.html'},
+  id:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/id-invocation.html'},
+  uname:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/uname-invocation.html'},
+  df:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/df-invocation.html'},
+  du:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/du-invocation.html'},
+  lsblk:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/lsblk.8.html'},
+  ip:{provider:'iproute2 manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/ip.8.html'},
+  ping:{provider:'iputils manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/ping.8.html'},
+  ssh:{provider:'OpenSSH manual',type:'manual',url:'https://man.openbsd.org/ssh.1'},
+  tar:{provider:'GNU tar',type:'official',url:'https://www.gnu.org/software/tar/manual/tar.html'},
+  apt:{provider:'Debian APT manual',type:'manual',url:'https://manpages.debian.org/trixie/apt/apt.8.en.html'},
+  dnf:{provider:'DNF documentation',type:'official',url:'https://dnf.readthedocs.io/en/stable/command_ref.html'},
+  pacman:{provider:'Arch Linux manual',type:'manual',url:'https://man.archlinux.org/man/pacman.8.en'},
+  systemctl:{provider:'systemd',type:'official',url:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html'},
+  journalctl:{provider:'systemd',type:'official',url:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html'},
+  rm:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/rm-invocation.html'},
+  dd:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html'},
+  mkfs:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/mkfs.8.html'},
+  fdisk:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/fdisk.8.html'},
+  cp:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/cp-invocation.html'},
+  mv:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/mv-invocation.html'},
+  ln:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/ln-invocation.html'},
+  less:{provider:'less manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/less.1.html'},
+  sort:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/sort-invocation.html'},
+  uniq:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/uniq-invocation.html'},
+  cut:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/cut-invocation.html'},
+  tr:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/tr-invocation.html'},
+  wc:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/wc-invocation.html'},
+  sed:{provider:'GNU sed',type:'official',url:'https://www.gnu.org/software/sed/manual/sed.html'},
+  awk:{provider:'GNU awk',type:'official',url:'https://www.gnu.org/software/gawk/manual/gawk.html'},
+  jobs:{provider:'GNU Bash',type:'official',url:'https://www.gnu.org/software/bash/manual/html_node/Job-Control-Builtins.html#index-jobs'},
+  nice:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/nice-invocation.html'},
+  ss:{provider:'iproute2 manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/ss.8.html'},
+  curl:{provider:'curl project',type:'official',url:'https://curl.se/docs/manpage.html'},
+  wget:{provider:'GNU Wget',type:'official',url:'https://www.gnu.org/software/wget/manual/wget.html'},
+  scp:{provider:'OpenSSH manual',type:'manual',url:'https://man.openbsd.org/scp.1'},
+  findmnt:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/findmnt.8.html'},
+  mount:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/mount.8.html'},
+  umount:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/umount.8.html'},
+  dmesg:{provider:'util-linux manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/dmesg.1.html'},
+  git:{provider:'Git',type:'official',url:'https://git-scm.com/docs/git'},
+  podman:{provider:'Podman',type:'official',url:'https://docs.podman.io/en/latest/markdown/podman.1.html'},
+  docker:{provider:'Docker',type:'official',url:'https://docs.docker.com/reference/cli/docker/'}
+};
+
+const topicDocumentationReferences={
+  filesystem:{provider:'Filesystem Hierarchy Standard',type:'official',url:'https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html'},
+  permissions:{provider:'GNU Coreutils',type:'official',url:'https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html'},
+  bash:{provider:'GNU Bash',type:'official',url:'https://www.gnu.org/software/bash/manual/bash.html'},
+  systemd:{provider:'systemd',type:'official',url:'https://www.freedesktop.org/software/systemd/man/latest/'},
+  kernel:{provider:'Linux kernel documentation',type:'official',url:'https://docs.kernel.org/'},
+  packages:{provider:'Debian Reference',type:'official',url:'https://www.debian.org/doc/manuals/debian-reference/ch02.en.html'},
+  processes:{provider:'procps-ng manual',type:'manual',url:'https://man7.org/linux/man-pages/man1/ps.1.html'},
+  networking:{provider:'iproute2 manual',type:'manual',url:'https://man7.org/linux/man-pages/man8/ip.8.html'},
+  security:{provider:'sudo project',type:'official',url:'https://www.sudo.ws/docs/man/sudo.man/'},
+  containers:{provider:'Podman',type:'official',url:'https://docs.podman.io/'},
+  git:{provider:'Git',type:'official',url:'https://git-scm.com/docs/git'}
+};
+
+const getCommandReference=name=>documentationReferences[name]||null;
+const getReferenceLabel=type=>{
+  const pt=typeof getLanguage==='function'&&getLanguage()==='pt';
+  if(type==='manual')return pt?'Página de manual':'Manual page';
+  if(type==='upstream')return pt?'Referência upstream':'Upstream reference';
+  return pt?'Documentação oficial':'Official documentation';
+};
+const getReferenceSourceLabel=()=>typeof getLanguage==='function'&&getLanguage()==='pt'?'Fonte':'Source';
+const getMissingReferenceLabel=()=>typeof getLanguage==='function'&&getLanguage()==='pt'?'Referência ainda não vinculada':'Reference not linked yet';
+const inferReferenceType=url=>{
+  if(!url)return 'official';
+  if(/man7\.org|man\.openbsd\.org|man\.archlinux\.org|manpages\.debian\.org/.test(url))return 'manual';
+  return 'official';
+};
 
 /* --- js/i18n.js --- */
 
@@ -921,7 +1084,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
   const localize=obj=>typeof obj==='string'?obj:(obj?.[getLanguage()]??obj?.en??'');
   const labIds=new Set(['files-directories','pipes','redirection','search-text','find-files','packages','networking','bash-scripting']);
   const challengeIds=new Set(['permissions','processes','services','storage','security']);
-  const typeFor=lesson=>labIds.has(lesson.id)?'LAB':challengeIds.has(lesson.id)?'CHALLENGE':'READ';
+  const typeFor=lesson=>lesson.type|| (labIds.has(lesson.id)?'LAB':challengeIds.has(lesson.id)?'CHALLENGE':'READ');
   const minutesFor=(lesson,index)=>lesson.minutes||[6,8,10,12][(index+lesson.level.length)%4];
 
   function render(){
@@ -935,7 +1098,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
 
       const num=document.createElement('span');
       num.className='lesson-num';
-      num.textContent=`${String(index+1).padStart(2,'0')} / ${t(activeLevel)}`;
+      num.textContent=`${String(index+1).padStart(2,'0')} / ${lesson.module ? lesson.module.toUpperCase() : t(activeLevel)}`;
 
       const heading=document.createElement('div');
       heading.className='lesson-title-wrap';
@@ -973,6 +1136,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       tryBtn.type='button';
       tryBtn.textContent=t('tryIt');
       tryBtn.addEventListener('click',()=>{
+        storage.setItem('linuxAcademy.lastLesson',lesson.id);
         terminalRunner?.(lesson.command);
         document.querySelector('#terminal')?.scrollIntoView({behavior:'smooth'});
       });
@@ -981,7 +1145,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       splitBtn.className='small-button split-learn-button';
       splitBtn.type='button';
       splitBtn.textContent=getLanguage()==='pt'?'Abrir modo dividido':'Open split mode';
-      splitBtn.addEventListener('click',()=>window.dispatchEvent(new CustomEvent('academy:split-lesson',{detail:{lesson}})));
+      splitBtn.addEventListener('click',()=>{storage.setItem('linuxAcademy.lastLesson',lesson.id);window.dispatchEvent(new CustomEvent('academy:split-lesson',{detail:{lesson}}));});
 
       const doneBtn=document.createElement('button');
       doneBtn.className='small-button complete';
@@ -991,6 +1155,7 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
         const set=read();
         if(set.has(lesson.id)) set.delete(lesson.id);
         else {
+          storage.setItem('linuxAcademy.lastLesson',lesson.id);
           set.add(lesson.id);
           tuxSpeak?.(getLanguage()==='pt'?'Boa! Mais um conceito Linux concluído. 🐧':'Nice! Another Linux concept unlocked. 🐧');
         }
@@ -1003,7 +1168,10 @@ function initCourse({onProgressChange,terminalRunner,tuxSpeak}){
       ref.href=lesson.reference;
       ref.target='_blank';
       ref.rel='noopener noreferrer';
-      ref.textContent=`${lesson.source || t('official')} ↗`;
+      const refType=lesson.referenceType||inferReferenceType(lesson.reference);
+      const refProvider=lesson.source||getReferenceLabel(refType);
+      ref.textContent=`${getReferenceLabel(refType)} · ${refProvider} ↗`;
+      ref.setAttribute('aria-label',`${getReferenceLabel(refType)} — ${refProvider}`);
 
       actions.append(tryBtn,splitBtn,doneBtn,ref);
       card.append(num,heading,desc,cmd,detail,actions);
@@ -1041,18 +1209,12 @@ const categoryLabels={
   pt:{Navigation:'Navegação',Directories:'Diretórios',Files:'Arquivos',Text:'Texto',Search:'Busca',Processes:'Processos',Permissions:'Permissões',Users:'Usuários',System:'Sistema',Storage:'Armazenamento',Network:'Rede',Archives:'Arquivos compactados',Packages:'Pacotes',Administration:'Administração'}
 };
 
-const coreutilsReference='https://www.gnu.org/software/coreutils/manual/coreutils.html';
-const commandReferences={
-  pwd:coreutilsReference,ls:coreutilsReference,mkdir:coreutilsReference,touch:coreutilsReference,cat:coreutilsReference,head:coreutilsReference,tail:coreutilsReference,whoami:coreutilsReference,id:coreutilsReference,uname:coreutilsReference,df:coreutilsReference,du:coreutilsReference,chmod:coreutilsReference,chown:coreutilsReference,rm:coreutilsReference,dd:coreutilsReference,
-  grep:'https://www.gnu.org/software/grep/manual/grep.html',find:'https://www.gnu.org/software/findutils/manual/html_mono/find.html',ps:'https://man7.org/linux/man-pages/man1/ps.1.html',kill:'https://man7.org/linux/man-pages/man1/kill.1.html',lsblk:'https://man7.org/linux/man-pages/man8/lsblk.8.html',ip:'https://man7.org/linux/man-pages/man8/ip.8.html',ping:'https://man7.org/linux/man-pages/man8/ping.8.html',ssh:'https://man.openbsd.org/ssh',apt:'https://www.debian.org/doc/manuals/debian-reference/ch02.en.html',dnf:'https://docs.fedoraproject.org/',pacman:'https://man.archlinux.org/man/pacman.8',systemctl:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html',journalctl:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html',tar:'https://www.gnu.org/software/tar/manual/tar.html',mkfs:'https://man7.org/linux/man-pages/man8/mkfs.8.html',fdisk:'https://man7.org/linux/man-pages/man8/fdisk.8.html'
-};
-
 const levelLabels={en:{Beginner:'Beginner',Intermediate:'Intermediate',Advanced:'Advanced'},pt:{Beginner:'Iniciante',Intermediate:'Intermediário',Advanced:'Avançado'}};
 function initCommandExplorer(){
   const grid=document.querySelector('#commandGrid'),search=document.querySelector('#commandSearch'),category=document.querySelector('#commandCategory');
   const localize=v=>typeof v==='string'?v:(v?.[getLanguage()]??v?.en??'');
   function buildCategories(){const selected=category.value||'all';category.replaceChildren();const all=document.createElement('option');all.value='all';all.textContent=t('allCategories');category.append(all);[...new Set(commands.map(c=>c.category))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=categoryLabels[getLanguage()][c]||c;category.append(o);});category.value=[...category.options].some(o=>o.value===selected)?selected:'all';}
-  function render(){const q=search.value.trim().toLowerCase(),cat=category.value;const lang=getLanguage();const filtered=commands.filter(c=>(cat==='all'||c.category===cat)&&(!q||[c.name,c.category,localize(c.description),c.example].join(' ').toLowerCase().includes(q)));grid.replaceChildren();if(!filtered.length){const e=document.createElement('div');e.className='empty-state';e.textContent=t('noCommands');grid.append(e);return;}filtered.forEach(c=>{const card=document.createElement('article');card.className='command-card';const head=document.createElement('header');const h=document.createElement('h3');h.textContent=c.name;const badge=document.createElement('span');badge.className=`badge ${c.risk?'risk':''}`;badge.textContent=c.risk?t('risk'):(levelLabels[lang][c.level]||c.level);head.append(h,badge);const p=document.createElement('p');p.textContent=localize(c.description);const syntax=document.createElement('div');syntax.className='command-syntax';syntax.innerHTML=`<span>${t('syntaxLabel')}</span><code></code>`;syntax.querySelector('code').textContent=c.syntax;const pre=document.createElement('pre');pre.textContent=c.example;const ref=document.createElement('a');ref.className='command-reference';ref.href=commandReferences[c.name]||'https://man7.org/linux/man-pages/';ref.target='_blank';ref.rel='noopener noreferrer';ref.textContent=`${t('docsLink')} ↗`;card.append(head,p,syntax,pre);if(c.risk){const r=document.createElement('div');r.className='risk-note';r.textContent=`⚠ ${localize(c.risk)}`;card.append(r);}card.append(ref);grid.append(card);});}
+  function render(){const q=search.value.trim().toLowerCase(),cat=category.value;const lang=getLanguage();const filtered=commands.filter(c=>(cat==='all'||c.category===cat)&&(!q||[c.name,c.category,localize(c.description),c.example].join(' ').toLowerCase().includes(q)));grid.replaceChildren();if(!filtered.length){const e=document.createElement('div');e.className='empty-state';e.textContent=t('noCommands');grid.append(e);return;}filtered.forEach(c=>{const card=document.createElement('article');card.className='command-card';const head=document.createElement('header');const h=document.createElement('h3');h.textContent=c.name;const badge=document.createElement('span');badge.className=`badge ${c.risk?'risk':''}`;badge.textContent=c.risk?t('risk'):(levelLabels[lang][c.level]||c.level);head.append(h,badge);const p=document.createElement('p');p.textContent=localize(c.description);const syntax=document.createElement('div');syntax.className='command-syntax';syntax.innerHTML=`<span>${t('syntaxLabel')}</span><code></code>`;syntax.querySelector('code').textContent=c.syntax;const pre=document.createElement('pre');pre.textContent=c.example;const reference=getCommandReference(c.name);card.append(head,p,syntax,pre);if(c.risk){const r=document.createElement('div');r.className='risk-note';r.textContent=`⚠ ${localize(c.risk)}`;card.append(r);}const refWrap=document.createElement('div');refWrap.className='command-reference-wrap';if(reference){const ref=document.createElement('a');ref.className='command-reference';ref.href=reference.url;ref.target='_blank';ref.rel='noopener noreferrer';ref.textContent=`${getReferenceLabel(reference.type)} ↗`;ref.setAttribute('aria-label',`${getReferenceLabel(reference.type)}: ${c.name} — ${reference.provider}`);const source=document.createElement('small');source.className='command-reference-source';source.textContent=`${getReferenceSourceLabel()}: ${reference.provider}`;refWrap.append(ref,source);}else{const missing=document.createElement('span');missing.className='command-reference-missing';missing.textContent=getMissingReferenceLabel();refWrap.append(missing);}card.append(refWrap);grid.append(card);});}
   search.addEventListener('input',render);category.addEventListener('change',render);window.addEventListener('academy:language',()=>{buildCategories();render();});buildCategories();render();return commands;
 }
 
@@ -1134,11 +1296,18 @@ function initSearch({commands,distros,lessons}){
       {type:getLanguage()==='pt'?'Desafio':'Challenge',title:getLanguage()==='pt'?'Missões do terminal':'Terminal missions',desc:'pwd • ls • mkdir • grep • chmod • ps • ip',target:'#terminal'},
       {type:getLanguage()==='pt'?'Referência':'Reference',title:getLanguage()==='pt'?'Consulta rápida Linux':'Linux quick reference',desc:getLanguage()==='pt'?'Pesquise comandos por intenção.':'Search commands by intent.',target:'#commands'}
     ];
+    const docs=(typeof docsTopics!=='undefined'?docsTopics:[]).map(x=>({type:getLanguage()==='pt'?'DOC':'DOC',title:localize(x.title),desc:localize(x.summary),target:'#resources'}));
+    const quizTopics=['filesystem','navigation','permissions','processes','networking','packages','systemd','storage','bash','security'].map(x=>({type:getLanguage()==='pt'?'TESTE':'QUIZ',title:x,desc:getLanguage()==='pt'?'Tópico do teste de conhecimento':'Knowledge-check topic',target:'#knowledge'}));
+    const paths=[
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Fundamentos Linux':'Linux Foundations',desc:'kernel • GNU/Linux • distros',target:'#roadmap'},
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Administração':'Administration',desc:'systemd • logs • storage • performance',target:'#roadmap'},
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Segurança':'Security',desc:'permissions • SSH • least privilege',target:'#roadmap'}
+    ];
     return [
       ...commands.map(x=>({type:t('commandType'),title:x.name,desc:localize(x.description),target:'#commands'})),
       ...distros.map(x=>({type:t('distroType'),title:x.name,desc:localize(x.summary),target:'#distros'})),
       ...lessons.map(x=>({type:t('lessonType'),title:localize(x.title),desc:localize(x.description),target:'#learn'})),
-      ...concepts
+      ...docs,...quizTopics,...paths,...concepts
     ];
   }
 
@@ -1226,10 +1395,71 @@ function initSearch({commands,distros,lessons}){
 /* --- js/quiz.js --- */
 
 function initQuiz({tuxSpeak,onProgressChange}={}){
-  const options=[...document.querySelectorAll('#quizOptions button')],feedback=document.querySelector('#quizFeedback');let last=null;
-  function show(ok){feedback.className=`quiz-feedback ${ok?'success':'error'}`;feedback.innerHTML=ok?t('quizCorrect'):t('quizWrong');}
-  options.forEach(btn=>btn.addEventListener('click',()=>{options.forEach(b=>b.classList.remove('correct','wrong'));const ok=btn.dataset.answer==='pwd';last=ok;btn.classList.add(ok?'correct':'wrong');show(ok);if(ok){storage.setItem('linuxAcademy.quiz','done');tuxSpeak?.(t('quizCorrect').replace(/<[^>]+>/g,''));onProgressChange?.();}}));
-  window.addEventListener('academy:language',()=>{if(last!==null)show(last);});
+  const root=document.querySelector('#quiz');
+  if(!root)return;
+  const questionEl=document.querySelector('#quizQuestionText');
+  const metaEl=document.querySelector('#quizQuestionMeta');
+  const topicEl=document.querySelector('#quizTopic');
+  const optionsEl=document.querySelector('#quizOptions');
+  const feedback=document.querySelector('#quizFeedback');
+  const progress=document.querySelector('#quizQuestionProgress');
+  const nextBtn=document.querySelector('#quizNext');
+  const resultEl=document.querySelector('#quizResultSummary');
+  const statsKey='linuxAcademy.quizStats.v6';
+  const questions=[
+    {topic:'filesystem',q:{en:'Which command prints the current working directory?',pt:'Qual comando mostra o diretório de trabalho atual?'},options:['pwd','mkdir','touch','grep'],answer:'pwd',explain:{en:'pwd means print working directory.',pt:'pwd significa print working directory e mostra o diretório atual.'}},
+    {topic:'navigation',q:{en:'Which command changes the shell working directory?',pt:'Qual comando altera o diretório de trabalho do shell?'},options:['cd','ls','cat','ps'],answer:'cd',explain:{en:'cd changes the current directory of the shell.',pt:'cd altera o diretório atual do shell.'}},
+    {topic:'permissions',q:{en:'Which command changes permission mode bits?',pt:'Qual comando altera os bits de permissão?'},options:['chmod','chown','grep','uname'],answer:'chmod',explain:{en:'chmod changes file mode bits; chown changes ownership.',pt:'chmod altera bits de modo; chown altera propriedade.'}},
+    {topic:'processes',q:{en:'Which command is commonly used to inspect processes?',pt:'Qual comando é usado com frequência para inspecionar processos?'},options:['ps','mkdir','tar','pwd'],answer:'ps',explain:{en:'ps displays process information.',pt:'ps exibe informações sobre processos.'}},
+    {topic:'networking',q:{en:'Which modern tool inspects Linux addresses and routes?',pt:'Qual ferramenta moderna inspeciona endereços e rotas Linux?'},options:['ip','touch','wc','chmod'],answer:'ip',explain:{en:'ip from iproute2 handles links, addresses and routes.',pt:'ip, do iproute2, trabalha com links, endereços e rotas.'}},
+    {topic:'packages',q:{en:'Which package manager is used by Arch Linux?',pt:'Qual gerenciador de pacotes é usado pelo Arch Linux?'},options:['pacman','apt','dnf','zypper'],answer:'pacman',explain:{en:'Arch Linux uses pacman.',pt:'Arch Linux usa pacman.'}},
+    {topic:'systemd',q:{en:'Which command inspects and controls systemd units?',pt:'Qual comando inspeciona e controla units do systemd?'},options:['systemctl','journalctl','grep','df'],answer:'systemctl',explain:{en:'systemctl manages and inspects systemd units.',pt:'systemctl gerencia e inspeciona units do systemd.'}},
+    {topic:'storage',q:{en:'Which command lists block devices without formatting them?',pt:'Qual comando lista dispositivos de bloco sem formatá-los?'},options:['lsblk','mkfs','dd','rm'],answer:'lsblk',explain:{en:'lsblk lists block devices and relationships without modifying them.',pt:'lsblk lista dispositivos de bloco e relações sem modificá-los.'}},
+    {topic:'bash',q:{en:'What does a pipe (|) connect?',pt:'O que um pipe (|) conecta?'},options:['stdout → stdin','files → permissions','users → groups','kernel → bootloader'],answer:'stdout → stdin',explain:{en:'A pipeline connects one command output to the next command input.',pt:'Um pipeline conecta a saída de um comando à entrada do próximo.'}},
+    {topic:'security',q:{en:'What is the safest general principle for administrative privileges?',pt:'Qual é o princípio geral mais seguro para privilégios administrativos?'},options:['least privilege','always use root','disable updates','share passwords'],answer:'least privilege',explain:{en:'Use only the privileges required for the task.',pt:'Use apenas os privilégios necessários para a tarefa.'}}
+  ];
+  let index=0,correct=0,wrong=0,streak=0,bestStreak=0,mistakes=[],locked=false,manual=false,timer=null;
+  const localize=v=>typeof v==='string'?v:(v?.[getLanguage()]??v?.en??'');
+  const readStats=()=>{try{return JSON.parse(storage.getItem(statsKey)||'{}')}catch{return {}}};
+  const saveStats=(score)=>{
+    const s=readStats();
+    s.tests=(s.tests||0)+1;s.questions=(s.questions||0)+questions.length;s.correct=(s.correct||0)+correct;s.incorrect=(s.incorrect||0)+wrong;
+    s.bestScore=Math.max(s.bestScore||0,score);s.latestScore=score;s.bestStreak=Math.max(s.bestStreak||0,bestStreak);s.lastCompleted=Date.now();
+    storage.setItem(statsKey,JSON.stringify(s));storage.setItem('linuxAcademy.quiz','done');
+    window.dispatchEvent(new CustomEvent('academy:quiz-complete',{detail:{score,correct,wrong,bestStreak,stats:s}}));
+    onProgressChange?.();
+  };
+  function render(){
+    clearTimeout(timer);locked=false;feedback.className='quiz-feedback';feedback.textContent='';resultEl.hidden=true;nextBtn.hidden=true;
+    const q=questions[index];
+    topicEl.textContent=(getLanguage()==='pt'?'TÓPICO: ':'TOPIC: ')+q.topic.toUpperCase();
+    metaEl.textContent=`${getLanguage()==='pt'?'Pergunta':'Question'} ${index+1} / ${questions.length}`;
+    questionEl.textContent=localize(q.q);progress.style.width=`${((index)/questions.length)*100}%`;
+    optionsEl.replaceChildren();
+    q.options.forEach(opt=>{const b=document.createElement('button');b.type='button';b.dataset.answer=opt;const code=document.createElement('code');code.textContent=opt;b.append(code);b.addEventListener('click',()=>answer(opt,b));optionsEl.append(b);});
+  }
+  function answer(value,button){
+    if(locked)return;locked=true;const q=questions[index],ok=value===q.answer;
+    [...optionsEl.children].forEach(b=>{b.disabled=true;if(b.dataset.answer===q.answer)b.classList.add('correct');});
+    if(!ok){button.classList.add('wrong');wrong++;streak=0;mistakes.push({index,selected:value});}else{correct++;streak++;bestStreak=Math.max(bestStreak,streak);}
+    feedback.className=`quiz-feedback ${ok?'success':'error'}`;
+    feedback.textContent=`${ok?(getLanguage()==='pt'?'Correto.':'Correct.'):(getLanguage()==='pt'?'Não é essa.':'Not quite.')} ${localize(q.explain)}`;
+    tuxSpeak?.(ok?(getLanguage()==='pt'?'Boa! Continue assim.':'Nice! Keep going.'):(getLanguage()==='pt'?'Quase. Veja a explicação.':'Close. Check the explanation.'));
+    if(index===questions.length-1){timer=setTimeout(finish,manual?999999:1250);nextBtn.hidden=false;nextBtn.textContent=getLanguage()==='pt'?'Ver resultado':'View result';nextBtn.onclick=finish;}
+    else{nextBtn.hidden=false;nextBtn.textContent=getLanguage()==='pt'?'Próxima':'Next';nextBtn.onclick=next;if(!manual)timer=setTimeout(next,1250);}
+  }
+  function next(){if(!locked)return;index++;render();}
+  function finish(){clearTimeout(timer);const score=Math.round(correct/questions.length*100);progress.style.width='100%';saveStats(score);optionsEl.replaceChildren();feedback.textContent='';nextBtn.hidden=true;resultEl.hidden=false;
+    resultEl.innerHTML=`<strong>${getLanguage()==='pt'?'TESTE CONCLUÍDO':'TEST COMPLETE'}</strong><b>${correct} / ${questions.length}</b><span>${score}% ${getLanguage()==='pt'?'de acerto':'accuracy'}</span><small>${getLanguage()==='pt'?'Maior sequência':'Best streak'}: ${bestStreak}</small><div class="quiz-result-actions"><button type="button" id="quizRetry">${getLanguage()==='pt'?'Refazer teste':'Retry test'}</button><button type="button" id="quizContinue">${getLanguage()==='pt'?'Continuar aprendendo':'Continue learning'}</button></div>`;
+    resultEl.querySelector('#quizRetry')?.addEventListener('click',reset);resultEl.querySelector('#quizContinue')?.addEventListener('click',()=>document.querySelector('#learn')?.scrollIntoView({behavior:'smooth'}));
+    if(score===100)tuxSpeak?.(getLanguage()==='pt'?'100%! Excelente trabalho. 🐧':'100%! Excellent work. 🐧');
+  }
+  function reset(){index=0;correct=0;wrong=0;streak=0;bestStreak=0;mistakes=[];render();}
+  document.querySelector('#quizAutoAdvance')?.addEventListener('change',e=>{manual=!e.target.checked;});
+  window.addEventListener('academy:language',()=>{if(!resultEl.hidden){finish();}else render();});
+  window.addEventListener('academy:progress-reset',()=>{storage.removeItem(statsKey);reset();});
+  render();
+  return{readStats,reset,questions};
 }
 
 /* --- js/app.js --- */
@@ -1687,21 +1917,56 @@ renderExtendedMissions();
 /* Distro comparator + finder */
 const localizeV5=v=>typeof v==='string'?v:(v?.[getLanguage()]??v?.en??'');
 const compareSelects=[...document.querySelectorAll('[data-compare-slot]')];
+const compareStorageKey='linuxAcademy.distroComparison.v62';
+const compareDefaults=['debian','fedora','arch'];
+function sanitizeCompareSelection(value){
+  const validIds=new Set(distros.map(d=>d.id));
+  const raw=Array.isArray(value)?value:[];
+  const used=new Set();
+  const result=[];
+  for(let i=0;i<3;i++){
+    const candidate=raw[i];
+    if(candidate&&validIds.has(candidate)&&!used.has(candidate)){result[i]=candidate;used.add(candidate);continue;}
+    const fallback=[...compareDefaults,...distros.map(d=>d.id)].find(id=>validIds.has(id)&&!used.has(id));
+    result[i]=fallback||'';if(fallback)used.add(fallback);
+  }
+  return result;
+}
+function readCompareSelection(){
+  try{
+    const current=storage.getItem(compareStorageKey);
+    if(current)return sanitizeCompareSelection(JSON.parse(current));
+    for(const legacyKey of ['linuxAcademy.distroComparison','linuxAcademy.distroComparison.v61']){
+      const legacy=storage.getItem(legacyKey);if(legacy)return sanitizeCompareSelection(JSON.parse(legacy));
+    }
+    return [...compareDefaults];
+  }catch{return [...compareDefaults];}
+}
+let comparisonSelection=readCompareSelection();
+function saveCompareSelection(){storage.setItem(compareStorageKey,JSON.stringify(comparisonSelection));}
 function buildCompareSelects(){
+  comparisonSelection=sanitizeCompareSelection(comparisonSelection);
   compareSelects.forEach((select,index)=>{
-    const current=select.value;
     select.replaceChildren();
-    const blank=document.createElement('option');blank.value='';blank.textContent='—';
-    select.append(blank);
-    distros.forEach(d=>{const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name;select.append(opt);});
-    select.value=current||['debian','fedora','arch'][index]||'';
-    select.onchange=renderCompare;
+    select.setAttribute('aria-label',getLanguage()==='pt'?`Distribuição ${index+1}`:`Distribution ${index+1}`);
+    distros.forEach(d=>{
+      const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name;
+      opt.disabled=comparisonSelection.some((id,slot)=>slot!==index&&id===d.id);
+      select.append(opt);
+    });
+    select.value=comparisonSelection[index]||'';
+    select.onchange=()=>{
+      const next=[...comparisonSelection];next[index]=select.value;
+      comparisonSelection=sanitizeCompareSelection(next);saveCompareSelection();buildCompareSelects();renderCompare();
+    };
   });
+  saveCompareSelection();
 }
 function renderCompare(){
   const out=document.querySelector('#distroCompareOutput');if(!out)return;
   out.replaceChildren();
-  const chosen=compareSelects.map(s=>distros.find(d=>d.id===s.value)).filter(Boolean);
+  comparisonSelection=sanitizeCompareSelection(comparisonSelection);
+  const chosen=comparisonSelection.map(id=>distros.find(d=>d.id===id)).filter(Boolean);
   if(!chosen.length){out.textContent=v5t('compareEmpty');return;}
   chosen.forEach(d=>{
     const box=document.createElement('div');box.className='compare-mini';
@@ -1739,14 +2004,14 @@ window.addEventListener('academy:language',()=>{buildCompareSelects();renderComp
 
 /* Documentation explorer */
 const docsTopics=[
-  {id:'filesystem',title:{en:'Filesystem',pt:'Sistema de arquivos'},summary:{en:'Linux organizes files beneath a single root directory, /. Conventional paths such as /etc, /home, /usr and /var have documented roles.',pt:'O Linux organiza arquivos abaixo de um único diretório raiz, /. Caminhos como /etc, /home, /usr e /var possuem funções convencionais documentadas.'},command:'ls /',source:'Filesystem Hierarchy Standard',url:'https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html'},
-  {id:'permissions',title:{en:'Permissions',pt:'Permissões'},summary:{en:'Read, write and execute bits are evaluated for owner, group and others. Learn to inspect permissions before changing them.',pt:'Bits de leitura, escrita e execução são avaliados para dono, grupo e outros. Aprenda a inspecionar permissões antes de alterá-las.'},command:'ls -la',source:'GNU Coreutils',url:'https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html'},
-  {id:'packages',title:{en:'Packages',pt:'Pacotes'},summary:{en:'Distributions use package managers and repositories to install and update software. The exact tool depends on the distro family.',pt:'Distribuições usam gerenciadores de pacotes e repositórios para instalar e atualizar software. A ferramenta depende da família da distro.'},command:'apt --help',source:'Debian Reference',url:'https://www.debian.org/doc/manuals/debian-reference/'},
-  {id:'processes',title:{en:'Processes',pt:'Processos'},summary:{en:'Processes have identifiers and state. Tools such as ps inspect them; signals request actions from a process.',pt:'Processos possuem identificadores e estados. Ferramentas como ps os inspecionam; sinais solicitam ações a um processo.'},command:'ps aux',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man1/ps.1.html'},
-  {id:'networking',title:{en:'Networking',pt:'Redes'},summary:{en:'Use tools such as ip, ping and ssh to inspect interfaces, test reachability and connect to remote systems.',pt:'Use ferramentas como ip, ping e ssh para inspecionar interfaces, testar conectividade e acessar sistemas remotos.'},command:'ip addr',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man8/ip.8.html'},
-  {id:'bash',title:{en:'Shell & Bash',pt:'Shell & Bash'},summary:{en:'The shell parses commands, expands variables, handles pipelines and redirections, and launches programs.',pt:'O shell interpreta comandos, expande variáveis, trata pipelines e redirecionamentos e inicia programas.'},command:'echo $SHELL',source:'GNU Bash Reference Manual',url:'https://www.gnu.org/software/bash/manual/bash.html'},
-  {id:'systemd',title:{en:'Services & systemd',pt:'Serviços e systemd'},summary:{en:'On many distributions, systemd manages services and units. Learn status inspection before making changes.',pt:'Em muitas distribuições, o systemd gerencia serviços e units. Aprenda a consultar o estado antes de fazer alterações.'},command:'systemctl status ssh',source:'systemd manuals',url:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html'}
-];
+  {id:'filesystem',title:{en:'Filesystem',pt:'Sistema de arquivos'},summary:{en:'Linux organizes files beneath a single root directory, /. Conventional paths such as /etc, /home, /usr and /var have documented roles.',pt:'O Linux organiza arquivos abaixo de um único diretório raiz, /. Caminhos como /etc, /home, /usr e /var possuem funções convencionais documentadas.'},command:'ls /',referenceId:'filesystem'},
+  {id:'permissions',title:{en:'Permissions',pt:'Permissões'},summary:{en:'Read, write and execute bits are evaluated for owner, group and others. Learn to inspect permissions before changing them.',pt:'Bits de leitura, escrita e execução são avaliados para dono, grupo e outros. Aprenda a inspecionar permissões antes de alterá-las.'},command:'ls -la',referenceId:'permissions'},
+  {id:'packages',title:{en:'Packages',pt:'Pacotes'},summary:{en:'Distributions use package managers and repositories to install and update software. The exact tool depends on the distro family.',pt:'Distribuições usam gerenciadores de pacotes e repositórios para instalar e atualizar software. A ferramenta depende da família da distro.'},command:'apt --help',referenceId:'packages'},
+  {id:'processes',title:{en:'Processes',pt:'Processos'},summary:{en:'Processes have identifiers and state. Tools such as ps inspect them; signals request actions from a process.',pt:'Processos possuem identificadores e estados. Ferramentas como ps os inspecionam; sinais solicitam ações a um processo.'},command:'ps aux',referenceId:'processes'},
+  {id:'networking',title:{en:'Networking',pt:'Redes'},summary:{en:'Use tools such as ip, ping and ssh to inspect interfaces, test reachability and connect to remote systems.',pt:'Use ferramentas como ip, ping e ssh para inspecionar interfaces, testar conectividade e acessar sistemas remotos.'},command:'ip addr',referenceId:'networking'},
+  {id:'bash',title:{en:'Shell & Bash',pt:'Shell & Bash'},summary:{en:'The shell parses commands, expands variables, handles pipelines and redirections, and launches programs.',pt:'O shell interpreta comandos, expande variáveis, trata pipelines e redirecionamentos e inicia programas.'},command:'echo $SHELL',referenceId:'bash'},
+  {id:'systemd',title:{en:'Services & systemd',pt:'Serviços e systemd'},summary:{en:'On many distributions, systemd manages services and units. Learn status inspection before making changes.',pt:'Em muitas distribuições, o systemd gerencia serviços e units. Aprenda a consultar o estado antes de fazer alterações.'},command:'systemctl status ssh',referenceId:'systemd'}
+]
 let activeDoc=0;
 function renderDocs(){
   const sidebar=document.querySelector('#docsSidebar');
@@ -1766,7 +2031,7 @@ function renderDocs(){
   const actions=document.createElement('div');actions.className='docs-article-actions';
   const tryBtn=document.createElement('button');tryBtn.type='button';tryBtn.className='small-button';tryBtn.textContent=t('tryIt');
   tryBtn.addEventListener('click',()=>{terminal.run(topic.command);document.querySelector('#terminal')?.scrollIntoView({behavior:'smooth'});});
-  const link=document.createElement('a');link.href=topic.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${topic.source} ↗`;
+  const topicRef=topicDocumentationReferences[topic.referenceId]||null;const refType=topicRef?.type||'official';const link=document.createElement('a');link.href=topicRef?.url||'#';link.target='_blank';link.rel='noopener noreferrer';link.className='docs-source-link';link.setAttribute('aria-label',`${getReferenceLabel(refType)} — ${topicRef?.provider||''}`);const label=document.createElement('span');label.textContent=getReferenceLabel(refType);const provider=document.createElement('small');provider.textContent=`${topicRef?.provider||getMissingReferenceLabel()} ↗`;link.append(label,provider);
   actions.append(tryBtn,link);body.append(h,p,pre,actions);
 }
 document.querySelector('#docsPrev')?.addEventListener('click',()=>{activeDoc=(activeDoc-1+docsTopics.length)%docsTopics.length;renderDocs();});
@@ -1829,7 +2094,7 @@ function openSplitLesson(lesson){
   const p=document.createElement('p');p.textContent=desc;
   const pre=document.createElement('pre');const code=document.createElement('code');code.textContent=`$ ${lesson.command}`;pre.append(code);
   const expected=document.createElement('p');expected.textContent=`${t('expectedOutput')}: ${output}`;
-  const link=document.createElement('a');link.href=lesson.reference;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${lesson.source} ↗`;
+  const link=document.createElement('a');link.href=lesson.reference;link.target='_blank';link.rel='noopener noreferrer';const lessonRefType=lesson.referenceType||inferReferenceType(lesson.reference);const lessonProvider=lesson.source||getReferenceLabel(lessonRefType);link.textContent=`${getReferenceLabel(lessonRefType)} · ${lessonProvider} ↗`;link.setAttribute('aria-label',`${getReferenceLabel(lessonRefType)} — ${lessonProvider}`);
   splitPane.append(eyebrow,h,p,pre,expected,link);
 
   const live=document.querySelector('#terminal .terminal-window');
@@ -1879,5 +2144,150 @@ renderAchievements();
 
 /* Re-apply V5 translations after all dynamic surfaces exist */
 applyV5Translations();
+
+/* --- js/v6.js --- */
+
+/* Interactive Linux Academy V6 — Academic Edition */
+const v6Messages={
+  en:{dashboardLabel:'ACADEMIC PROGRESS',dashboardTitle:'Your Linux learning record',overallProgress:'Overall progress',lessonsCompleted:'Lessons',challengesCompleted:'Challenges',quizAccuracy:'Quiz accuracy',autoAdvance:'Auto advance',quizHelper:'Answer, read the explanation, then continue automatically.',resultsLabel:'YOUR RESULTS',resultsTitle:'Knowledge statistics',accuracy:'Accuracy',testsCompleted:'Tests',correctAnswers:'Correct',incorrectAnswers:'Incorrect',curriculumLabel:'CURRICULUM',curriculumTitle:'One system, many learning paths.',curriculumText:'Build a foundation, then move toward administration, networking, automation, security and containers.',aboutHeadline:'From a CSS drawing to an open-source Linux academy.',aboutText:'V6 turns the project into an academic learning environment: structured curriculum, labs, quizzes, local progress, documentation and a safe terminal simulator.',resumeLearning:'Continue where you stopped'},
+  pt:{dashboardLabel:'PROGRESSO ACADÊMICO',dashboardTitle:'Seu registro de aprendizado Linux',overallProgress:'Progresso geral',lessonsCompleted:'Aulas',challengesCompleted:'Desafios',quizAccuracy:'Precisão nos testes',autoAdvance:'Avanço automático',quizHelper:'Responda, leia a explicação e continue automaticamente.',resultsLabel:'SEUS RESULTADOS',resultsTitle:'Estatísticas de conhecimento',accuracy:'Precisão',testsCompleted:'Testes',correctAnswers:'Acertos',incorrectAnswers:'Erros',curriculumLabel:'TRILHA',curriculumTitle:'Um sistema, muitos caminhos.',curriculumText:'Construa uma base sólida e depois avance para administração, redes, automação, segurança e containers.',aboutHeadline:'De um desenho em CSS para uma academia Linux open source.',aboutText:'A V6 transforma o projeto em um ambiente acadêmico: currículo estruturado, laboratórios, testes, progresso local, documentação e terminal seguro.',resumeLearning:'Continuar de onde parei'}
+};
+const v6t=k=>v6Messages[getLanguage()]?.[k]??v6Messages.en[k]??k;
+function applyV6Translations(){document.querySelectorAll('[data-v6-i18n]').forEach(el=>{const v=v6t(el.dataset.v6I18n);if(v!=null)el.textContent=v;});}
+function syncV6Title(){document.title=getLanguage()==='pt'?'Interactive Linux Academy V6 — Edição Acadêmica':'Interactive Linux Academy V6 — Academic Edition';}
+applyV6Translations();syncV6Title();window.addEventListener('academy:language',()=>{applyV6Translations();syncV6Title();});
+
+/* theme button keeps static icon markup and updates accessible name only */
+function syncV6Theme(){if(!themeToggle)return;const light=document.documentElement.dataset.theme==='light';themeToggle.innerHTML='<span class="theme-icon" aria-hidden="true"></span>';themeToggle.setAttribute('aria-label',light?v5t('themeDark'):v5t('themeLight'));document.querySelector('meta[name="theme-color"]')?.setAttribute('content',light?'#f5f7fb':'#070a0f');}
+themeToggle?.addEventListener('click',()=>setTimeout(syncV6Theme,0));window.addEventListener('academy:language',syncV6Theme);syncV6Theme();
+
+/* Academic dashboard + resume */
+const quizStatsKey='linuxAcademy.quizStats.v6';
+function readQuizStats(){try{return JSON.parse(storage.getItem(quizStatsKey)||'{}')}catch{return {}}}
+function renderAcademicDashboard(){
+  const completed=new Set(JSON.parse(storage.getItem('linuxAcademy.completedLessons')||'[]'));const stats=readQuizStats();const pct=Math.round(completed.size/Math.max(1,lessons.length)*100);
+  const labs=lessons.filter(l=>l.type==='LAB'&&completed.has(l.id)).length;const challenges=lessons.filter(l=>l.type==='CHALLENGE'&&completed.has(l.id)).length;
+  const set=(id,v)=>{const el=document.querySelector(id);if(el)el.textContent=v};set('#metricOverall',pct+'%');set('#metricLessons',`${completed.size}/${lessons.length}`);set('#metricLabs',labs);set('#metricChallenges',challenges);set('#metricQuizAccuracy',stats.questions?Math.round(stats.correct/stats.questions*100)+'%':'—');
+  set('#statAccuracy',stats.questions?Math.round(stats.correct/stats.questions*100)+'%':'—');set('#statTests',stats.tests||0);set('#statCorrect',stats.correct||0);set('#statIncorrect',stats.incorrect||0);
+}
+['academy:lesson-progress','academy:progress-reset','academy:quiz-complete'].forEach(e=>window.addEventListener(e,renderAcademicDashboard));renderAcademicDashboard();
+document.querySelector('#resumeLastLesson')?.addEventListener('click',()=>{const id=storage.getItem('linuxAcademy.lastLesson');const lesson=lessons.find(l=>l.id===id);if(lesson){document.querySelector(`.level-tabs [data-level="${lesson.level}"]`)?.click();setTimeout(()=>document.querySelector(`[data-lesson-id="${id}"]`)?.scrollIntoView({behavior:'smooth',block:'center'}),60);}else document.querySelector('#learn')?.scrollIntoView({behavior:'smooth'});});
+
+/* Curriculum infinite carousel — V6.1 uses a compositor-friendly CSS marquee. */
+const curriculumModules=[
+ ['01','Foundations','Fundamentos','kernel • GNU/Linux • distros'],['02','Terminal','Terminal','pwd • ls • cd • man'],['03','Filesystem','Sistema de arquivos','FHS • /etc • /var • /proc'],['04','File management','Arquivos','cp • mv • rm • ln'],['05','Text processing','Texto','grep • sed • awk • sort'],['06','Permissions','Permissões','rwx • chmod • chown • sudo'],['07','Packages','Pacotes','apt • dnf • pacman • rpm'],['08','Processes','Processos','ps • top • signals • jobs'],['09','Systemd','Systemd','units • services • journal'],['10','Networking','Redes','ip • ss • curl • ssh'],['11','Storage','Armazenamento','df • du • lsblk • mounts'],['12','Shell & Bash','Shell & Bash','variables • pipes • loops'],['13','Troubleshooting','Diagnóstico','journal • dmesg • evidence'],['14','Security','Segurança','least privilege • SSH • firewall'],['15','Servers','Servidores','services • sockets • logs'],['16','Containers','Containers','namespaces • cgroups • OCI'],['17','Development','Desenvolvimento','Git • PATH • tooling'],['18','Administration','Administração','boot • timers • performance']
+];
+const viewport=document.querySelector('#curriculumViewport'),track=document.querySelector('#curriculumTrack');
+function makeCurriculumCard(m){
+  const card=document.createElement('div');
+  card.className='curriculum-card';
+  card.setAttribute('role','listitem');
+  card.innerHTML=`<small>${m[0]}</small><strong>${getLanguage()==='pt'?m[2]:m[1]}</strong><p>${m[3]}</p>`;
+  return card;
+}
+function buildCurriculum(){
+  if(!track||!viewport)return;
+  track.replaceChildren();
+  for(let copy=0;copy<2;copy++){
+    const sequence=document.createElement('div');
+    sequence.className='curriculum-sequence';
+    sequence.dataset.copy=String(copy+1);
+    if(copy===1)sequence.setAttribute('aria-hidden','true');
+    curriculumModules.forEach(m=>sequence.append(makeCurriculumCard(m)));
+    track.append(sequence);
+  }
+}
+if(viewport){buildCurriculum();window.addEventListener('academy:language',()=>requestAnimationFrame(buildCurriculum));}
+
+/* richer docs topics */
+docsTopics.push(
+ {id:'users',title:{en:'Users & groups',pt:'Usuários e grupos'},summary:{en:'Linux permissions and process ownership are built around user and group identities. Inspect identity before changing access.',pt:'Permissões e propriedade de processos são construídas em torno de identidades de usuários e grupos. Inspecione a identidade antes de alterar acesso.'},command:'id',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man1/id.1.html'},
+ {id:'storage',title:{en:'Storage',pt:'Armazenamento'},summary:{en:'Use df, du, lsblk and findmnt to answer different questions about capacity, directory usage, block devices and mounts.',pt:'Use df, du, lsblk e findmnt para responder perguntas diferentes sobre capacidade, uso de diretórios, dispositivos de bloco e montagens.'},command:'lsblk',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man8/lsblk.8.html'},
+ {id:'security',title:{en:'Security',pt:'Segurança'},summary:{en:'Security begins with updates, least privilege, reviewed services, permissions and careful remote access.',pt:'Segurança começa com atualizações, menor privilégio, revisão de serviços, permissões e acesso remoto cuidadoso.'},command:'id',source:'sudo / Linux manuals',url:'https://www.sudo.ws/docs/man/sudo.man/'},
+ {id:'troubleshooting',title:{en:'Troubleshooting',pt:'Diagnóstico'},summary:{en:'Define the symptom, collect logs and system state, then change one thing at a time. Evidence beats guesswork.',pt:'Defina o sintoma, colete logs e estado do sistema e altere uma coisa por vez. Evidências vencem palpites.'},command:'journalctl -b -p warning',source:'systemd journalctl',url:'https://www.freedesktop.org/software/systemd/man/latest/journalctl.html'}
+);renderDocs();
+
+/* expand achievement set with real quiz condition */
+if(!achievements.some(a=>a.id==='quiz-master'))achievements.push({id:'quiz-master',icon:'100',name:{en:'Quiz Master',pt:'Mestre dos Testes'},test:()=>readQuizStats().bestScore===100});
+window.addEventListener('academy:quiz-complete',()=>{renderAchievements();renderAcademicDashboard();});renderAchievements();
+
+/* reset V6 academic state only after user confirmation */
+const resetBtn=document.querySelector('#resetProgress');if(resetBtn){const clone=resetBtn.cloneNode(true);resetBtn.replaceWith(clone);clone.addEventListener('click',()=>{const ok=confirm(getLanguage()==='pt'?'Apagar todo o progresso local, resultados e conquistas deste dispositivo?':'Clear all local progress, quiz results and achievements on this device?');if(!ok)return;['linuxAcademy.completedLessons','linuxAcademy.quiz','linuxAcademy.challenge','linuxAcademy.quizStats.v6','linuxAcademy.lastLesson','linuxAcademy.v5.firstCommand'].forEach(k=>storage.removeItem(k));missionDefinitions.forEach(m=>storage.removeItem(missionKey(m.id)));window.dispatchEvent(new CustomEvent('academy:progress-reset'));location.reload();});}
+
+applyV6Translations();renderAcademicDashboard();
+
+/* --- js/v6.1.js --- */
+
+/* ==========================================================
+   Interactive Linux Academy V6.1
+   Visual consistency, theme regressions and editorial headings.
+   ========================================================== */
+const v61Headings={
+  map:{selector:'.map-editorial h2',en:'YOUR <span class="section-title__accent">LINUX</span> MAP,<br>CONNECTED.',pt:'SEU MAPA DO <span class="section-title__accent">LINUX</span>,<br>CONECTADO.'},
+  learn:{selector:'#learn .editorial-heading h2',en:'UNDERSTAND <span class="section-title__accent">LINUX</span><br>FROM THE INSIDE OUT.',pt:'ENTENDA O <span class="section-title__accent">LINUX</span><br>DE DENTRO PARA FORA.'},
+  terminal:{selector:'#terminal .terminal-heading-v5 h2',en:'PRACTICE IN THE <span class="section-title__accent">TERMINAL</span><br>IN YOUR BROWSER.',pt:'PRATIQUE NO <span class="section-title__accent">TERMINAL</span><br>DIRETO NO NAVEGADOR.'},
+  distros:{selector:'#distros .editorial-heading h2',en:'EXPLORE THE MAIN <span class="section-title__accent">DISTRIBUTIONS</span>.',pt:'EXPLORE AS PRINCIPAIS <span class="section-title__accent">DISTRIBUIÇÕES</span>.'},
+  commands:{selector:'#commands .editorial-heading h2',en:'A <span class="section-title__accent">LINUX</span> REFERENCE<br>YOU CAN PRACTICE.',pt:'UMA REFERÊNCIA <span class="section-title__accent">LINUX</span><br>QUE VOCÊ PODE PRATICAR.'},
+  docs:{selector:'#resources .editorial-heading h2',en:'READ THE CONCEPT.<br><span class="section-title__accent">VERIFY</span> THE SOURCE.',pt:'LEIA O CONCEITO.<br><span class="section-title__accent">CONFIRA</span> A FONTE.'},
+  concepts:{selector:'#concepts .editorial-heading h2',en:'SEE HOW <span class="section-title__accent">LINUX</span><br>IS ORGANIZED.',pt:'VEJA COMO O <span class="section-title__accent">LINUX</span><br>É ORGANIZADO.'},
+  windows:{selector:'#windows-linux .section-heading h2',en:'TRANSLATE FAMILIAR IDEAS<br>INTO <span class="section-title__accent">LINUX</span> CONCEPTS.',pt:'TRADUZA IDEIAS CONHECIDAS<br>PARA CONCEITOS DO <span class="section-title__accent">LINUX</span>.'},
+  curriculum:{selector:'#roadmap .curriculum-heading-v6 h2',en:'ONE SYSTEM,<br>MANY <span class="section-title__accent">PATHS</span>.',pt:'UM SISTEMA,<br>MUITOS <span class="section-title__accent">CAMINHOS</span>.'},
+  about:{selector:'#about h2',en:'FROM A CSS DRAWING<br>TO AN <span class="section-title__accent">INTERACTIVE</span> LINUX ACADEMY.',pt:'DE UM DESENHO EM CSS<br>PARA UMA ACADEMIA <span class="section-title__accent">LINUX</span> INTERATIVA.'}
+};
+function applyV61Headings(){
+  const lang=getLanguage()==='pt'?'pt':'en';
+  Object.values(v61Headings).forEach(item=>{
+    const el=document.querySelector(item.selector);
+    if(!el)return;
+    el.classList.add('v61-editorial-title');
+    el.innerHTML=item[lang];
+  });
+}
+function syncV61Document(){
+  document.documentElement.dataset.version='6.1';
+  document.title=getLanguage()==='pt'?'Interactive Linux Academy V6.1 — Refinamento Visual':'Interactive Linux Academy V6.1 — Visual Consistency Update';
+}
+function applyV61(){applyV61Headings();syncV61Document();}
+applyV61();
+window.addEventListener('academy:language',()=>setTimeout(applyV61,0));
+
+/* --- js/v6.2.js --- */
+
+/* Interactive Linux Academy V6.2 — Documentation Integrity & UI Consistency */
+const v62Messages={
+  en:{releaseTitle:'Interactive Linux Academy V6.2 — Documentation Integrity'},
+  pt:{releaseTitle:'Interactive Linux Academy V6.2 — Integridade da Documentação'}
+};
+function syncV62Title(){document.title=v62Messages[getLanguage()]?.releaseTitle||v62Messages.en.releaseTitle;}
+function secureExternalReferences(){
+  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+    a.rel='noopener noreferrer';
+    if(!a.title&&a.href){
+      try{a.title=getLanguage()==='pt'?'Abrir referência em uma nova aba':'Open reference in a new tab';}catch{}
+    }
+  });
+}
+function migrateLegacyComparator(){
+  const legacyKeys=['linuxAcademy.distroComparison','linuxAcademy.distroComparison.v61'];
+  legacyKeys.forEach(key=>{
+    try{
+      const value=JSON.parse(storage.getItem(key)||'null');
+      if(Array.isArray(value)&&!storage.getItem('linuxAcademy.distroComparison.v62')){
+        storage.setItem('linuxAcademy.distroComparison.v62',JSON.stringify(sanitizeCompareSelection(value)));
+        comparisonSelection=readCompareSelection();buildCompareSelects();renderCompare();
+      }
+      storage.removeItem(key);
+    }catch{storage.removeItem(key);}
+  });
+}
+function auditReferenceRegistry(){
+  const missing=commands.map(c=>c.name).filter(name=>!getCommandReference(name));
+  const generic=Object.entries(documentationReferences).filter(([,ref])=>ref.url==='https://man7.org/linux/man-pages/').map(([name])=>name);
+  return{commands:commands.length,linked:commands.length-missing.length,missing,genericFallbacks:generic};
+}
+window.AcademyReferenceAudit=auditReferenceRegistry;
+document.body.dataset.release='6.2';
+migrateLegacyComparator();syncV62Title();secureExternalReferences();
+window.addEventListener('academy:language',()=>{setTimeout(syncV62Title,0);requestAnimationFrame(secureExternalReferences);});
 
 })();

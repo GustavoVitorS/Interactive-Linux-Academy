@@ -22,11 +22,18 @@ function initSearch({commands,distros,lessons}){
       {type:getLanguage()==='pt'?'Desafio':'Challenge',title:getLanguage()==='pt'?'Missões do terminal':'Terminal missions',desc:'pwd • ls • mkdir • grep • chmod • ps • ip',target:'#terminal'},
       {type:getLanguage()==='pt'?'Referência':'Reference',title:getLanguage()==='pt'?'Consulta rápida Linux':'Linux quick reference',desc:getLanguage()==='pt'?'Pesquise comandos por intenção.':'Search commands by intent.',target:'#commands'}
     ];
+    const docs=(typeof docsTopics!=='undefined'?docsTopics:[]).map(x=>({type:getLanguage()==='pt'?'DOC':'DOC',title:localize(x.title),desc:localize(x.summary),target:'#resources'}));
+    const quizTopics=['filesystem','navigation','permissions','processes','networking','packages','systemd','storage','bash','security'].map(x=>({type:getLanguage()==='pt'?'TESTE':'QUIZ',title:x,desc:getLanguage()==='pt'?'Tópico do teste de conhecimento':'Knowledge-check topic',target:'#knowledge'}));
+    const paths=[
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Fundamentos Linux':'Linux Foundations',desc:'kernel • GNU/Linux • distros',target:'#roadmap'},
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Administração':'Administration',desc:'systemd • logs • storage • performance',target:'#roadmap'},
+      {type:getLanguage()==='pt'?'TRILHA':'PATH',title:getLanguage()==='pt'?'Segurança':'Security',desc:'permissions • SSH • least privilege',target:'#roadmap'}
+    ];
     return [
       ...commands.map(x=>({type:t('commandType'),title:x.name,desc:localize(x.description),target:'#commands'})),
       ...distros.map(x=>({type:t('distroType'),title:x.name,desc:localize(x.summary),target:'#distros'})),
       ...lessons.map(x=>({type:t('lessonType'),title:localize(x.title),desc:localize(x.description),target:'#learn'})),
-      ...concepts
+      ...docs,...quizTopics,...paths,...concepts
     ];
   }
 

@@ -12,6 +12,7 @@ ORDER = [
     "js/data/lessons.js",
     "js/data/commands.js",
     "js/data/distros.js",
+    "js/data/references.js",
     "js/i18n.js",
     "js/tux.js",
     "js/mindmap.js",
@@ -23,6 +24,9 @@ ORDER = [
     "js/quiz.js",
     "js/app.js",
     "js/v5.js",
+    "js/v6.js",
+    "js/v6.1.js",
+    "js/v6.2.js",
 ]
 
 parts = ["(()=>{", "'use strict';"]

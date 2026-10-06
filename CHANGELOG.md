@@ -1,45 +1,31 @@
 # Changelog
 
-## V5.0.0 — Editorial Product Redesign
+## V6.2 — Documentation Integrity & UI Consistency
 
-### Design
-- Rebuilt the visual system around a dark editorial Linux/GNOME-inspired product language.
-- Added V5 color, typography, spacing, radius, surface and motion tokens.
-- Reworked the hero, navigation, learning map, terminal, curriculum, distro area, docs and footer.
-- Reduced repetitive generic-card and SaaS-template patterns.
-- Added dedicated tablet and mobile compositions.
+### Documentation
+- Removed the generic man7 homepage fallback from Command Explorer.
+- Added a centralized `js/data/references.js` registry covering all 58 commands.
+- Added source-aware labels for official documentation vs. manual pages.
+- Added provider metadata to command cards.
+- Added safe external-link attributes and accessible labels.
+- Added `tools/check_references.py` and `REFERENCE_AUDIT.md`.
 
-### Learning experience
-- Added personalized first-visit learning routes.
-- Rebuilt lessons as an editorial curriculum.
-- Added Split Learn Mode.
-- Added Command Inspector.
-- Added progressive terminal missions.
-- Added Quick Reference / cheat sheet.
-- Added local achievement states and an expanded progress dashboard.
+### Light Mode
+- Fixed the unreadable filesystem directory detail/placeholder panel.
+- Strengthened distro-specific hover/focus colors while preserving readable text.
+- Preserved V6.1 progress-ring, Windows → Linux and typography fixes.
 
-### Linux distributions
-- Preserved the 10-distro explorer.
-- Added distro comparison for up to three distributions.
-- Added a goal-based distro finder.
+### i18n
+- Fixed the academic dashboard resume action in PT-BR: `Continuar de onde parei`.
+- Documentation labels and source metadata update live when switching languages.
+- Comparator accessible labels update between PT-BR and EN.
 
-### Documentation and search
-- Added a documentation explorer with topic navigation and Try in Terminal actions.
-- Expanded global Ctrl/Cmd + K search across lessons, commands, distros, docs, concepts and challenges.
-- Added keyboard navigation for search results.
-
-### Interaction
-- Preserved Tux eye tracking, blink, wink, click and idle behavior.
-- Added reactions to learning-map focus, challenge progress and unsupported terminal commands.
-- Added semantic motion and reduced-motion support.
+### Distro comparator
+- Defaults are now Debian, Fedora and Arch Linux.
+- Duplicate distributions are disabled across the three selectors.
+- Selector values and rendered comparison content use the same `comparisonSelection` state.
+- Invalid/duplicate persisted state is sanitized during load and migration.
 
 ### Architecture
-- Restored maintainable JavaScript source modules as the source of truth.
-- Added `tools/build_bundle.py` to regenerate `js/bundle.js`.
-- Preserved static GitHub Pages compatibility with no framework/backend requirement.
-
-### QA
-- Removed learning-map node collisions at target responsive widths.
-- Removed document-level horizontal overflow at tested widths.
-- Validated the JS source and generated bundle with Node syntax checks.
-- Verified EN/PT-BR switching, terminal output, Command Inspector, global search, distro dialog and personalized-route highlighting in browser automation.
+- Added V6.2 CSS/JS layers without removing the approved V6.1 design.
+- Rebuilt `js/bundle.js` from source files.

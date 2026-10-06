@@ -289,21 +289,56 @@ renderExtendedMissions();
 /* Distro comparator + finder */
 const localizeV5=v=>typeof v==='string'?v:(v?.[getLanguage()]??v?.en??'');
 const compareSelects=[...document.querySelectorAll('[data-compare-slot]')];
+const compareStorageKey='linuxAcademy.distroComparison.v62';
+const compareDefaults=['debian','fedora','arch'];
+function sanitizeCompareSelection(value){
+  const validIds=new Set(distros.map(d=>d.id));
+  const raw=Array.isArray(value)?value:[];
+  const used=new Set();
+  const result=[];
+  for(let i=0;i<3;i++){
+    const candidate=raw[i];
+    if(candidate&&validIds.has(candidate)&&!used.has(candidate)){result[i]=candidate;used.add(candidate);continue;}
+    const fallback=[...compareDefaults,...distros.map(d=>d.id)].find(id=>validIds.has(id)&&!used.has(id));
+    result[i]=fallback||'';if(fallback)used.add(fallback);
+  }
+  return result;
+}
+function readCompareSelection(){
+  try{
+    const current=storage.getItem(compareStorageKey);
+    if(current)return sanitizeCompareSelection(JSON.parse(current));
+    for(const legacyKey of ['linuxAcademy.distroComparison','linuxAcademy.distroComparison.v61']){
+      const legacy=storage.getItem(legacyKey);if(legacy)return sanitizeCompareSelection(JSON.parse(legacy));
+    }
+    return [...compareDefaults];
+  }catch{return [...compareDefaults];}
+}
+let comparisonSelection=readCompareSelection();
+function saveCompareSelection(){storage.setItem(compareStorageKey,JSON.stringify(comparisonSelection));}
 function buildCompareSelects(){
+  comparisonSelection=sanitizeCompareSelection(comparisonSelection);
   compareSelects.forEach((select,index)=>{
-    const current=select.value;
     select.replaceChildren();
-    const blank=document.createElement('option');blank.value='';blank.textContent='—';
-    select.append(blank);
-    distros.forEach(d=>{const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name;select.append(opt);});
-    select.value=current||['debian','fedora','arch'][index]||'';
-    select.onchange=renderCompare;
+    select.setAttribute('aria-label',getLanguage()==='pt'?`Distribuição ${index+1}`:`Distribution ${index+1}`);
+    distros.forEach(d=>{
+      const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name;
+      opt.disabled=comparisonSelection.some((id,slot)=>slot!==index&&id===d.id);
+      select.append(opt);
+    });
+    select.value=comparisonSelection[index]||'';
+    select.onchange=()=>{
+      const next=[...comparisonSelection];next[index]=select.value;
+      comparisonSelection=sanitizeCompareSelection(next);saveCompareSelection();buildCompareSelects();renderCompare();
+    };
   });
+  saveCompareSelection();
 }
 function renderCompare(){
   const out=document.querySelector('#distroCompareOutput');if(!out)return;
   out.replaceChildren();
-  const chosen=compareSelects.map(s=>distros.find(d=>d.id===s.value)).filter(Boolean);
+  comparisonSelection=sanitizeCompareSelection(comparisonSelection);
+  const chosen=comparisonSelection.map(id=>distros.find(d=>d.id===id)).filter(Boolean);
   if(!chosen.length){out.textContent=v5t('compareEmpty');return;}
   chosen.forEach(d=>{
     const box=document.createElement('div');box.className='compare-mini';
@@ -341,14 +376,14 @@ window.addEventListener('academy:language',()=>{buildCompareSelects();renderComp
 
 /* Documentation explorer */
 const docsTopics=[
-  {id:'filesystem',title:{en:'Filesystem',pt:'Sistema de arquivos'},summary:{en:'Linux organizes files beneath a single root directory, /. Conventional paths such as /etc, /home, /usr and /var have documented roles.',pt:'O Linux organiza arquivos abaixo de um único diretório raiz, /. Caminhos como /etc, /home, /usr e /var possuem funções convencionais documentadas.'},command:'ls /',source:'Filesystem Hierarchy Standard',url:'https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html'},
-  {id:'permissions',title:{en:'Permissions',pt:'Permissões'},summary:{en:'Read, write and execute bits are evaluated for owner, group and others. Learn to inspect permissions before changing them.',pt:'Bits de leitura, escrita e execução são avaliados para dono, grupo e outros. Aprenda a inspecionar permissões antes de alterá-las.'},command:'ls -la',source:'GNU Coreutils',url:'https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html'},
-  {id:'packages',title:{en:'Packages',pt:'Pacotes'},summary:{en:'Distributions use package managers and repositories to install and update software. The exact tool depends on the distro family.',pt:'Distribuições usam gerenciadores de pacotes e repositórios para instalar e atualizar software. A ferramenta depende da família da distro.'},command:'apt --help',source:'Debian Reference',url:'https://www.debian.org/doc/manuals/debian-reference/'},
-  {id:'processes',title:{en:'Processes',pt:'Processos'},summary:{en:'Processes have identifiers and state. Tools such as ps inspect them; signals request actions from a process.',pt:'Processos possuem identificadores e estados. Ferramentas como ps os inspecionam; sinais solicitam ações a um processo.'},command:'ps aux',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man1/ps.1.html'},
-  {id:'networking',title:{en:'Networking',pt:'Redes'},summary:{en:'Use tools such as ip, ping and ssh to inspect interfaces, test reachability and connect to remote systems.',pt:'Use ferramentas como ip, ping e ssh para inspecionar interfaces, testar conectividade e acessar sistemas remotos.'},command:'ip addr',source:'Linux man-pages',url:'https://man7.org/linux/man-pages/man8/ip.8.html'},
-  {id:'bash',title:{en:'Shell & Bash',pt:'Shell & Bash'},summary:{en:'The shell parses commands, expands variables, handles pipelines and redirections, and launches programs.',pt:'O shell interpreta comandos, expande variáveis, trata pipelines e redirecionamentos e inicia programas.'},command:'echo $SHELL',source:'GNU Bash Reference Manual',url:'https://www.gnu.org/software/bash/manual/bash.html'},
-  {id:'systemd',title:{en:'Services & systemd',pt:'Serviços e systemd'},summary:{en:'On many distributions, systemd manages services and units. Learn status inspection before making changes.',pt:'Em muitas distribuições, o systemd gerencia serviços e units. Aprenda a consultar o estado antes de fazer alterações.'},command:'systemctl status ssh',source:'systemd manuals',url:'https://www.freedesktop.org/software/systemd/man/latest/systemctl.html'}
-];
+  {id:'filesystem',title:{en:'Filesystem',pt:'Sistema de arquivos'},summary:{en:'Linux organizes files beneath a single root directory, /. Conventional paths such as /etc, /home, /usr and /var have documented roles.',pt:'O Linux organiza arquivos abaixo de um único diretório raiz, /. Caminhos como /etc, /home, /usr e /var possuem funções convencionais documentadas.'},command:'ls /',referenceId:'filesystem'},
+  {id:'permissions',title:{en:'Permissions',pt:'Permissões'},summary:{en:'Read, write and execute bits are evaluated for owner, group and others. Learn to inspect permissions before changing them.',pt:'Bits de leitura, escrita e execução são avaliados para dono, grupo e outros. Aprenda a inspecionar permissões antes de alterá-las.'},command:'ls -la',referenceId:'permissions'},
+  {id:'packages',title:{en:'Packages',pt:'Pacotes'},summary:{en:'Distributions use package managers and repositories to install and update software. The exact tool depends on the distro family.',pt:'Distribuições usam gerenciadores de pacotes e repositórios para instalar e atualizar software. A ferramenta depende da família da distro.'},command:'apt --help',referenceId:'packages'},
+  {id:'processes',title:{en:'Processes',pt:'Processos'},summary:{en:'Processes have identifiers and state. Tools such as ps inspect them; signals request actions from a process.',pt:'Processos possuem identificadores e estados. Ferramentas como ps os inspecionam; sinais solicitam ações a um processo.'},command:'ps aux',referenceId:'processes'},
+  {id:'networking',title:{en:'Networking',pt:'Redes'},summary:{en:'Use tools such as ip, ping and ssh to inspect interfaces, test reachability and connect to remote systems.',pt:'Use ferramentas como ip, ping e ssh para inspecionar interfaces, testar conectividade e acessar sistemas remotos.'},command:'ip addr',referenceId:'networking'},
+  {id:'bash',title:{en:'Shell & Bash',pt:'Shell & Bash'},summary:{en:'The shell parses commands, expands variables, handles pipelines and redirections, and launches programs.',pt:'O shell interpreta comandos, expande variáveis, trata pipelines e redirecionamentos e inicia programas.'},command:'echo $SHELL',referenceId:'bash'},
+  {id:'systemd',title:{en:'Services & systemd',pt:'Serviços e systemd'},summary:{en:'On many distributions, systemd manages services and units. Learn status inspection before making changes.',pt:'Em muitas distribuições, o systemd gerencia serviços e units. Aprenda a consultar o estado antes de fazer alterações.'},command:'systemctl status ssh',referenceId:'systemd'}
+]
 let activeDoc=0;
 function renderDocs(){
   const sidebar=document.querySelector('#docsSidebar');
@@ -368,7 +403,7 @@ function renderDocs(){
   const actions=document.createElement('div');actions.className='docs-article-actions';
   const tryBtn=document.createElement('button');tryBtn.type='button';tryBtn.className='small-button';tryBtn.textContent=t('tryIt');
   tryBtn.addEventListener('click',()=>{terminal.run(topic.command);document.querySelector('#terminal')?.scrollIntoView({behavior:'smooth'});});
-  const link=document.createElement('a');link.href=topic.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${topic.source} ↗`;
+  const topicRef=topicDocumentationReferences[topic.referenceId]||null;const refType=topicRef?.type||'official';const link=document.createElement('a');link.href=topicRef?.url||'#';link.target='_blank';link.rel='noopener noreferrer';link.className='docs-source-link';link.setAttribute('aria-label',`${getReferenceLabel(refType)} — ${topicRef?.provider||''}`);const label=document.createElement('span');label.textContent=getReferenceLabel(refType);const provider=document.createElement('small');provider.textContent=`${topicRef?.provider||getMissingReferenceLabel()} ↗`;link.append(label,provider);
   actions.append(tryBtn,link);body.append(h,p,pre,actions);
 }
 document.querySelector('#docsPrev')?.addEventListener('click',()=>{activeDoc=(activeDoc-1+docsTopics.length)%docsTopics.length;renderDocs();});
@@ -431,7 +466,7 @@ function openSplitLesson(lesson){
   const p=document.createElement('p');p.textContent=desc;
   const pre=document.createElement('pre');const code=document.createElement('code');code.textContent=`$ ${lesson.command}`;pre.append(code);
   const expected=document.createElement('p');expected.textContent=`${t('expectedOutput')}: ${output}`;
-  const link=document.createElement('a');link.href=lesson.reference;link.target='_blank';link.rel='noopener noreferrer';link.textContent=`${lesson.source} ↗`;
+  const link=document.createElement('a');link.href=lesson.reference;link.target='_blank';link.rel='noopener noreferrer';const lessonRefType=lesson.referenceType||inferReferenceType(lesson.reference);const lessonProvider=lesson.source||getReferenceLabel(lessonRefType);link.textContent=`${getReferenceLabel(lessonRefType)} · ${lessonProvider} ↗`;link.setAttribute('aria-label',`${getReferenceLabel(lessonRefType)} — ${lessonProvider}`);
   splitPane.append(eyebrow,h,p,pre,expected,link);
 
   const live=document.querySelector('#terminal .terminal-window');

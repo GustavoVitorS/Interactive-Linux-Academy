@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-version="6.2">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -9,15 +9,18 @@
   <meta property="og:description" content="Learn Linux by understanding the system and practicing safely in your browser.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gustavovitors.github.io/Interactive-Linux-Academy/">
-  <meta property="og:image" content="https://gustavovitors.github.io/Interactive-Linux-Academy/preview-v5-desktop.png">
+  <meta property="og:image" content="https://gustavovitors.github.io/Interactive-Linux-Academy/preview-v61-dark.png">
   <link rel="canonical" href="https://gustavovitors.github.io/Interactive-Linux-Academy/">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/v5.css">
-  <title>Interactive Linux Academy — Learn Linux</title>
+  <link rel="stylesheet" href="css/v6.css">
+  <link rel="stylesheet" href="css/v6.1.css">
+  <link rel="stylesheet" href="css/v6.2.css">
+  <title>Interactive Linux Academy V6.2 — Documentation Integrity & UI Consistency</title>
 </head>
-<body class="v5">
+<body class="v5 v6">
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
   <div class="v5-background" aria-hidden="true">
     <div class="v5-grid"></div>
@@ -53,7 +56,7 @@
           <button class="topbar-button language-toggle" id="languageToggle" type="button" aria-label="Switch language">
             <b id="languageLabel">EN</b>
           </button>
-          <button class="topbar-button theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme">☼</button>
+          <button class="topbar-button theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" title="Toggle theme"><span class="theme-icon" aria-hidden="true"></span></button>
         </div>
       </div>
     </nav>
@@ -196,6 +199,16 @@
           <button class="text-button" id="resetProgress" type="button" data-i18n="resetProgress">Reset progress</button>
         </div>
       </div>
+      <section class="academic-dashboard-v6 reveal" id="academicDashboard" aria-label="Course progress dashboard">
+        <div class="academic-dashboard-head"><div><p class="eyebrow" data-v6-i18n="dashboardLabel">ACADEMIC PROGRESS</p><h3 data-v6-i18n="dashboardTitle">Your Linux learning record</h3></div><button type="button" class="dashboard-link compact" id="resumeLastLesson"><span data-v6-i18n="resumeLearning">Continue where you stopped</span> <i>→</i></button></div>
+        <div class="academic-metrics">
+          <div><strong id="metricOverall">0%</strong><span data-v6-i18n="overallProgress">Overall progress</span></div>
+          <div><strong id="metricLessons">0/0</strong><span data-v6-i18n="lessonsCompleted">Lessons</span></div>
+          <div><strong id="metricLabs">0</strong><span>Labs</span></div>
+          <div><strong id="metricChallenges">0</strong><span data-v6-i18n="challengesCompleted">Challenges</span></div>
+          <div><strong id="metricQuizAccuracy">—</strong><span data-v6-i18n="quizAccuracy">Quiz accuracy</span></div>
+        </div>
+      </section>
       <div class="lesson-grid editorial-lessons" id="lessonGrid"></div>
     </section>
 
@@ -415,37 +428,53 @@
       </div>
     </section>
 
-    <section class="section shell compact-grid-v5">
+    <section class="section shell knowledge-zone-v6" id="knowledge">
       <article class="quiz-card reveal" id="quiz">
-        <div><p class="eyebrow" data-i18n="knowledgeCheck">Knowledge check</p><h2 data-i18n="quizQuestion">Which command prints the current directory?</h2><p data-i18n="quizText">Choose one answer. Feedback appears immediately.</p></div>
-        <div class="quiz-options" id="quizOptions">
-          <button type="button" data-answer="pwd"><code>pwd</code></button><button type="button" data-answer="mkdir"><code>mkdir</code></button><button type="button" data-answer="touch"><code>touch</code></button><button type="button" data-answer="grep"><code>grep</code></button>
-        </div>
+        <div class="quiz-topline"><div><p class="eyebrow" data-i18n="knowledgeCheck">Knowledge check</p><span class="quiz-topic" id="quizTopic">TOPIC</span></div><label class="quiz-auto"><input type="checkbox" id="quizAutoAdvance" checked><span data-v6-i18n="autoAdvance">Auto advance</span></label></div>
+        <div class="quiz-question-status"><span id="quizQuestionMeta">Question 1 / 10</span><div class="quiz-progress-track"><i id="quizQuestionProgress"></i></div></div>
+        <h2 id="quizQuestionText">Which command prints the current directory?</h2>
+        <p class="quiz-helper" data-v6-i18n="quizHelper">Answer, read the explanation, then continue automatically.</p>
+        <div class="quiz-options" id="quizOptions"></div>
         <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+        <button class="small-button quiz-next" id="quizNext" type="button" hidden>Next</button>
+        <div class="quiz-result-summary" id="quizResultSummary" hidden></div>
       </article>
 
-      <article class="achievement-panel reveal" id="achievements">
-        <p class="eyebrow" data-v5-i18n="achievementsLabel">LOCAL ACHIEVEMENTS</p>
-        <h2 data-v5-i18n="achievementsTitle">Small milestones, stored only here.</h2>
-        <div class="achievement-list" id="achievementList"></div>
-      </article>
+      <aside class="results-achievements-panel reveal">
+        <section class="quiz-stats-panel" aria-labelledby="resultsTitle">
+          <p class="eyebrow" data-v6-i18n="resultsLabel">YOUR RESULTS</p>
+          <h2 id="resultsTitle" data-v6-i18n="resultsTitle">Knowledge statistics</h2>
+          <div class="quiz-stats-grid">
+            <div><strong id="statAccuracy">—</strong><span data-v6-i18n="accuracy">Accuracy</span></div>
+            <div><strong id="statTests">0</strong><span data-v6-i18n="testsCompleted">Tests</span></div>
+            <div><strong id="statCorrect">0</strong><span data-v6-i18n="correctAnswers">Correct</span></div>
+            <div><strong id="statIncorrect">0</strong><span data-v6-i18n="incorrectAnswers">Incorrect</span></div>
+          </div>
+        </section>
+        <section class="achievement-panel" id="achievements">
+          <p class="eyebrow" data-v5-i18n="achievementsLabel">LOCAL ACHIEVEMENTS</p>
+          <h3 data-v5-i18n="achievementsTitle">Small milestones, stored only here.</h3>
+          <div class="achievement-list" id="achievementList"></div>
+        </section>
+      </aside>
     </section>
 
-    <section class="section roadmap-section" id="roadmap">
-      <div class="shell">
-        <div class="section-heading reveal editorial-heading"><div><p class="eyebrow" data-i18n="roadmapEyebrow">Roadmap</p><h2 data-i18n="roadmapTitle">One system, many directions.</h2></div><p data-i18n="roadmapText"></p></div>
-        <div class="roadmap reveal" aria-label="Linux learning roadmap">
-          <span data-i18n="fundamentals">Fundamentals</span><i>→</i><span>Terminal</span><i>→</i><span data-i18n="filesystem">Filesystem</span><i>→</i><span data-i18n="permissions">Permissions</span><i>→</i><span data-i18n="packages">Packages</span><i>→</i><span data-i18n="processes">Processes</span><i>→</i><span data-i18n="networking">Networking</span><i>→</i><span>Shell & Bash</span><i>→</i><span data-i18n="administration">Administration</span>
-        </div>
+    <section class="section curriculum-section-v6" id="roadmap">
+      <div class="shell curriculum-heading-v6">
+        <div><p class="eyebrow">08 / <span data-v6-i18n="curriculumLabel">CURRICULUM</span></p><h2 data-v6-i18n="curriculumTitle">One system, many learning paths.</h2></div>
+        <p data-v6-i18n="curriculumText">Build a foundation, then move toward administration, networking, automation, security and containers.</p>
+      </div>
+      <div class="curriculum-carousel-v6" id="curriculumCarousel" aria-label="Linux curriculum carousel">
+        <div class="curriculum-viewport" id="curriculumViewport"><div class="curriculum-track" id="curriculumTrack" role="list"></div></div>
       </div>
     </section>
 
     <section class="about-v5 shell section" id="about">
       <div>
-        <p class="eyebrow">V1 → V4 → V5</p>
-        <h2 data-v5-i18n-html="aboutHeadline">From a CSS drawing<br>to an interactive Linux product.</h2>
+        <p class="eyebrow">V1 → V4 → V5 → V6</p>
+        <h2 data-v6-i18n="aboutHeadline">From a CSS drawing<br>to an interactive Linux product.</h2>
       </div>
-      <p data-v5-i18n="aboutText">The project preserves its original Tux experiment while evolving into an open-source learning environment built with HTML, CSS and Vanilla JavaScript.</p>
+      <p data-v6-i18n="aboutText">The project preserves its original Tux experiment while evolving into an open-source learning environment built with HTML, CSS and Vanilla JavaScript.</p>
     </section>
   </main>
 
